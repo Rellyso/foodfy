@@ -1,0 +1,104 @@
+@charset "UTF-8";
+
+@import 'https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap';
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 26px;
+}
+
+.container {
+    width: 100%;
+    max-width: 1000px;
+
+    margin: 0 auto;
+    padding: 0 30px;
+}
+
+/* ===========CABECALHO=========== */
+
+header {
+    max-width: 1000px;
+
+    margin: 0 auto;
+
+    padding: 30px 0;
+
+    display: flex;
+}
+
+header .logo__link {
+    width: 250px;
+}
+
+header .links {
+    display: flex;
+    align-items: center;
+
+    width: 90%;
+}
+
+header .links a{
+    text-decoration: none;
+    
+    color: black;
+
+    margin-right: 30px;
+}
+
+/* ===========CABECALHO=========== */
+
+#page-home {
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+}
+
+#page-home .main__content {
+    background-image: url('../assets/chef.png');
+    background-repeat: no-repeat;
+    background-color: #FBDFDB;
+    background-position-y: bottom;
+    background-position-x: 80%;
+
+    border-radius: 30px;
+
+    width: 100%;
+    height: 370px;
+
+    padding: 30px 60px;
+    margin-bottom: 50px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.main__content h1 {
+    font-size: 32px;
+    line-height: 42px;
+
+    padding-bottom: 10px;
+}
+
+.main__content p {
+    max-width: 320px;
+
+    opacity: .7;
+
+    font-size: 18px;
+    line-height: 28px;
+}
+
+.content {
+
+}
