@@ -250,9 +250,8 @@ footer p {
 
 }
 
-.modal__img span {
-    background: url('../assets/asinhas.png') no-repeat;
-    background-size: cover;
+.modal__img img {
+    object-fit: cover;
 
     width: 600px;
     height: 200px;
