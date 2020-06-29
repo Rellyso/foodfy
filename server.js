@@ -5,7 +5,7 @@ const data = require('./data')
 
 const server = express()
 
-nunjuck.configure({
+nunjuck.configure("views", {
     express: server,
     noCache: true,
     autoescape: false
@@ -27,7 +27,12 @@ server.get('/recipes', (req, res) => {
     return res.render('recipes',  {recipes: data})
 })
 
-server.get('/recipes/:index')
+server.get('/recipes/:index', (req, res) => {
+    const recipes = data
+    const recipeIndex = req.params.index
+
+    return res.render("recipe", {recipe: recipes[recipeIndex]})
+})
 
 server.listen(5000, function () {
     console.log('server is running')

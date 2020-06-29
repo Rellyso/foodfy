@@ -184,21 +184,21 @@ footer p {
     margin-bottom: 30px;
 }
 
-#page-about article h1{
+section article h1{
     font-size: 24px;
     line-height: 34px;
 
     margin-bottom: 20px;
 }
 
-#page-about article h2{
+section article h2{
     font-size: 20px;
     line-height: 30px;
 
     margin-bottom: 20px;
 }
 
-#page-about article p{
+section article p{
     font-size: 18px;
     line-height: 28px;
 
@@ -311,4 +311,91 @@ footer p {
     line-height: 26px;
 
     cursor: pointer;
+}
+
+/* ======= RECIPE PAGE ======= */
+
+.recipe {
+    min-height: 83vh;
+}
+
+.recipe h1,
+.recipe h3 {
+    font-weight: bolder;
+}
+
+.recipe__head img {
+    border-radius: 16px;
+
+    margin: 20px 0;
+}
+
+.recipe__title {
+    margin: 30px 0;
+}
+
+.recipe__title h1 {
+    text-align: center;
+
+    font-size: 36px;
+    line-height: 46px;
+}
+
+.recipe__title h3 {
+    color: #999999;
+
+    text-align: center;
+
+    font-size: 20px;
+    line-height: 30px;
+}
+
+.recipe__content {
+    padding-bottom: 20px;
+}
+
+.content__title {
+    display: flex;
+    align-items: baseline;
+
+    margin: 20px 0;
+}
+
+.content__title h2 {
+    padding: 0;
+    margin: 0;
+
+    font-size: 24px;
+    line-height: 34px;
+}
+
+.content__title span {
+    content: 'MOSTRAR';
+    text-transform: uppercase;
+
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 22px;
+
+    color: #999999;
+
+    margin-left: 8px;
+
+    cursor: pointer;
+}
+
+.content__content {
+    display: none;
+}
+
+.content__content.active {
+    display: inline;
+}
+
+.content__list {
+    font-size: 18px;
+    line-height: 28px;
+    font-weight: normal;
+
+    list-style-position: inside;
 }
