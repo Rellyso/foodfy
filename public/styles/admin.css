@@ -1,0 +1,146 @@
+.container {
+    height: 80px;
+
+    margin-bottom: 20px;
+
+    background-color: black;
+
+    width: 100%;
+}
+
+.container header {
+    padding: 30px 0;
+
+    width: 100%;
+    max-width: 1000px;
+
+    margin: 0 auto;
+}
+
+.content {
+    width: 100%;
+    max-width: 1000px;
+
+    margin: 20px auto;
+}
+
+.content a {
+    font-size: 14px;
+    line-height: 16px;
+
+    color: #6558C3;
+
+    font-weight: bold;
+    text-transform: capitalize;
+    text-decoration: none;
+}
+
+.content__title,
+.form__title {
+    padding: 30px 0;
+}
+
+/* CARDS */
+
+.content .cards {
+    grid-template-columns: 1fr 1fr;
+}
+
+.cards .card {
+    flex-direction: row;
+
+    margin: 0;
+
+    cursor: auto;
+}
+
+.card .card__img {
+    width: initial;
+    height: 100%;
+
+    margin: 0;
+
+    padding-right: 20px;
+}
+
+.card .card__img img {
+    width: 172px;
+    height: 80px;
+}
+
+.card__content h3 {
+    font-size: 18px;
+    line-height: 21px;
+
+    margin-bottom: 5px;
+
+}
+
+.card__content p {
+    font-size: 14px;
+    line-height: 16px;
+    margin: 5px 0;
+}
+
+/* FORM */
+
+.form__title {
+    display: flex;
+    justify-content: space-between;
+}
+
+button[type="submit"] {
+    background-color: #6558C3;
+    color: white;
+
+    border: none;
+    border-radius: 4px;
+
+    padding: 8px 16px;
+
+    font-size: 16px;
+    line-height: 19px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.item {
+    width: 100%;
+
+    margin-bottom: 30px;
+}
+
+.item div {
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.item a.add-ingredient,
+a.add-pass {
+    font-size: 16px;
+    text-transform: none;
+
+    cursor: pointer;
+}
+
+input,
+textarea {
+    width: 100%;
+    
+    padding: 8px 16px;
+
+    font-size: 16px;
+
+    margin: 10px 0;
+
+    border: 1px solid #DDDDDD;
+    outline: none;
+}
+
+textarea {
+    resize: none;
+}
+
+/* DETAILS */
