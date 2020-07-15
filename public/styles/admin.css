@@ -84,8 +84,9 @@
 
 /* FORM */
 
-.form__title {
+.content__title {
     display: flex;
+    align-items: center;
     justify-content: space-between;
 }
 
@@ -117,8 +118,7 @@ button[type="submit"] {
     font-weight: 700;
 }
 
-.item a.add-ingredient,
-a.add-pass {
+.item a.link__button {
     font-size: 16px;
     text-transform: none;
 
@@ -131,7 +131,11 @@ textarea {
     
     padding: 8px 16px;
 
+    font-family: 'Roboto', sans-serif;
     font-size: 16px;
+    line-height: 19px;
+
+    color: #111111;
 
     margin: 10px 0;
 

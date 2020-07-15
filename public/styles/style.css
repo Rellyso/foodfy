@@ -37,6 +37,10 @@ header .links a{
     margin-right: 30px;
 }
 
+a.active {
+    font-weight: bolder;
+}
+
 /* ===========CABECALHO=========== */
 
 #page-home {
