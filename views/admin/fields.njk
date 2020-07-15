@@ -1,0 +1,57 @@
+<div class="form__body">
+                
+                <div class="item">
+                    <div>Nome da receita</div>
+
+                    <input 
+                    type="text" 
+                    name="title"
+                    required
+                    >
+
+                </div>
+
+                <div class="item">
+                    <div>Imagem da receita</div>
+
+                    <input 
+                    type="url" 
+                    name="image"
+                    placeholder="https://"
+                    >
+
+                </div>
+                
+                <div class="item">
+                    <div>Autor</div>
+
+                    <input 
+                    type="text" 
+                    name="author"
+                    >
+
+                </div>
+
+                <div class="item" id="ingredients">
+                    <div>Ingredientes</div>
+                    <div class="ingredient">
+                        <input type="text" name="ingredients[]" value="">
+                    </div>
+                    <a class="link__button add-ingredient">Adicionar novo ingrediente</a>
+                </div>
+
+                <div class="item" id="steps">
+                    <div>Modo de preparo</div>
+                    <div class="preparation">
+                        <input type="text" name="preparation[]" value="">
+                    </div>
+
+                    <a class="link__button add-step">Adicionar novo passo</a>
+                </div>
+
+                <div class="item">
+                    <div>Informações adicionais</div>
+
+                    <textarea name="information" cols="30" rows="10"></textarea>
+                </div>
+            </div>

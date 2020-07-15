@@ -5,67 +5,20 @@
 {% endblock head %}
 
     {% block content %}
-        <form class="content">
-            <div class="form__title">
-                <h2>Gerenciar receitas</h2>
-                <button type="submit">Salvar receita</button>
-            </div>
+    <section class="content">
 
-            <div class="form__body">
-                <div class="item">
-                    <div>Imagem da receita</div>
+        <div class="content__title">
+            <h2>Criando receita</h2>
+        
+            <button type="submit" class="button__save" form="f_create">Salvar receita</button>
+        </div>
 
-                    <input 
-                    type="url" 
-                    name="image"
-                    >
-
-                </div>
-
-                <div class="item" id="ingredients">
-                    <div>Ingredientes</div>
-                    <div class="ingredient">
-                        <input type="text" name="ingredients[]" value="">
-                    </div>
-                    <a class="add-ingredient">Adicionar novo ingrediente</a>
-                </div>
-
-                <div class="item" id="steps">
-                    <div>Modo de preparo</div>
-                    <div class="preparation">
-                        <input type="text" name="preparation">
-                    </div>
-
-                    <a class="add-step">Adicionar novo passo</a>
-                </div>
-
-                <div class="item">
-                    <div>Informações adicionais</div>
-
-                    <textarea name="information" cols="30" rows="10"></textarea>
-                </div>
-            </div>
+        <form id="f_create" method="POST" action="/admin/recipes">
+            {% include 'admin/fields.njk' %}
         </form>
+    </section>
 
-        <script>
-
-            const addIngredientBtn = document.querySelector('.add-ingredient')
-            const addStepBtn = document.querySelector('.add-step')
-
-            addStepBtn.addEventListener('click', addOne)
-            addIngredientBtn.addEventListener('click', function () {
-                const fatherDiv = document.querySelector('#ingredients .ingredient')
-                const fieldContainer = document.querySelectorAll('.ingredient')
-
-                const newField = fieldContainer[fieldContainer.length - 1].cloneNode(true)
-
-                if (newField.children[0].value == 0) return false
-
-                console.log()
-                newField.children[].value = ""
-                fatherDiv.appendChild(newField)
-            })
-        </script>
-
+    <script src="/scripts/create.js"></script>
     {% endblock content %}
+
     
