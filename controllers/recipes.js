@@ -2,7 +2,18 @@ const fs = require('fs')
 const data = require('../data.json')
 
 exports.index = (req, res) => {
-    return res.render('admin/index', {recipes: data.recipes})
+    const recipes = [
+        ...data.recipes
+    ]
+
+    for (let i = 0; i < recipes.length; i++) {
+        recipes[i] = {
+            ...recipes[i],
+            id: i + 1
+        }
+    }
+
+    return res.render('admin/index', { recipes })
 }
 
 exports.create = (req, res) => {
@@ -32,4 +43,16 @@ exports.post = (req, res) => {
     })
 
     return res.redirect('/admin/recipes')
+}
+
+exports.show = (req, res) => {
+    let { id } = req.params
+
+    const recipe = {
+        ...data.recipes[id - 1]
+    }
+
+    
+
+    return res.render('admin/show', { recipe })
 }
