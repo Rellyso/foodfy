@@ -114,6 +114,16 @@ a.active {
     margin-bottom: 30px;
 }
 
+#page-about h1,
+#page-about h2 {
+    animation: swipeUp .7s ease-out;
+    animation-fill-mode: backwards;
+}
+
+#page-about article {
+    animation: swipeUp .4s ease-out;
+}
+
 /* =========== PAGE RECIPES ===========*/
 
 #page-recipes {

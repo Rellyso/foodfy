@@ -1,18 +1,19 @@
 .container {
+    margin: 0 auto;
+}
+.header__content {
     height: 80px;
-
-    margin-bottom: 20px;
-
+    
     background-color: black;
 
     width: 100%;
+    margin-bottom: 20px;
 }
 
-
-
-.container header {
+.header__content header {
     padding: 30px 0;
-
+    
+    height: 100%;
     width: 100%;
     max-width: 1000px;
 
@@ -36,7 +37,7 @@
     text-transform: capitalize;
     text-decoration: none;
 }
-
+/* PADDING */
 .content__title,
 .form__title {
     padding: 30px 0;
@@ -92,7 +93,8 @@
     justify-content: space-between;
 }
 
-button[type="submit"] {
+button[type="submit"],
+a.button {
     background-color: #6558C3;
     color: white;
 
@@ -150,3 +152,82 @@ textarea {
 }
 
 /* DETAILS */
+
+.recipe {
+    width: 100%;
+    max-width: 1000px;
+
+    margin: 0 auto;
+}
+
+.recipe__actions {
+    display: flex;
+    justify-content: space-between;
+
+    padding-top: 20px;
+}
+
+a.button {
+    display: inline-block;
+}
+
+.recipe__head {
+    display: flex;
+    flex-direction: column;
+}
+
+.recipe__head img {
+    border-radius: 16px;
+
+    margin: 20px auto;
+}
+
+.recipe__title {
+    margin: 30px 0;
+    text-align: center;
+}
+
+.recipe__title h1 {
+    font-size: 36px;
+    line-height: 46px;
+}
+
+.recipe__title h3 {
+    color: #777777;
+
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.recipe__content {
+    padding-bottom: 20px;
+}
+
+
+.content__title h2 {
+    padding: 0;
+    margin: 0;
+
+    font-size: 24px;
+    line-height: 34px;
+}
+
+.content__content {
+    display: none;
+}
+
+.content__content.active {
+    display: inline;
+}
+
+.content__list {
+    font-size: 18px;
+    line-height: 28px;
+    font-weight: normal;
+
+    list-style-position: inside;
+}
+
+.content__list ul {
+    list-style-type: " - ";
+}
