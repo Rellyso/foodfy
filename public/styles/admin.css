@@ -6,7 +6,7 @@
     
     background-color: black;
 
-    width: 100%;
+    width: 100vw;
     margin-bottom: 20px;
 }
 
@@ -119,6 +119,8 @@ button.delete {
     width: 100%;
 
     margin-bottom: 30px;
+
+    animation: swipeUp .6s ease-out;
 }
 
 .item div {
@@ -181,6 +183,8 @@ textarea {
     max-width: 1000px;
 
     margin: 0 auto;
+
+    animation: swipeUp .6s ease-out;
 }
 
 .recipe__actions {
