@@ -24,9 +24,9 @@ exports.post = (req, res) => {
     const keys = Object.keys(req.body)
 
 
-    for (let key of keys) {
-        if (req.body[key] == "") return res.send('Please fill in all fields.')
-    }
+    // for (let key of keys) {
+    //     if (req.body[key] == "") return res.send('Please fill in all fields.')
+    // }
 
     let { image, title, author, ingredients, preparation, information } = req.body
 
@@ -100,5 +100,23 @@ exports.put = (req, res) => {
         if (err) return res.send('Write file error!')
     })
 
-    res.redirect("/admin/recipes")
+    res.redirect(`/admin/recipes/${id}`)
+}
+
+exports.delete = (req, res) => {
+    let { id } = req.body
+
+    let filteredRecipes = []
+    for (let i = 0; i < data.recipes.length; i++) {
+        if (id != (i + 1)) {
+            filteredRecipes.push(data.recipes[i])
+        }
+    }
+
+    data.recipes = filteredRecipes
+
+    fs.writeFile('data.json', JSON.stringify(data, null, 4), err => {
+        if (err) return res.send('Write file error!')
+    })
+    res.redirect('/admin/recipes')
 }
