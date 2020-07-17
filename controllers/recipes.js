@@ -49,10 +49,56 @@ exports.show = (req, res) => {
     let { id } = req.params
 
     const recipe = {
+        id,
         ...data.recipes[id - 1]
     }
 
-    
-
     return res.render('admin/show', { recipe })
+}
+
+exports.edit = (req, res) => {
+    let { id } = req.params
+    const recipe = {
+        id,
+        ...data.recipes[id - 1]
+    }
+    res.render('admin/edit', { recipe })
+}
+
+exports.put = (req, res) => {
+    const { id, title, image, author, ingredients, preparation, information } = req.body
+    let index = id - 1
+
+    let newIngredients = []
+    let newPreparation = []
+
+    for (let i = 0; i < ingredients.length; i++) {
+        if (ingredients[i] != "" || ingredients[i] != 0) {
+            newIngredients.push(ingredients[i])
+        }
+    }
+
+    for (let i = 0; i < preparation.length; i++) {
+        if (preparation[i] != "" || preparation[i] != 0) {
+            newPreparation.push(preparation[i])
+        }
+    }
+    
+    let recipeUpdated = {
+        ...data.recipes[index],
+        title,
+        image,
+        author,
+        ingredients: newIngredients,
+        preparation: newPreparation,
+        information
+    }
+
+    data.recipes[index] = recipeUpdated
+
+    fs.writeFile('data.json', JSON.stringify(data, null, 4), err => {
+        if (err) return res.send('Write file error!')
+    })
+
+    res.redirect("/admin/recipes")
 }

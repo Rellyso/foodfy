@@ -111,6 +111,10 @@ a.button {
     cursor: pointer;
 }
 
+button.delete {
+    background-color: #DC4747;
+}
+
 .item {
     width: 100%;
 
@@ -151,6 +155,25 @@ textarea {
     resize: none;
 }
 
+/*  IMPLEMENTAR FUNÇÃO DE EXCLUIR CAMPO
+
+.preparation,
+.ingredient {
+    display: grid;
+    grid-template-columns: 1fr 64px;
+}
+
+.item a.button {
+    width: 100%;
+
+    margin: 10px 0;
+
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+
+    text-align: center;
+} */
+
 /* DETAILS */
 
 .recipe {
@@ -169,6 +192,7 @@ textarea {
 
 a.button {
     display: inline-block;
+    text-decoration: none;
 }
 
 .recipe__head {
@@ -231,3 +255,5 @@ a.button {
 .content__list ul {
     list-style-type: " - ";
 }
+
+/* */

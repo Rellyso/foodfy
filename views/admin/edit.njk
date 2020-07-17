@@ -1,88 +1,31 @@
 {% extends 'admin/layout.njk' %}
 
 {% block head %}
-    <title>Criar receita</title>
+    <title>{{ recipe.title }} - Editar</title>
 {% endblock head %}
 
-    {% block content %}
+{% block content %}
     <section class="content">
 
         <div class="content__title">
-            <h2>Gerenciar receitas</h2>
+            <h2>Editar receita</h2>
+
+            <div class="title__buttons">
+                <button type="submit" form="f_delete" class="delete">Deletar</button>
+
+                <button type="submit" form="f_edit">Salvar receita</button>
+            </div>
         </div>
 
-        <button type="submit" form="f_edit">Deletar</button>
-
-        <button type="submit" form="f_delete">Salvar receita</button>
-
-        <form action="/delete" method="post">
-                <input type="hidden" name="excluir">
+        <form id="f_delete" action="/admin/recipes?_method=DELETE" method="post">
+            <input type="hidden" name="excluir">
         </form>
-        
-        <form method="POST" action="/admin/recipes">
-            <div class="form__title">
-            </div>
 
-
-            <div class="form__body">
-                
-                <div class="item">
-                    <div>Nome da receita</div>
-
-                    <input 
-                    type="text" 
-                    name="title"
-                    >
-
-                </div>
-
-                <div class="item">
-                    <div>Imagem da receita</div>
-
-                    <input 
-                    type="url" 
-                    name="image"
-                    >
-
-                </div>
-                
-                <div class="item">
-                    <div>Autor</div>
-
-                    <input 
-                    type="text" 
-                    name="author"
-                    >
-
-                </div>
-
-                <div class="item" id="ingredients">
-                    <div>Ingredientes</div>
-                    <div class="ingredient">
-                        <input type="text" name="ingredients[]" value="">
-                    </div>
-                    <a class="link__button add-ingredient">Adicionar novo ingrediente</a>
-                </div>
-
-                <div class="item" id="steps">
-                    <div>Modo de preparo</div>
-                    <div class="preparation">
-                        <input type="text" name="preparation[]" value="">
-                    </div>
-
-                    <a class="link__button add-step">Adicionar novo passo</a>
-                </div>
-
-                <div class="item">
-                    <div>Informações adicionais</div>
-
-                    <textarea name="information" cols="30" rows="10"></textarea>
-                </div>
-            </div>
+        <form id="f_edit" method="POST" action="/admin/recipes?_method=PUT">
+            {% include 'admin/fields.njk' %}
+            <input type="hidden" name="id" value="{{ recipe.id }}">
         </form>
     </section>
 
-    <script src="/scripts/create.js"></script>
-    {% endblock content %}
-
-    
+    <script src="/scripts/fields.js"></script>
+{% endblock content %}
