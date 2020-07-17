@@ -17,15 +17,26 @@
             </div>
         </div>
 
-        <form id="f_delete" action="/admin/recipes?_method=DELETE" method="post">
-            <input type="hidden" name="excluir">
-        </form>
+        
 
-        <form id="f_edit" method="POST" action="/admin/recipes?_method=PUT">
+        <form id="f_edit" 
+        method="POST" 
+        action="/admin/recipes?_method=PUT"
+        >
             {% include 'admin/fields.njk' %}
+
             <input type="hidden" name="id" value="{{ recipe.id }}">
         </form>
+
+        <form id="f_delete" 
+        method="POST" 
+        action="/admin/recipes?_method=DELETE"
+        >
+            <input type="hidden" name="id" value="{{ recipe.id }}">
+        </form>
+
     </section>
 
     <script src="/scripts/fields.js"></script>
+    {% include 'admin/confirmation.njk' %}
 {% endblock content %}

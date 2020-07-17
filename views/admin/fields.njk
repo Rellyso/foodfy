@@ -3,21 +3,21 @@
     <div class="item">
         <div>Nome da receita</div>
 
-        <input type="text" name="title" required="required" value="{{ recipe.title }}">
+        <input type="text" name="title" value="{{ recipe.title }}" required>
 
     </div>
 
     <div class="item">
         <div>Imagem da receita</div>
 
-        <input type="url" name="image" placeholder="https://" value="{{ recipe.image }}">
+        <input type="url" name="image" placeholder="https://" value="{{ recipe.image }}" required>
 
     </div>
 
     <div class="item">
         <div>Autor</div>
 
-        <input type="text" name="author" value="{{ recipe.author }}">
+        <input type="text" name="author" value="{{ recipe.author }}" required>
 
     </div>
 
