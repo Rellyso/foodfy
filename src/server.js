@@ -6,7 +6,7 @@ const methodOverride = require('method-override')
 const server = express()
 
 
-nunjuck.configure("views", {
+nunjuck.configure("src/app/views", {
     express: server,
     noCache: true,
     autoescape: false
