@@ -18,8 +18,34 @@
     width: 100%;
     max-width: 1000px;
 
+    display: flex;
+    align-items: center;
+
     margin: 0 auto;
     overflow: hidden;
+}
+
+header .logo__link {
+    margin-right: 50px;
+
+    display: flex;
+    align-items: center;
+}
+
+.header__content header .links a {
+    text-decoration: none;
+    
+    font-size: 15px;
+    line-height: 18px;
+    font-weight: 500;
+
+    color: #777777;
+    
+    margin-right: 30px;
+}
+
+header .links a.active {
+    color: #ffffff;
 }
 
 .content {
