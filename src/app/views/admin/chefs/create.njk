@@ -1,0 +1,23 @@
+{% extends 'admin/layout.njk' %}
+
+{% block head %}
+    <title>Criar chef</title>
+{% endblock head %}
+
+    {% block content %}
+    <section class="content">
+
+        <div class="content__title">
+            <h2>Criando chef</h2>
+        
+            <button type="submit" class="button__save" form="f_create">Salvar chef</button>
+        </div>
+
+        <form id="f_create" method="POST" action="/admin/chefs">
+            {% include 'admin/chefs/fields.njk' %}
+        </form>
+    </section>
+
+    {% endblock content %}
+
+    

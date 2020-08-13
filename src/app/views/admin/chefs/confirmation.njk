@@ -1,0 +1,11 @@
+<script>
+    const deleteBtn = document.querySelector('button.delete')
+
+    deleteBtn.addEventListener('click', function (e) {
+        const confirmation = window.confirm("Deseja realmente deletar o chef {{ chef.name }}?")
+
+        if (!confirmation) {
+            e.preventDefault()
+        }
+    })
+</script>
