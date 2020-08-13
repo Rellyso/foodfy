@@ -12,8 +12,8 @@ nunjuck.configure("src/app/views", {
     autoescape: false
 })
 
-server.use(express.static('public'))
 server.use(express.urlencoded({ extended: true }))
+server.use(express.static('public'))
 server.use(methodOverride('_method'))
 
 server.use(routes)
