@@ -113,6 +113,28 @@ header .links a.active {
     margin: 5px 0;
 }
 
+/* CHEFS' CARDS */
+
+.cards#chefs {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+#chefs .card__img img {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+}
+
+#chefs .card__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+#chefs .card__content h3 {
+    margin-bottom: 0;
+}
+
 /* FORM */
 
 .content__title {
@@ -175,7 +197,7 @@ textarea {
 
     color: #111111;
 
-    margin: 10px 0;
+    margin-top: 10px;
 
     border: 1px solid #DDDDDD;
     outline: none;
@@ -206,7 +228,8 @@ textarea {
 
 /* DETAILS */
 
-.recipe {
+.recipe,
+.chef {
     width: 100%;
     max-width: 1000px;
 
@@ -215,7 +238,8 @@ textarea {
     animation: swipeUp .6s ease-out;
 }
 
-.recipe__actions {
+.recipe__actions,
+.chef__actions {
     display: flex;
     justify-content: space-between;
 
@@ -227,9 +251,11 @@ a.button {
     text-decoration: none;
 }
 
-.recipe__head {
+.recipe__head,
+.chef__head {
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 
 .recipe__head img {
@@ -238,24 +264,51 @@ a.button {
     margin: 20px auto;
 }
 
-.recipe__title {
+.chef__head .chef__img {
+    width: 200px;
+    height: 200px;
+
+    border-radius: 50%;
+
+    text-align: center;
+
+    object-fit: cover;
+    overflow: hidden;
+}
+
+.chef__img img {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    object-fit: cover;
+}
+
+.recipe__title,
+.chef__title {
     margin: 30px 0;
     text-align: center;
 }
 
-.recipe__title h1 {
+.recipe__title h1,
+.chef__title h1 {
     font-size: 36px;
     line-height: 46px;
 }
 
-.recipe__title h3 {
+.recipe__title h3,
+.chef__title h3 {
     color: #777777;
 
     font-size: 20px;
     font-weight: 500;
 }
 
-.recipe__content {
+.recipe__content,
+.chef__content {
     padding-bottom: 20px;
 }
 
