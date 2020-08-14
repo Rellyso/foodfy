@@ -1,59 +1,58 @@
 const fs = require('fs')
 const data = require('../../data.json')
+const Recipe = require('../models/Recipe')
 
 exports.index = (req, res) => {
-    const recipes = [
-        ...data.recipes
-    ]
 
-    for (let i = 0; i < recipes.length; i++) {
-        recipes[i] = {
-            ...recipes[i],
-            id: i + 1
-        }
-    }
+//     const recipes = [
+//         ...data.recipes
+//     ]
 
-    return res.render('admin/recipes/index', { recipes })
+//     for (let i = 0; i < recipes.length; i++) {
+//         recipes[i] = {
+//             ...recipes[i],
+//             id: i + 1
+//         }
+//     }
+    Recipe.all((recipes) => {
+
+
+        return res.render('admin/recipes/index', { recipes })
+    })
 }
 
 exports.create = (req, res) => {
-    return res.render('admin/recipes/create')
+
+    Recipe.selectChefOptions( (options) => {
+        console.log(options)
+
+        return res.render('admin/recipes/create', { options })
+    })
+    
 }
 
 exports.post = (req, res) => {
     const keys = Object.keys(req.body)
 
 
-    // for (let key of keys) {
-    //     if (req.body[key] == "") return res.send('Please fill in all fields.')
-    // }
+    for (let key of keys) {
+        if (req.body[key] == "") return res.send('Please fill in all fields.')
+    }
 
-    let { image, title, author, ingredients, preparation, information } = req.body
-
-    data.recipes.push({
-        image,
-        title,
-        author,
-        ingredients,
-        preparation,
-        information
+    Recipe.create(req.body, (recipe) => {
+        return res.redirect(`/admin/recipes/${recipe.id}`)
     })
-    fs.writeFile('data.json', JSON.stringify(data, null, 4), function (err) {
-        if (err) return res.send('Write file error.')
-    })
-
-    return res.redirect('/admin/recipes')
+   
 }
 
 exports.show = (req, res) => {
-    let { id } = req.params
+    const { id } = req.params
 
-    const recipe = {
-        id,
-        ...data.recipes[id - 1]
-    }
-
-    return res.render('admin/recipes/show', { recipe })
+    
+    Recipe.find(id, (recipe) => {
+        console.log(recipe)
+        return res.render('admin/recipes/show', { recipe })
+    })
 }
 
 exports.edit = (req, res) => {
