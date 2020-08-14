@@ -186,7 +186,8 @@ button.delete {
 }
 
 input,
-textarea {
+textarea,
+select {
     width: 100%;
     
     padding: 8px 16px;
@@ -203,8 +204,21 @@ textarea {
     outline: none;
 }
 
+select {
+    color: #111111;
+}
+
+option {
+    color: #111111;
+}
+
+select:invalid {
+    color: #777777;
+}
+
 textarea {
-    resize: none;
+    min-height: 200px;
+    resize: vertical;
 }
 
 /*  IMPLEMENTAR FUNÇÃO DE EXCLUIR CAMPO
