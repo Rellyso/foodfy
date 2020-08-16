@@ -24,7 +24,6 @@ exports.index = (req, res) => {
 exports.create = (req, res) => {
 
     Recipe.selectChefOptions( (options) => {
-        console.log(options)
 
         return res.render('admin/recipes/create', { options })
     })
@@ -50,56 +49,55 @@ exports.show = (req, res) => {
 
     
     Recipe.find(id, (recipe) => {
-        console.log(recipe)
         return res.render('admin/recipes/show', { recipe })
     })
 }
 
 exports.edit = (req, res) => {
-    let { id } = req.params
-    const recipe = {
-        id,
-        ...data.recipes[id - 1]
-    }
-    res.render('admin/recipes/edit', { recipe })
+    const { id } = req.params
+
+    Recipe.find(id, (recipe) => {
+        Recipe.selectChefOptions((options) => {
+            res.render('admin/recipes/edit', { recipe, options })
+        })
+    })
 }
 
 exports.put = (req, res) => {
-    const { id, title, image, author, ingredients, preparation, information } = req.body
-    let index = id - 1
 
-    let newIngredients = []
-    let newPreparation = []
+    const { ingredients, preparation } = req.body
+    let newIngredients = [],
+        newPreparation = []
+        
+    for (let ingredient of ingredients) {
+        if (ingredient === "") {
 
-    for (let i = 0; i < ingredients.length; i++) {
-        if (ingredients[i] != "" || ingredients[i] != 0) {
-            newIngredients.push(ingredients[i])
+        } else {
+            newIngredients.push(ingredient)
         }
     }
 
-    for (let i = 0; i < preparation.length; i++) {
-        if (preparation[i] != "" || preparation[i] != 0) {
-            newPreparation.push(preparation[i])
+    for (let prep of preparation) {
+        if (prep == "") {
+
+        } else {
+            newPreparation.push(prep)
         }
     }
+
     
-    let recipeUpdated = {
-        ...data.recipes[index],
-        title,
-        image,
-        author,
+    const paramsBody = {
+        ...req.body,
+        id: parseInt(req.body.id, 10),
+        chef_id: parseInt(req.body.chef_id, 10),
         ingredients: newIngredients,
         preparation: newPreparation,
-        information
     }
+    // return res.send(paramsBody)
 
-    data.recipes[index] = recipeUpdated
-
-    fs.writeFile('data.json', JSON.stringify(data, null, 4), err => {
-        if (err) return res.send('Write file error!')
+    Recipe.update(paramsBody, (recipe) => {
+        return res.redirect(`/admin/recipes/${recipe.id}`)
     })
-
-    res.redirect(`/admin/recipes/${id}`)
 }
 
 exports.delete = (req, res) => {
