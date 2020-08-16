@@ -6,10 +6,10 @@ module.exports = {
         db.query(`
             SELECT recipes.*, count(chefs) AS total_chefs
             FROM recipes
-            LEFT JOIN chefs ON (recipes.chef_id = chef.id)
+            LEFT JOIN chefs ON (recipes.chef_id = chefs.id)
             GROUP BY recipes.id
         `, function (err, results) {
-            if (err) throw 'Database error!!'
+            if (err) throw `Database error!! ${err}`
 
             callback(results.rows)
         })
@@ -59,13 +59,14 @@ module.exports = {
     update(params, callback) {
         const query = `
             UPDATE recipes SET
-                chef_id = $1,
-                image = $2,
-                title = $3,
-                ingredients = $4,
-                preparation = $5,
-                information = $6,
-            WHERE id = $7`
+                chef_id = ($1),
+                image = ($2),
+                title = ($3),
+                ingredients = ($4),
+                preparation = ($5),
+                information = ($6)
+            WHERE id = $7
+            RETURNING id`
 
         const values = [
             params.chef_id,
@@ -74,12 +75,13 @@ module.exports = {
             params.ingredients,
             params.preparation,
             params.information,
+            params.id
         ]
 
         db.query(query, values, (err, results) => {
             if (err) throw `Database error! ${err}`
 
-            callback(results.rows)
+            callback(results.rows[0])
         })
     },
 
