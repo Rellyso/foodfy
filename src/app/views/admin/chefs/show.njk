@@ -21,7 +21,14 @@
             <div class="chef__title">
                 <h1>{{chef.name}}</h1>
 
-                <h3>4 receitas</h3>
+                <h3>
+                    {% if chef.total_recipes > 0 %}
+                        {{ chef.total_recipes }}
+                        Receita{% if chef.total_recipes > 1 %}s{% endif %}
+                    {% else %}
+                        Nenhuma receita 
+                    {% endif %}
+                </h3>
             </div>
         </div>
 
@@ -31,14 +38,22 @@
                     <h2>Receitas</h2>
                 </div>
 
-                <div class="content__content active">
-                    <div class="content__list">
-                        <ul>
-                            {% for ingredient in recipe.ingredients %}
-                                <li>{{ingredient}}</li>
-                            {% endfor %}
-                        </ul>
-                    </div>
+                <div class="recipe__list">
+                    {% for recipe in recipes %}
+                        <div class="card">
+                            <figure class="card__img">
+                                <img src="{{recipe.image}}" alt="imagem de {{chef.name}}">
+                            </figure>
+
+                            <div class="card__content">
+                                <h3>{{recipe.title}}</h3>
+
+                                <p>Por
+                                    {{chef.name}}</p>
+                                <a href="/admin/recipes/{{ recipe.id }}">visualizar</a>
+                            </div>
+                        </div>
+                    {% endfor %}
                 </div>
             </article>
         </div>
