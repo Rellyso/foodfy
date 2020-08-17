@@ -6,7 +6,7 @@ exports.index = (req, res) => {
     Chef.all(function (chefs) {
         return res.render('admin/chefs/index', { chefs })
     })
-    
+
 }
 
 exports.create = (req, res) => {
@@ -29,17 +29,20 @@ exports.post = (req, res) => {
 
 exports.show = (req, res) => {
     const { id } = req.params
-    
+
     Chef.find(id, (chef) => {
-        
         if (!chef) {
             return res.send('Chef not found')
         }
 
-        chef.created_at = date(chef.created_at).format
-
-        return res.render('admin/chefs/show', { chef: chef })
-    }) 
+        Chef.selectRecipesOptions(id, (options) => {
+            console.log(options)
+            
+            chef.created_at = date(chef.created_at).format
+            
+            return res.render('admin/chefs/show', { chef, recipes: options })
+        })
+    })
 }
 
 exports.edit = (req, res) => {
@@ -50,9 +53,9 @@ exports.edit = (req, res) => {
             return res.send('Chef not found')
         }
 
-        res.render('admin/chefs/edit', { chef } )
+        res.render('admin/chefs/edit', { chef })
     })
-    
+
 }
 
 exports.put = (req, res) => {
