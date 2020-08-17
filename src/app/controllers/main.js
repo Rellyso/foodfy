@@ -1,7 +1,9 @@
-const data = require('../../data')
+const Recipe = require("../models/Recipe")
 
 exports.index = (req, res) => {
-    return res.render('main/index', {recipes: data})
+    Recipe.all((recipes) => {
+        return res.render('main/index', { recipes })
+    })
 }
 
 exports.about = (req, res) => {
@@ -9,12 +11,16 @@ exports.about = (req, res) => {
 }
 
 exports.recipes = (req, res) => {
-    return res.render('main/recipes',  {recipes: data})
+    Recipe.selectAllWithChefNames((recipes) => {
+        return res.render('main/recipes', { recipes })
+    })
 }
 
-exports.recipe =  (req, res) => {
-    const recipes = data
-    const recipeIndex = req.params.index
-
-    return res.render("main/recipe", {recipe: recipes[recipeIndex]})
+exports.recipe = (req, res) => {
+    const { id } = req.params
+    
+    Recipe.find(id, (recipe) => {
+        console.log(recipe)
+        return res.render("main/recipe", { recipe })
+    })
 }
