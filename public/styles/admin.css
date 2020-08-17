@@ -113,6 +113,14 @@ header .links a.active {
     margin: 5px 0;
 }
 
+.card__content a {
+    text-decoration: none;
+
+    font: 700 Roboto 16px;
+    
+    color: #6558C3;
+}
+
 /* CHEFS' CARDS */
 
 .cards#chefs {
@@ -355,4 +363,22 @@ a.button {
     list-style-type: " - ";
 }
 
-/* */
+/* RECIPES LIST */
+
+.chef__content .recipe__list {
+    display: grid;
+    grid-template-columns: 1fr 1fr ;
+}
+
+.recipe__list .card {
+    width: 100%;
+    display: flex;
+}
+
+.recipe__list .card img {
+    border-radius: 9px;
+}
+
+.recipe__list .card__content a {
+    font-weight: 700;
+}
