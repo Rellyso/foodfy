@@ -10,7 +10,7 @@
         <section id="page-recipes" class="content">
             <div class="cards">
                 {% for recipe in recipes %}
-                    <div class="card">
+                    <a href="/recipes/{{recipe.id}}" class="card">
                         <figure class="card__img">
                             <img src="{{recipe.image}}" alt="imagem de {{recipe.title}}">
                         </figure>
@@ -18,9 +18,9 @@
                         <div class="card__content">
                             <h3>{{recipe.title}}</h3>
                             
-                            <p>{{recipe.author}}</p>
+                            <p>{{recipe.chef_name}}</p>
                         </div>
-                    </div>
+                    </a>
                 {% endfor %}
             </div>
         </section>
