@@ -11,7 +11,7 @@ routes.get('/', (req, res) => {
 routes.get('/home', main.index)
 routes.get('/about', main.about)
 routes.get('/recipes', main.recipes)
-routes.get('/recipes/:index', main.recipe)
+routes.get('/recipes/:id', main.recipe)
 
 routes.get('/admin/recipes', admin.index)
 routes.get('/admin/recipes/create', admin.create)
