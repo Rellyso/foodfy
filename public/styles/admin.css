@@ -152,6 +152,7 @@ header .links a.active {
 }
 
 button[type="submit"],
+button[type="button"],
 a.button {
     background-color: #6558C3;
     color: white;
@@ -227,6 +228,26 @@ select:invalid {
 textarea {
     min-height: 200px;
     resize: vertical;
+}
+
+div.input-field {
+    display: grid;
+    grid-template-columns: 1fr 32px;
+    column-gap: 4px; 
+
+    align-items: center;
+}
+
+.input-field button {
+    margin-top: 10px;
+    padding: 0;
+
+    width: 32px;
+    height: 32px;
+}
+
+.input-field button span {
+    font-size: 16px;
 }
 
 /*  IMPLEMENTAR FUNÇÃO DE EXCLUIR CAMPO
