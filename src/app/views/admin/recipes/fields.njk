@@ -3,14 +3,14 @@
     <div class="item">
         <div>Nome da receita</div>
 
-        <input type="text" name="title" value="{{ recipe.title }}" required>
+        <input type="text" name="title" value="{{ recipe.title }}" required="required">
 
     </div>
 
     <div class="item">
         <div>Imagem da receita</div>
 
-        <input type="url" name="image" placeholder="https://" value="{{ recipe.image }}" required>
+        <input type="url" name="image" placeholder="https://" value="{{ recipe.image }}" required="required">
 
     </div>
 
@@ -18,9 +18,9 @@
         <div>Chef</div>
 
         <select name="chef_id">
-                <option value="" disabled invalid selected >Selecione uma opção</option>
+            <option value="" disabled="disabled" invalid="invalid" selected="selected">Selecione uma opção</option>
             {% for option in options %}
-                <option value="{{ option.id }}" {% if recipe.chef_id == option.id %} selected {% endif %}>{{ option.name }}</option>
+                <option value="{{ option.id }}" {% if recipe.chef_id == option.id %} selected="selected" {% endif %}>{{ option.name }}</option>
             {% endfor %}
         </select>
     </div>
@@ -28,17 +28,28 @@
     <div class="item" id="ingredients">
         <div>Ingredientes</div>
 
+        <div class="ingredients">
             {% for ingredient in recipe.ingredients %}
-        <div class="ingredient">
+                <div class="ingredient input-field">
+                    <input type="text" name="ingredients[]" value="{{ ingredient }}" class="ingredient-field">
 
-                <input type="text" name="ingredients[]" value="{{ ingredient }}"  class="ingredient-field">
-                {# <a class="button">X</a> #}
-
-
-            <input type="text" name="ingredients[]">
-            {# <a class="button">X</a> #}
-        </div>
+                    <button type="button" class="delete ingredient-delete-button">
+                        <span class="material-icons">
+                            close
+                        </span>
+                    </button>
+                </div>
             {% endfor %}
+            <div class="ingredient input-field">
+                <input type="text" name="ingredients[]" value="" class="ingredient-field">
+
+                <button type="button" class="delete ingredient-delete-button">
+                    <span class="material-icons">
+                        close
+                    </span>
+                </button>
+            </div>
+        </div>
 
         <a class="link__button add-ingredient">Adicionar novo ingrediente</a>
     </div>
@@ -46,14 +57,30 @@
     <div class="item" id="steps">
         <div>Modo de preparo</div>
 
-        <div class="preparation">
+        <div class="preparations">
             {% for step in recipe.preparation %}
+                <div class="preparation input-field">
 
-                <input type="text" name="preparation[]" value="{{ step }}">
+                    <input type="text" name="preparation[]" value="{{ step }}">
 
+                    <button type="button" class="delete preparation-delete-button">
+                        <span class="material-icons">
+                            close
+                        </span>
+                    </button>
+                </div>
             {% endfor %}
+
+            <div class="input-field">
+                <input type="text" name="preparation[]" value="" class="preparation-field">
+
+                <button type="button" class="delete preparation-delete-button">
+                    <span class="material-icons">
+                        close
+                    </span>
+                </button>
+            </div>
             
-            <input type="text" name="preparation[]">
         </div>
 
         <a class="link__button add-step">Adicionar novo passo</a>
