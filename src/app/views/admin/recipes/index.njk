@@ -1,11 +1,11 @@
 {% extends "admin/layout.njk" %}
 
     {% block head %}
-        <title>Foodfy admin</title>
+        <title>Gerenciar receitas</title>
     {% endblock head %}
 
     {% block content %}
-        <section class="content">
+        <section class="content" id="recipes">
             <div class="content__title">
                 <h2>Gerenciar receitas</h2>
             </div>
@@ -20,7 +20,7 @@
                         <div class="card__content">
                             <h3>{{recipe.title}}</h3>
                             
-                            <p>{{recipe.author}}</p>
+                            <p>Por {{recipe.chef_name}}</p>
                             <a href="/admin/recipes/{{ recipe.id }}">visualizar</a>
                         </div>
                     </div>
