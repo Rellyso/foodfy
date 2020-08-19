@@ -1,44 +1,20 @@
-const fs = require('fs')
-const data = require('../../data.json')
 const Recipe = require('../models/Recipe')
 
 exports.index = (req, res) => {
-
-    //     const recipes = [
-    //         ...data.recipes
-    //     ]
-
-    //     for (let i = 0; i < recipes.length; i++) {
-    //         recipes[i] = {
-    //             ...recipes[i],
-    //             id: i + 1
-    //         }
-    //     }
-    Recipe.all((recipes) => {
-
-
+    Recipe.selectAllWithChefNames((recipes) => {
         return res.render('admin/recipes/index', { recipes })
     })
 }
 
 exports.create = (req, res) => {
-    
     Recipe.selectChefOptions((options) => {
-
         return res.render('admin/recipes/create', { options })
     })
-
 }
 
 exports.post = (req, res) => {
-    // const keys = Object.keys(req.body)
-
-
-    // for (let key of keys) {
-    //     // if (req.body[key] == "") return res.send('Please fill in all fields.')
-    // }
     const { ingredients, preparation } = req.body
-    
+
     let newIngredients = [],
         newPreparation = []
 
@@ -61,15 +37,12 @@ exports.post = (req, res) => {
     }
 
     Recipe.create(data, (recipe) => {
-
         return res.redirect(`/admin/recipes/${recipe.id}`)
     })
-
 }
 
 exports.show = (req, res) => {
     const { id } = req.params
-
 
     Recipe.find(id, (recipe) => {
         return res.render('admin/recipes/show', { recipe })
@@ -87,7 +60,6 @@ exports.edit = (req, res) => {
 }
 
 exports.put = (req, res) => {
-
     const { ingredients, preparation } = req.body
     let newIngredients = [],
         newPreparation = []
@@ -108,7 +80,6 @@ exports.put = (req, res) => {
         }
     }
 
-
     const paramsBody = {
         ...req.body,
         id: parseInt(req.body.id, 10),
@@ -116,7 +87,6 @@ exports.put = (req, res) => {
         ingredients: newIngredients,
         preparation: newPreparation,
     }
-    // return res.send(paramsBody)
 
     Recipe.update(paramsBody, (recipe) => {
         return res.redirect(`/admin/recipes/${recipe.id}`)
@@ -124,12 +94,9 @@ exports.put = (req, res) => {
 }
 
 exports.delete = (req, res) => {
-
     const { id } = req.body
 
     Recipe.delete(id, () => {
         res.redirect('/admin/recipes')
-    }
-    )
-
+    })
 }
