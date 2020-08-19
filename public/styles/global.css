@@ -9,12 +9,18 @@
 }
 
 body {
-    font-family: 'Roboto', sans-serif;
-    font-weight: 400;
     font-size: 16px;
     line-height: 26px;
 
     min-height: 100vh;
+}
+
+body,
+input,
+select,
+textarea {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
 }
 
 a {
@@ -59,7 +65,7 @@ section article h2{
     margin-bottom: 20px;
 }
 
-section article p{
+section article > p{
     font-size: 18px;
     line-height: 28px;
 
@@ -110,10 +116,11 @@ section article p{
     font-size: 18px;
     line-height: 21px;
     font-weight: 400;
+    
+    padding-bottom: 5px;
 }
 
 .card__content > p {
-    padding-top: 5px;
     font-size: 14px;
 
     line-height: 18px;

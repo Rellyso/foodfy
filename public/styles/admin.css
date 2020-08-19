@@ -99,26 +99,31 @@ header .links a.active {
     height: 80px;
 }
 
+.card__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
 .card__content h3 {
     font-size: 18px;
     line-height: 21px;
-
-    margin-bottom: 5px;
-
 }
 
-.card__content p {
+#recipes .card__content > p {
     font-size: 14px;
     line-height: 16px;
-    margin: 5px 0;
+
 }
 
-.card__content a {
+#recipes .card__content a {
     text-decoration: none;
 
     font: 700 Roboto 16px;
     
     color: #6558C3;
+
+    margin-top: 10px;
 }
 
 /* CHEFS' CARDS */
@@ -402,4 +407,9 @@ a.button {
 
 .recipe__list .card__content a {
     font-weight: 700;
+}
+
+#recipes .card__content p {
+    padding: 0;
+    margin: 0;
 }
