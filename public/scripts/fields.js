@@ -15,7 +15,8 @@ function deleteIngredient(length) {
                     fieldContainer[i].remove()
                     count--
                 }
-            } else {
+            } 
+            if (count <= 1) {
                 alert('Você não pode excluir todos os campos!')
             }
         })
