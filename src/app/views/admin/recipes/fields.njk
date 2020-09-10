@@ -8,7 +8,7 @@
             <div id="photos-upload">
                 <input 
                     type="file" 
-                    name="image" 
+                    name="images" 
                     multiple
                     accept="image/*"
                     onChange="imagesUpload.handleFileInput(event)"
@@ -20,7 +20,7 @@
             </div>
             <div id="photos-preview">
 
-        </div>
+            </div>
         </div>
 
     </div>
@@ -89,7 +89,7 @@
                 </div>
             {% endfor %}
 
-            <div class="input-field">
+            <div class="preparation input-field">
                 <input type="text" name="preparation[]" value="" class="preparation-field">
 
                 <button type="button" class="delete preparation-delete-button">
