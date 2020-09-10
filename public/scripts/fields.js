@@ -51,7 +51,6 @@ addIngredientBtn.addEventListener('click', function () {
         fieldContainer = document.querySelectorAll('.ingredient')
 
     const newField = fieldContainer[fieldContainer.length - 1].cloneNode(true)
-
     if (newField.children[0].value == 0) return false
 
     newField.children[0].value = ""
@@ -65,7 +64,6 @@ addPreparationBtn.addEventListener('click', function () {
         fieldContainer = document.querySelectorAll('.preparation')
 
     const newField = fieldContainer[fieldContainer.length - 1].cloneNode(true)
-
     if (newField.children[0].value == 0) return false
 
     newField.children[0].value = ""
@@ -104,7 +102,7 @@ const imagesUpload = {
     },
     hasLimit(event) {
         const { uploadLimit, input, preview } = imagesUpload
-        const { files: fileList } = event.target
+        const { files: fileList } = input
 
         if (fileList.length > uploadLimit) {
             alert(`Envie no máximo ${uploadLimit} imagens.`)
@@ -112,7 +110,21 @@ const imagesUpload = {
             return true
         }
 
-        // continuar
+        const imagesDiv = []
+        imagesUpload.preview.childNodes.forEach(item => {
+            if (item.classList & item.classList == "photo")
+                imagesDiv.push(item)
+        })
+
+        const totalImages = imagesDiv.length + preview.length
+        
+        if (totalImages > uploadLimit) {
+            alert("Você atingiu o limite de fotos.")
+            event.preventDefault()
+            return true
+        }
+
+        return false
     },
     getAllFiles() {
         const dataTransfer = new ClipboardEvent("").clipboardData || new DataTransfer()
@@ -123,19 +135,31 @@ const imagesUpload = {
     },
     getContainer(image) {
         const div = document.createElement('div')
-        div.classList.add('photos')
+        div.classList.add('photo')
 
         div.onclick = imagesUpload.removeImage
 
         div.appendChild(image)
-        // div.appendChild(imagesUpload.getRemoveButton)
+        div.appendChild(imagesUpload.getRemoveButton())
 
         return div
     },
     getRemoveButton() {
+        const button = document.createElement('i')
 
+        button.classList.add('material-icons')
+        button.innerHTML = 'close'
+
+        return button
     },
     removeImage(event) {
+        const photoDiv = event.target.parentNode
+        const photosArray = Array.from(imagesUpload.preview.children)
+        const index = photosArray.indexOf(photoDiv)
 
+        imagesUpload.files.splice(index, 1)
+        imagesUpload.input.files = imagesUpload.getAllFiles()
+        
+        photoDiv.remove()
     },
 }
