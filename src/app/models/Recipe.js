@@ -15,7 +15,7 @@ module.exports = {
         })
     },
 
-    create(params, callback) {
+    create(params) {
         const query = `
             INSERT INTO recipes (
                 chef_id,
@@ -38,11 +38,7 @@ module.exports = {
             date(Date.now()).iso,
         ]
 
-        db.query(query, values, (err, results) => {
-            if (err) throw `Database error!! ${err}`
-
-            callback(results.rows[0]) // retorna objeto com id dentro
-        })
+        return db.query(query, values)
     },
 
     find(id, callback) {
