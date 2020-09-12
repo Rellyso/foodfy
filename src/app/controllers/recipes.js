@@ -1,4 +1,5 @@
 const Recipe = require('../models/Recipe')
+const File = require('../models/File')
 
 module.exports = {
     index(req, res) {
@@ -35,8 +36,17 @@ module.exports = {
             preparation: newPreparation
         }
 
-        let results = await Recipe.create(data)
-        const recipeId = results.rows[0].id
+        console.log(req.files)
+        try {
+            let results = await Recipe.create(data)
+            const recipeId = results.rows[0].id
+
+            const filesPromise = req.files.map(file => File.create({...file, }))
+        } catch (err) {
+            res.send(`It wasn't possible create a new recipe, has an error at ${err}`)
+        }
+
+        res.send()
 
     },
     
