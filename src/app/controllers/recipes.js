@@ -36,17 +36,21 @@ module.exports = {
             preparation: newPreparation
         }
 
-        console.log(req.files)
+        if (req.files == 0) {
+            res.send('Please sen at least an image.')
+        }
         try {
             let results = await Recipe.create(data)
             const recipeId = results.rows[0].id
 
-            const filesPromise = req.files.map(file => File.create({...file, }))
+            const filesPromise = req.files.map(file => File.create({...file, recipe_id: recipeId}))
+            await Promise.all(filesPromise)
+            
+            
+            return res.redirect(`/admin/recipes/${recipeId}`)
         } catch (err) {
             res.send(`It wasn't possible create a new recipe, has an error at ${err}`)
         }
-
-        res.send()
 
     },
     
