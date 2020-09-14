@@ -10,10 +10,10 @@
         <div class="content__title">
             <h2>Criando receita</h2>
         
-            <button type="submit" class="button__save" form="f_create">Salvar receita</button>
+            <button type="submit" class="button__save" form="f_create" >Salvar receita</button>
         </div>
 
-        <form id="f_create" method="POST" action="/admin/recipes">
+        <form id="f_create" method="POST" action="/admin/recipes" enctype="multipart/form-data">
             {% include 'admin/recipes/fields.njk' %}
         </form>
     </section>
