@@ -39,15 +39,11 @@ module.exports = {
         return db.query(query, values)
     },
 
-    find(id, callback) {
-        db.query(`SELECT recipes.*, chefs.name AS chef_name
+    find(id) {
+        return db.query(`SELECT recipes.*, chefs.name AS chef_name
         FROM recipes
         LEFT JOIN chefs ON (chefs.id = recipes.chef_id)
-        WHERE recipes.id = $1`, [id], (err, results) => {
-            if (err) throw `Database error!! ${err}`
-
-            callback(results.rows[0])
-        })
+        WHERE recipes.id = $1`, [id])
     },
 
     findBy(filter, callback) {
@@ -76,21 +72,19 @@ module.exports = {
         })
     },
 
-    update(params, callback) {
+    async update(params) {
         const query = `
             UPDATE recipes SET
                 chef_id = ($1),
-                image = ($2),
-                title = ($3),
-                ingredients = ($4),
-                preparation = ($5),
-                information = ($6)
-            WHERE id = $7
+                title = ($2),
+                ingredients = ($3),
+                preparation = ($4),
+                information = ($5)
+            WHERE id = $6
             RETURNING id`
 
         const values = [
             params.chef_id,
-            params.image,
             params.title,
             params.ingredients,
             params.preparation,
@@ -98,11 +92,7 @@ module.exports = {
             params.id
         ]
 
-        db.query(query, values, (err, results) => {
-            if (err) throw `Database error! ${err}`
-
-            callback(results.rows[0])
-        })
+        return db.query(query, values)
     },
 
     selectChefOptions(callback) {
