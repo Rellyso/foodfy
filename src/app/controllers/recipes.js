@@ -7,16 +7,16 @@ module.exports = {
             return res.render('admin/recipes/index', { recipes })
         })
     },
-    
+
     create(req, res) {
         Recipe.selectChefOptions((options) => {
             return res.render('admin/recipes/create', { options })
         })
     },
-    
+
     async post(req, res) {
         const { ingredients, preparation } = req.body
-    
+
         let newIngredients = [],
             newPreparation = []
 
@@ -29,7 +29,7 @@ module.exports = {
             if (prep != "" || prep != 0)
                 newPreparation.push(prep)
         })
-    
+
         const data = {
             ...req.body,
             ingredients: newIngredients,
@@ -37,34 +37,64 @@ module.exports = {
         }
 
         if (req.files == 0) {
-            res.send('Please sen at least an image.')
+            res.send('Please send at least an image.')
         }
         try {
             let results = await Recipe.create(data)
             const recipeId = results.rows[0].id
 
-            const filesPromise = req.files.map(file => File.create({...file, recipe_id: recipeId}))
+            const filesPromise = req.files.map(file => File.create({ ...file, recipe_id: recipeId }))
             await Promise.all(filesPromise)
-            
-            
+
+
             return res.redirect(`/admin/recipes/${recipeId}`)
         } catch (err) {
             res.send(`It wasn't possible create a new recipe, has an error at ${err}`)
         }
 
     },
-    
-    show(req, res) {
+
+    async show(req, res) {
         const { id } = req.params
-    
-        Recipe.find(id, (recipe) => {
-            return res.render('admin/recipes/show', { recipe })
-        })
+        try {
+            let results = await Recipe.find(id)
+            let recipe = results.rows[0]
+
+            const {id: recipeId} = recipe
+
+            results = await File.recipeFiles(recipeId)
+            let recipe_files = results.rows
+
+            let files = []
+
+            for (file in recipe_files) {
+                results = await File.getFile(recipe_files[file].file_id)
+                
+                file = results.rows.map(file => ({
+                    ...file,
+                    src: `${req.protocol}://${req.headers.host}${file.path.replace("public", "").replace("","")}`  
+                }))
+                files.push(file)
+            }
+
+            
+            
+            recipe = {
+                ...recipe,
+                files: files
+            }
+
+            return res.send(recipe)
+        } catch (err) {
+            res.send(err)
+        }
+
+        // return res.render('admin/recipes/show', { recipe })
     },
-    
+
     edit(req, res) {
         const { id } = req.params
-    
+
         Recipe.find(id, (recipe) => {
             Recipe.selectChefOptions((options) => {
                 res.render('admin/recipes/edit', { recipe, options })
@@ -72,27 +102,19 @@ module.exports = {
         })
     },
 
-    put(req, res) {
+    async put(req, res) {
         const { ingredients, preparation } = req.body
         let newIngredients = [],
             newPreparation = []
-    
-        for (let ingredient of ingredients) {
-            if (ingredient === "") {
-    
-            } else {
-                newIngredients.push(ingredient)
-            }
-        }
-    
-        for (let prep of preparation) {
-            if (prep == "") {
-    
-            } else {
-                newPreparation.push(prep)
-            }
-        }
-    
+
+        newIngredients = ingredients.map(ingredient => {
+            if (ingredient != "") true
+        })
+
+        newPreparation = preparation.map(prep => {
+            if (prep != "") true
+        })
+
         const paramsBody = {
             ...req.body,
             id: parseInt(req.body.id, 10),
@@ -100,15 +122,24 @@ module.exports = {
             ingredients: newIngredients,
             preparation: newPreparation,
         }
-    
-        Recipe.update(paramsBody, (recipe) => {
-            return res.redirect(`/admin/recipes/${recipe.id}`)
-        })
+
+        if (req.files == 0) {
+            res.send('Please send at least an image.')
+        }
+        try {
+            let results = await Recipe.update(paramsBody)
+            const recipeId = results.rows[0].id
+
+
+            return res.redirect(`/admin/recipes/${recipeId}`)
+        } catch (err) {
+            res.send(`It wasn't possible updating recipe because: Has an ${err}`)
+        }
     },
-    
+
     delete(req, res) {
         const { id } = req.body
-    
+
         Recipe.delete(id, () => {
             res.redirect('/admin/recipes')
         })
