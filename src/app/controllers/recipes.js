@@ -69,22 +69,17 @@ module.exports = {
 
             for (file in recipe_files) {
                 results = await File.getFile(recipe_files[file].file_id)
-                
-                file = results.rows.map(file => ({
-                    ...file,
-                    src: `${req.protocol}://${req.headers.host}${file.path.replace("public", "").replace("","")}`  
-                }))
+
+                file = results.rows[0]
+                file.src = `${req.protocol}://${req.headers.host}${file.path.replace("public", "")}`
                 files.push(file)
             }
-
-            
             
             recipe = {
                 ...recipe,
-                files: files
             }
 
-            return res.send(recipe)
+            return res.render(`admin/recipes/show`, {recipe, files})
         } catch (err) {
             res.send(err)
         }
