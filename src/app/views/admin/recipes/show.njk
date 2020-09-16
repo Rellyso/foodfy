@@ -14,7 +14,19 @@
         </div>
         <div class="recipe__head">
 
-            <img src="{{recipe.image}}" alt="imagem da receita {{recipe.title}}">
+            <img src="{{files[0].src}}" alt="imagem da receita {{recipe.title}}">
+
+            <div id="gallery">
+                {% for image in files %}
+                    <img 
+                        src="{{image.src}}" 
+                        alt="{{image.name}}"
+                        {% if files.index0 == 0 %}
+                        class="active"
+                        {% endif %}
+                    >
+                {% endfor %}
+            </div>
 
             <div class="recipe__title">
                 <h1>{{recipe.title}}</h1>
