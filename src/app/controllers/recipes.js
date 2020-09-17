@@ -2,10 +2,13 @@ const Recipe = require('../models/Recipe')
 const File = require('../models/File')
 
 module.exports = {
-    index(req, res) {
-        Recipe.selectAllWithChefNames((recipes) => {
-            return res.render('admin/recipes/index', { recipes })
-        })
+    async index(req, res) {
+        let results = await Recipe.selectAllWithChefNames()
+        const recipes = results.rows
+
+        
+        return res.render('admin/recipes/index', { recipes })
+
     },
 
     create(req, res) {
@@ -58,33 +61,19 @@ module.exports = {
         const { id } = req.params
         try {
             let results = await Recipe.find(id)
-            let recipe = results.rows[0]
+            const recipe = results.rows[0]
 
-            const {id: recipeId} = recipe
+            results = await File.getFilesByRecipeId(id)
+            let files = results.rows
 
-            results = await File.recipeFiles(recipeId)
-            let recipe_files = results.rows
-
-            let files = []
-
-            for (file in recipe_files) {
-                results = await File.getFile(recipe_files[file].file_id)
-
-                file = results.rows[0]
+            files.map(file => {
                 file.src = `${req.protocol}://${req.headers.host}${file.path.replace("public", "")}`
-                files.push(file)
-            }
-            
-            recipe = {
-                ...recipe,
-            }
+            })
 
             return res.render(`admin/recipes/show`, {recipe, files})
         } catch (err) {
             res.send(err)
         }
-
-        // return res.render('admin/recipes/show', { recipe })
     },
 
     edit(req, res) {
