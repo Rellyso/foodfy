@@ -17,7 +17,7 @@
         <link rel="stylesheet" href="/styles/keyframes.css">
     </head>
 
-    <body onload="onLoadPage()">
+    <body>
         <div class="container">
             <div class="header__content">
                 <header>
@@ -37,6 +37,8 @@
         </div>
 
         <script src="/scripts/main/main.js"></script>
+        {% block scripts %}
+        {% endblock scripts %}
     </body>
 
 </html>
