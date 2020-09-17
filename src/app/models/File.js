@@ -35,6 +35,15 @@ module.exports = {
         }
     },
 
+    getFilesByRecipeId(recipe_id) {
+        return db.query(`
+            SELECT files.* FROM recipes, recipe_files, files
+            WHERE recipes.id = recipe_files.recipe_id 
+            AND recipe_files.file_id = files.id
+            AND recipes.id = $1`, [recipe_id])
+
+    },
+
     getFile(file_id) {
         try {
             return db.query(`SELECT * FROM files WHERE id = $1`, [file_id])
@@ -47,16 +56,6 @@ module.exports = {
     async recipeFiles(recipe_id) {
         try {
             let results = await db.query(`SELECT * FROM recipe_files WHERE recipe_id = $1`, [recipe_id])
-
-            // const recipeFiles = results.rows
-
-            // let files = []
-            // recipeFiles.map(async recipeFile => {
-            //     let result = await db.query(`SELECT * FROM files WHERE id = $1`, [recipeFile.file_id])
-            //     let file = result.rows
-                
-            //     files.push(file)
-            // })
 
             return results
         } catch (err) {
