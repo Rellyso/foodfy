@@ -321,14 +321,25 @@ a.button {
 /* GALLERY */
 
 #gallery {
-    display: grid;
-    grid-template-columns: repeat(5, 50px);
-    column-gap: 8px;
+    width: 100%;
+}
 
-    align-self: flex-end;
-    align-items: flex-end;
+#gallery .highlight {
+    width: 100%;
+    height: 300px;
+}
 
-    width: initial;
+#gallery .highlight img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.gallery-preview {
+    display: flex;
+    justify-content: flex-end;
+
+    width: inherit;
     height: 50px;
 
     position: relative;
@@ -336,16 +347,16 @@ a.button {
     margin: 8px 0;
 }
 
-#gallery img {
-    width: 100%;
-    height: 100%;
+.gallery-preview img {
+    width: 50px;
+    height: 50px;
+
+    margin-left: 10px;
 
     object-fit: cover;
 
     border: 1px solid #DDDDDD;
     border-radius: 4px;
-
-    margin: 0;
 
     position: relative;
 
@@ -357,8 +368,8 @@ a.button {
 }
 
 
-#gallery img.active,
-#gallery img:hover {
+.gallery-preview img.active,
+.gallery-preview img:hover {
     opacity: 1;
 }
 
