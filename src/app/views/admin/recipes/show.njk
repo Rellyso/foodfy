@@ -14,18 +14,35 @@
         </div>
         <div class="recipe__head">
 
-            <img src="{{files[0].src}}" alt="imagem da receita {{recipe.title}}">
 
             <div id="gallery">
-                {% for image in files %}
-                    <img 
-                        src="{{image.src}}" 
-                        alt="{{image.name}}"
-                        {% if files.index0 == 0 %}
-                        class="active"
-                        {% endif %}
-                    >
-                {% endfor %}
+                <div class="highlight">
+                    {% if not files[0] %}
+                        <img 
+                            src="https://www.placehold.it/980x300?text=RECEITA SEM IMAGEM"
+                            alt="imagem da receita {{recipe.title}}"
+                        >
+                    {% else %}
+                        <img src="{{files[0].src}}" alt="imagem da receita {{recipe.title}}">
+
+                    {% endif %}
+                </div>
+
+                {% if files[1] %}
+                    <div class="gallery-preview">
+                    {% for image in files %}
+                        <img 
+                            src="{{image.src}}" 
+                            alt="{{image.name}}"
+                            {% if loop.index0 == 0 %}
+                            class="active"
+                            {% endif %}}
+                            onclick="imageGallery.setImage(event)"
+                        >
+                    {% endfor %}
+                </div>
+                {% endif %}
+                
             </div>
 
             <div class="recipe__title">
@@ -82,5 +99,5 @@
 {% endblock content %}
 
 {% block scripts %}
-    <script src="/scripts/main/recipe.js"></script>
+    <script src="/scripts/fields.js"></script>
 {% endblock scripts %}
