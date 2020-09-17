@@ -51,7 +51,10 @@
                 <div class="ingredient input-field">
                     <input type="text" name="ingredients[]" value="{{ ingredient }}" class="ingredient-field">
 
-                    <button type="button" class="delete ingredient-delete-button">
+                    <button 
+                        type="button" 
+                        class="delete ingredient-delete-button" 
+                    >
                         <span class="material-icons">
                             close
                         </span>
@@ -69,7 +72,7 @@
             </div>
         </div>
 
-        <a class="link__button add-ingredient">Adicionar novo ingrediente</a>
+        <a class="link__button add-ingredient" onclick="addNewField.newIngredient()">Adicionar novo ingrediente</a>
     </div>
 
     <div class="item" id="steps">
@@ -81,7 +84,10 @@
 
                     <input type="text" name="preparation[]" value="{{ step }}">
 
-                    <button type="button" class="delete preparation-delete-button">
+                    <button 
+                        type="button" 
+                        class="delete preparation-delete-button"
+                    >
                         <span class="material-icons">
                             close
                         </span>
@@ -101,7 +107,7 @@
             
         </div>
 
-        <a class="link__button add-step">Adicionar novo passo</a>
+        <a class="link__button add-step" onclick="addNewField.newPreparation()">Adicionar novo passo</a>
     </div>
 
     <div class="item">
