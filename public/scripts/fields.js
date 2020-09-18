@@ -105,12 +105,12 @@ const imagesUpload = {
         }
 
         const imagesDiv = []
-        imagesUpload.preview.childNodes.forEach(item => {
-            if (item.classList & item.classList == "photo")
-                imagesDiv.push(item)
+        preview.childNodes.forEach(item => {
+            if (item.classList && item.classList.value == "photo")
+            imagesDiv.push(item)
         })
-
-        const totalImages = imagesDiv.length + preview.length
+        
+        const totalImages = imagesDiv.length + fileList.length
 
         if (totalImages > uploadLimit) {
             alert("Você atingiu o limite de fotos.")
@@ -156,6 +156,20 @@ const imagesUpload = {
 
         photoDiv.remove()
     },
+    removeOldImage(event) {
+        const photoDiv = event.target.parentNode
+
+        if (photoDiv.id) {
+            const removedFiles = document.querySelector('input[name=removed_files]')
+
+            if (removedFiles) {
+                removedFiles.value =+ `${photoDiv.id},`
+            }
+
+        }
+
+        photoDiv.remove()
+    }
 }
 
 const imageGallery = {
