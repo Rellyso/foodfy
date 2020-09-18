@@ -1,5 +1,4 @@
 const db = require('../../config/db')
-const { find } = require('./Recipe')
 
 module.exports = {
     async create({ filename, path, recipe_id }) {
@@ -43,16 +42,7 @@ module.exports = {
             AND recipes.id = $1`, [recipe_id])
 
     },
-
-    getFile(file_id) {
-        try {
-            return db.query(`SELECT * FROM files WHERE id = $1`, [file_id])
-
-        } catch (err) {
-            throw `Database Error => ${err}`
-        }
-    },
-
+    
     async recipeFiles(recipe_id) {
         try {
             let results = await db.query(`SELECT * FROM recipe_files WHERE recipe_id = $1`, [recipe_id])
