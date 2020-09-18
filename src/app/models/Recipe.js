@@ -61,11 +61,13 @@ module.exports = {
         })
     },
 
-    selectAllWithChefNames() {
-        return db.query(`SELECT recipes.*, chefs.name AS chef_name
+    selectAllWithChefNamesAndFiles() {
+        return db.query(`SELECT recipes.*, chefs.name AS chef_name, files.name AS filename, files.path
         FROM recipes
         LEFT JOIN chefs ON (chefs.id = recipes.chef_id)
-        `)
+        LEFT JOIN recipe_files ON (recipes.id = recipe_files.recipe_id)
+        LEFT JOIN files ON (recipe_files.file_id = files.id)
+        ORDER BY recipes.id ASC`)
     },
 
     async update(params) {
@@ -91,13 +93,8 @@ module.exports = {
         return db.query(query, values)
     },
 
-    selectChefOptions(callback) {
-        db.query(`SELECT name, id FROM chefs`, (err, results) => {
-            if (err) throw `Database error! ${err}`
-
-            callback(results.rows)
-
-        })
+    selectChefOptions() {
+        return db.query(`SELECT name, id FROM chefs`)
     },
 
     delete(id, callback) {
