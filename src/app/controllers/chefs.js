@@ -12,17 +12,25 @@ exports.create = (req, res) => {
 }
 
 exports.post = (req, res) => {
+
     const keys = Object.keys(req.body)
 
     for (let key of keys) {
-        if (req.body[key] == '') {
+        if (req.body[key] == '' && key != "images") {
             return res.send('please fill in all the fields')
         }
     }
+    if (!req.file) {
+        res.send('Please add an image')
+    }
 
-    Chef.create(req.body, (chef) => {
-        return res.redirect(`/admin/chefs/${chef.id}`)
-    })
+    return res.send()
+
+    // continuar aqui
+
+    // Chef.create(req.body, (chef) => {
+    //     return res.redirect(`/admin/chefs/${chef.id}`)
+    // })
 }
 
 exports.show = (req, res) => {
