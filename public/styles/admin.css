@@ -65,6 +65,7 @@ header .links a.active {
     text-transform: capitalize;
     text-decoration: none;
 }
+
 /* PADDING */
 .content__title,
 .form__title {
@@ -564,4 +565,42 @@ a.button {
 
 .item #photos-preview .photo i:hover {
     opacity: 1;
+}
+
+/* AVATAR UPLOAD */
+
+.item #avatar-upload {
+    margin-top: 10px;
+    position: relative;
+
+    display: flex;
+    align-items: center;
+}
+
+.item #avatar-upload input {
+    position: absolute;
+    display: block;
+
+    width: 130px;
+    height: 40px;
+
+    margin: 0;
+    padding: 0;
+
+    overflow: hidden;
+    opacity: 0;
+}
+
+#avatar-upload .avatar-preview {
+    padding-left: 10px;
+    height: 35px;
+}
+
+#avatar-upload .avatar-preview img{
+    width: 35px;
+    height: 35px;
+
+    object-fit: cover;
+
+    border-radius: 50%;
 }
