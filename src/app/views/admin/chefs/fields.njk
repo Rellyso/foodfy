@@ -10,7 +10,23 @@
     <div class="item">
         <div>Avatar</div>
 
-        <input type="url" name="avatar_url" placeholder="https://" value="{{ chef.avatar_url }}" required>
+        <div id="avatar-upload">
+            <div class="upload-field">
+                <input 
+                    type="file" 
+                    name="images" 
+                    id="images"
+                    accept="image/*"
+                    onChange="avatarUpload.handleFileInput(event)"
+                >
+            
+                <a class="button">Enviar Avatar</a>
+            </div>
+
+            <div class="avatar-preview">
+                <img src="http://placehold.it/50x50" alt="avatar preview">
+            </div>
+        </div>
 
     </div>
 
