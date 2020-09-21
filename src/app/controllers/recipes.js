@@ -35,7 +35,7 @@ module.exports = {
     async post(req, res) {
         const { ingredients, preparation } = req.body
 
-        const keys = new Object.keys(req.body)
+        const keys = Object.keys(req.body)
 
         for (let key of keys) {
             if (req.body[key] == "" && key != "removed_files") {
@@ -178,11 +178,12 @@ module.exports = {
         }
     },
 
-    delete(req, res) {
+    async delete(req, res) {
         const { id } = req.body
 
-        Recipe.delete(id, () => {
-            res.redirect('/admin/recipes')
-        })
+        await File.deleteFilesFromRecipe(parseInt(id))
+        await Recipe.delete(parseInt(id))
+
+        return res.redirect('/admin/recipes')
     },
 }
