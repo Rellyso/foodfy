@@ -1,5 +1,6 @@
 const db = require('../../config/db')
 const { date } = require('../../libs/utils')
+const File = require('./File')
 
 module.exports = {
     all(callback) {
@@ -97,11 +98,7 @@ module.exports = {
         return db.query(`SELECT name, id FROM chefs`)
     },
 
-    delete(id, callback) {
-        db.query(`DELETE FROM recipes WHERE id = $1`, [id], (err, results) => {
-            if (err) throw `Database error! ${err}`
-
-            callback()
-        })
+    async delete(id) {
+        return db.query(`DELETE FROM recipes WHERE id = $1`, [id])
     }
 }
