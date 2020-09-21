@@ -13,11 +13,14 @@
             <button type="submit" class="button__save" form="f_create">Salvar chef</button>
         </div>
 
-        <form id="f_create" method="POST" action="/admin/chefs">
+        <form id="f_create" method="POST" action="/admin/chefs" enctype="multipart/form-data">
             {% include 'admin/chefs/fields.njk' %}
         </form>
     </section>
 
     {% endblock content %}
 
+    {% block scripts %}
+    <script src="/scripts/fields.js"></script>
+    {% endblock scripts %}
     
