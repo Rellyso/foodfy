@@ -64,8 +64,6 @@ const addNewField = {
 
 }
 
-
-
 const imagesUpload = {
     input: "",
     preview: document.querySelector('#photos-preview'),
@@ -92,7 +90,8 @@ const imagesUpload = {
 
             reader.readAsDataURL(file)
         })
-
+        imagesUpload.input.files = imagesUpload.getAllFiles()
+        console.log(imagesUpload.input.files)
     },
     hasLimit(event) {
         const { uploadLimit, input, preview } = imagesUpload
@@ -183,5 +182,35 @@ const imageGallery = {
 
         imageGallery.highlight.src = target.src
 
+    }
+}
+
+const avatarUpload = {
+    input: "",
+    files: [],
+    preview: document.querySelector('.avatar-preview img'),
+    handleFileInput(event) {
+        const {files: fileList} = event.target
+        avatarUpload.input = event.target
+
+        Array.from(fileList).forEach(file => {
+            avatarUpload.files.push(file)
+            const reader = new FileReader()
+
+            reader.onload = () => {
+                avatarUpload.preview.src = reader.result
+            }
+
+            reader.readAsDataURL(file)
+        })
+        avatarUpload.input.files = avatarUpload.getFile()
+        console.log(avatarUpload.input.files)
+    },
+
+    getFile() {
+        const dataTransfer = new ClipboardEvent("").clipboardData || new DataTransfer()
+
+        avatarUpload.files.forEach(file => dataTransfer.items.add(file))
+        return dataTransfer.files
     }
 }
