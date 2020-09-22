@@ -1,80 +1,139 @@
 const Chef = require('../models/Chef')
+const File = require('../models/File')
 const { date } = require('../../libs/utils')
 
-exports.index = (req, res) => {
-    Chef.all(function (chefs) {
-        return res.render('admin/chefs/index', { chefs })
-    })
-}
+module.exports = {
+    async index(req, res) {
+        let results = await Chef.all()
+        const chefs = results.rows
 
-exports.create = (req, res) => {
-    return res.render('admin/chefs/create')
-}
-
-exports.post = (req, res) => {
-
-    const keys = Object.keys(req.body)
-
-    for (let key of keys) {
-        if (req.body[key] == '' && key != "images") {
-            return res.send('please fill in all the fields')
-        }
-    }
-    if (!req.file) {
-        res.send('Please add an image')
-    }
-
-    return res.send()
-
-    // continuar aqui
-
-    // Chef.create(req.body, (chef) => {
-    //     return res.redirect(`/admin/chefs/${chef.id}`)
-    // })
-}
-
-exports.show = (req, res) => {
-    const { id } = req.params
-
-    Chef.find(id, (chef) => {
-        if (!chef) {
-            return res.send('Chef not found')
-        }
-
-        Chef.selectRecipesOptions(id, (options) => {
-            console.log(options)
-            
-            chef.created_at = date(chef.created_at).format
-            
-            return res.render('admin/chefs/show', { chef, recipes: options })
+        chefs.forEach(async chef => {
+            results = await File.selectFromFileId(chef.file_id)
+            chefs.avatar_url = `${req.protocol}://${req.headers.host}${results.rows[0].path.replace('public', '')}`
         })
-    })
-}
+        return res.render('admin/chefs/index', { chefs })
+    },
 
-exports.edit = (req, res) => {
-    const { id } = req.params
+    create(req, res) {
+        return res.render('admin/chefs/create')
+    },
 
-    Chef.find(id, (chef) => {
+    async post(req, res) {
+
+        const keys = Object.keys(req.body)
+
+        for (let key of keys) {
+            if (req.body[key] == '' && key != "images") {
+                return res.send('please fill in all the fields')
+            }
+        }
+
+        if (!req.file) {
+            res.send('Please send an image')
+        }
+
+        try {
+            let results = await File.createChefFile({ ...req.file })
+            const fileId = results.rows[0].id
+
+            console.log(results.rows[0].id)
+
+            results = await Chef.create({ ...req.body, fileId })
+            const chefId = results.rows[0].id
+
+            return res.redirect(`/admin/chefs/${chefId}`)
+        } catch (err) {
+            return res.send(req.body)
+        }
+
+    },
+
+    async show(req, res) {
+        const { id } = req.params
+
+        let results = await Chef.find(id)
+        const chef = results.rows[0]
+
+        if (chef.path) {
+            chef.avatar_url = `${req.protocol}://${req.headers.host}${chef.path.replace('public', '')}`
+        }
+
+        chef.created_at = date(chef.created_at).format
+
         if (!chef) {
             return res.send('Chef not found')
         }
 
+        results = await Chef.selectRecipesOptions(id)
+        let lastId = 0
+        const recipes = []
+        results.rows.forEach(recipe => {
+            if (recipe.recipe_id != lastId) {
+                recipe.src = `${req.protocol}://${req.headers.host}${recipe.path.replace('public', '')}`
+                recipes.push(recipe)
+            }
+            lastId = recipe.recipe_id
+        })
+
+        return res.render('admin/chefs/show', { chef, recipes })
+    },
+
+    async edit(req, res) {
+        const { id } = req.params
+
+        let results = await Chef.find(id)
+        const chef = results.rows[0]
+
+        if (chef.path) {
+            chef.avatar_url = `${req.protocol}://${req.headers.host}${chef.path.replace('public', '')}`
+        }
         res.render('admin/chefs/edit', { chef })
-    })
+    },
 
-}
+    async put(req, res) {
+        const keys = Object.keys(req.body)
 
-exports.put = (req, res) => {
-    Chef.update(req.body, (chef) => {
-        res.redirect(`/admin/chefs/${req.body.id}`)
-    })
-}
+        for (let key of keys) {
+            if (req.body[key] == '' && key != "lastFileId") {
+                return res.send('please fill in all the fields')
+            }
+        }
 
-exports.delete = (req, res) => {
-    const { id } = req.body
+        try {
+            if (req.file) {
+                let results = await File.createChefFile({ ...req.file })
+                const fileId = results.rows[0].id
 
-    Chef.delete(id, () => {
+                const data = {
+                    ...req.body,
+                    fileId: fileId || null
+                }
 
-        res.redirect('/admin/chefs')
-    })
+                await Chef.update({ ...data })
+
+                await File.deleteFileFromChefId(req.body.lastFileId)
+
+            } else {
+                const data = {
+                    ...req.body,
+                    fileId: req.body.lastFileId
+                }
+
+                await Chef.update({ ...data })
+            }
+            return res.redirect(`/admin/chefs/${req.body.id}`)
+        } catch (err) {
+            console.error(err)
+            return res.send('An error has occurred, please try again')
+        }
+    },
+
+    delete(req, res) {
+        const { id } = req.body
+
+        Chef.delete(id, () => {
+
+            res.redirect('/admin/chefs')
+        })
+    },
 }
