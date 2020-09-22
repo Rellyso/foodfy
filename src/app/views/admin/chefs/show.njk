@@ -1,7 +1,7 @@
 {% extends "admin/layout.njk" %}
 
 {% block head %}
-    <title>{{chef.name}}</title>
+    <title>Perfil de{{chef.name}}</title>
 {% endblock head %}
 
 {% block content %}
@@ -42,7 +42,7 @@
                     {% for recipe in recipes %}
                         <div class="card">
                             <figure class="card__img">
-                                <img src="{{recipe.image}}" alt="imagem de {{chef.name}}">
+                                <img src="{{recipe.src}}" alt="imagem de {{recipe.title}}">
                             </figure>
 
                             <div class="card__content">
@@ -50,7 +50,7 @@
 
                                 <p>Por
                                     {{chef.name}}</p>
-                                <a href="/admin/recipes/{{ recipe.id }}">visualizar</a>
+                                <a href="/admin/recipes/{{ recipe.recipe_id }}">visualizar</a>
                             </div>
                         </div>
                     {% endfor %}
@@ -61,5 +61,4 @@
 {% endblock content %}
 
 {% block scripts %}
-    <script src="/scripts/main/chef.js"></script>
 {% endblock scripts %}
