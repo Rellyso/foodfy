@@ -24,6 +24,7 @@ module.exports = {
                 recipe_id,
                 file_id
             ) VALUES ($1, $2) `
+
             values = [
                 recipe_id,
                 fileId
@@ -35,6 +36,26 @@ module.exports = {
         }
     },
 
+    createChefFile({ filename, path }) {
+        try {
+            return db.query(`
+            INSERT INTO files (
+                name,
+                path
+            ) VALUES ($1, $2)
+            RETURNING id
+        `, [filename, path])
+        } catch (err) {
+            throw `Error at: ${err}`
+        }
+    },
+
+    selectFromFileId(id) {
+        return db.query(`
+            SELECT files.path FROM files, chefs WHERE chefs.file_id = files.id AND chefs.file_id = $1
+        `, [id])
+    },
+
     getFilesByRecipeId(recipe_id) {
         return db.query(`
             SELECT files.* FROM recipes, recipe_files, files
@@ -42,16 +63,6 @@ module.exports = {
             AND recipe_files.file_id = files.id
             AND recipes.id = $1`, [recipe_id])
 
-    },
-
-    async recipeFiles(recipe_id) {
-        try {
-            let results = await db.query(`SELECT * FROM recipe_files WHERE recipe_id = $1`, [recipe_id])
-
-            return results
-        } catch (err) {
-            return `Database error: ${err}`
-        }
     },
 
     async deleteFileFromRecipe(id) {
@@ -82,5 +93,18 @@ module.exports = {
 
         const filesPromise = files.map(file => this.deleteFileFromRecipe(file.id))
         await Promise.all(filesPromise)
-    }
+    },
+    
+    async deleteFileFromChefId(id) {
+        try {
+            let result = await db.query(`SELECT * FROM files WHERE id = $1`, [id])
+            const file = result.rows[0]
+
+            fs.unlinkSync(file.path)
+
+            return db.query(`DELETE FROM files WHERE id = $1`, [id])
+        } catch (err) {
+            console.error(err)
+        }
+    },
 }
