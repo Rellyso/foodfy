@@ -205,6 +205,7 @@ const avatarUpload = {
         })
         avatarUpload.input.files = avatarUpload.getFile()
         console.log(avatarUpload.input.files)
+        avatarUpload.files = []
     },
 
     getFile() {
