@@ -24,11 +24,17 @@
             </div>
 
             <div class="avatar-preview">
-                <img src="http://placehold.it/50x50" alt="avatar preview">
+                <img 
+                    src="{% if chef.avatar_url %}{{chef.avatar_url}}{% else %}http://placehold.it/50x50{% endif %}" 
+                    alt="avatar preview"
+                >
             </div>
         </div>
 
     </div>
 
+    {% if chef %}
+        <input type="hidden" name="lastFileId" value="{{chef.file_id}}">
+    {% endif %}
     
 </div>
