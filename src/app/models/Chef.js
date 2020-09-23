@@ -6,12 +6,12 @@ module.exports = {
         return db.query(`SELECT * FROM chefs ORDER BY name ASC`)
     },
 
-    create({name, fileId}) {
+    create({ name, fileId }) {
         const query = `
-            INSERT INTO chefs (
-                name,
-                file_id,
-                created_at
+        INSERT INTO chefs (
+            name,
+            file_id,
+            created_at
             ) VALUES ($1, $2, $3)
             RETURNING id`
 
@@ -33,17 +33,23 @@ module.exports = {
         GROUP BY chefs.id, files.path, files.id`, [id])
     },
 
-    selectChefsWithTotalRecipes(callback) {
-        db.query(`
-            SELECT chefs.*, count(recipes) AS total_recipes
+    selectAllWithAvatar() {
+        return db.query(`
+            SELECT chefs.*, files.path 
+            FROM files, chefs 
+            WHERE chefs.file_id = files.id
+            ORDER BY chefs.name ASC
+        `)
+    },
+
+    selectChefsWithTotalRecipes() {
+        return db.query(`
+            SELECT chefs.*, files.path, count(recipes) AS total_recipes
             FROM chefs
             LEFT JOIN recipes ON (chefs.id = recipes.chef_id)
-            GROUP BY chefs.id
-        `, (err, results) => {
-            if (err) throw `Database error! ${err}`
-
-            callback(results.rows)
-        })
+            LEFT JOIN files ON (chefs.file_id = files.id)
+            GROUP BY chefs.id, files.path
+        `)
     },
 
     selectRecipesOptions(id) {
@@ -56,7 +62,7 @@ module.exports = {
         `, [id])
     },
 
-    async update({name, fileId = null, id}) {
+    async update({ name, fileId = null, id }) {
         const query = `
             UPDATE chefs SET
                 name = $1,
