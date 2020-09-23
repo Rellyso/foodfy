@@ -4,14 +4,17 @@ const { date } = require('../../libs/utils')
 
 module.exports = {
     async index(req, res) {
-        let results = await Chef.all()
-        const chefs = results.rows
+        let results = await Chef.selectAllWithAvatar()
+        const chefs = results.rows,
+            chefsWithAvatar = []
 
-        chefs.forEach(async chef => {
-            results = await File.selectFromFileId(chef.file_id)
-            chefs.avatar_url = `${req.protocol}://${req.headers.host}${results.rows[0].path.replace('public', '')}`
+        chefs.forEach(chef => {
+            chef.avatar_url = `${req.protocol}://${req.headers.host}${chef.path.replace('public', '')}`
+
+            chefsWithAvatar.push(chef)
         })
-        return res.render('admin/chefs/index', { chefs })
+
+        return res.render('admin/chefs/index', { chefs: chefsWithAvatar })
     },
 
     create(req, res) {
