@@ -35,7 +35,7 @@ module.exports = {
 
     selectAllWithAvatar() {
         return db.query(`
-            SELECT chefs.*, files.path 
+            SELECT chefs.*, files.path
             FROM files, chefs 
             WHERE chefs.file_id = files.id
             ORDER BY chefs.name ASC
