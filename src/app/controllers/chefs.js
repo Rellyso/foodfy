@@ -39,8 +39,6 @@ module.exports = {
             let results = await File.createChefFile({ ...req.file })
             const fileId = results.rows[0].id
 
-            console.log(results.rows[0].id)
-
             results = await Chef.create({ ...req.body, fileId })
             const chefId = results.rows[0].id
 
