@@ -21,6 +21,9 @@ CREATE TABLE "recipes" (
   "created_at" timestamp DEFAULT (now())
 );
 
+ALTER TABLE "recipes" ADD COLUMN "updated_at" timestamp DEFAULT (now())
+ALTER TABLE "recipes" ALTER "created_at" SET DEFAULT (now())
+
 ALTER TABLE "recipe_files" ADD FOREIGN KEY ("recipe_id") REFERENCES "recipes" ("id");
 
 ALTER TABLE "recipe_files" ADD FOREIGN KEY ("file_id") REFERENCES "files" ("id");
