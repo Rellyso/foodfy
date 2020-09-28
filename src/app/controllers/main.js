@@ -62,16 +62,30 @@ module.exports = {
             file.src = `${req.protocol}://${req.headers.host}${file.path.replace("public", "")}`
         })
 
-        console.log(files)
         return res.render("main/recipe", { recipe, files })
     },
 
-    search(req, res) {
+    async search(req, res) {
         const { filter } = req.query
 
-        Recipe.findBy(filter, (filteredRecipes) => {
-            res.render('main/search', { recipes: filteredRecipes, filter })
+        let results = await Recipe.findBy(filter)
+
+        let lastId = 0
+        let filteredRecipes = []
+        results.rows.forEach(recipe => {
+
+
+            if (recipe.id !== lastId) {
+                filteredRecipes.push(recipe)
+            }
+            if (recipe.path != null) {
+                recipe.src = `${req.protocol}://${req.headers.host}${recipe.path.replace('public', '')}`
+            }
+
+            lastId = recipe.id
         })
+
+        res.render('main/search', { recipes: filteredRecipes, filter })
     },
 
     async chefs(req, res) {
