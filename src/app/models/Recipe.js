@@ -1,6 +1,4 @@
 const db = require('../../config/db')
-const { date } = require('../../libs/utils')
-const File = require('./File')
 
 module.exports = {
     all(callback) {
@@ -9,6 +7,7 @@ module.exports = {
             FROM recipes
             LEFT JOIN chefs ON (recipes.chef_id = chefs.id)
             GROUP BY recipes.id
+            ORDER BY recipes.updated_at DESC
         `, function (err, results) {
             if (err) throw `Database error!! ${err}`
 
@@ -34,7 +33,7 @@ module.exports = {
             params.ingredients,
             params.preparation,
             params.information,
-            date(Date.now()).iso,
+            `now()`,
         ]
 
         return db.query(query, values)
@@ -47,19 +46,17 @@ module.exports = {
         WHERE recipes.id = $1`, [id])
     },
 
-    findBy(filter, callback) {
-        db.query(`
-        SELECT recipes.*, chefs.name AS chef_name  
+    findBy(filter) {
+        return db.query(`
+        SELECT recipes.*, chefs.name AS chef_name, files.name AS filename, files.path
         FROM recipes
         LEFT JOIN chefs ON (chefs.id = recipes.chef_id)
+        LEFT JOIN recipe_files ON (recipes.id = recipe_files.recipe_id)
+        LEFT JOIN files ON (recipe_files.file_id = files.id)
         WHERE recipes.title ILIKE '%${filter}%'
         OR chefs.name ILIKE '%${filter}%'
-        ORDER BY recipes.title ASC
-        `, (err, results) => {
-            if (err) throw `Database error!! ${err}`
-
-            callback(results.rows)
-        })
+        ORDER BY recipes.updated_at ASC
+        `)
     },
 
     selectAllWithChefNamesAndFiles() {
@@ -68,7 +65,7 @@ module.exports = {
         LEFT JOIN chefs ON (chefs.id = recipes.chef_id)
         LEFT JOIN recipe_files ON (recipes.id = recipe_files.recipe_id)
         LEFT JOIN files ON (recipe_files.file_id = files.id)
-        ORDER BY recipes.id ASC`)
+        ORDER BY recipes.updated_at DESC`)
     },
 
     async update(params) {
