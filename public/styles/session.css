@@ -1,0 +1,46 @@
+.session .header__content {
+    margin-bottom: 150px;
+}
+
+.session header {
+    align-items: center;
+    justify-content: center;
+}
+
+.session .logo__link {
+    margin: 0;
+}
+
+
+/* SESSION CONTAINER */
+.session__container {
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.session__container .content__title {
+    align-items: center;
+    justify-content: center;
+}
+
+.session__container input {
+    color: #777 !important;
+}
+
+.session__container .footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.session__container .footer a {
+    font-size: 16px;
+    font-weight: bold;
+    color: #999;
+}
+
+.session__container .footer button {
+    font-size: 16px;
+    font-weight: bold;
+    padding: 8px 32px;
+}
