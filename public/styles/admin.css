@@ -149,113 +149,6 @@ header .links a.active {
     margin-bottom: 0;
 }
 
-/* FORM */
-
-.content__title {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-button[type="submit"],
-button[type="button"],
-a.button {
-    background-color: #6558C3;
-    color: white;
-
-    border: none;
-    border-radius: 4px;
-
-    padding: 8px 16px;
-
-    font-size: 16px;
-    line-height: 19px;
-
-    font-weight: bold;
-
-    cursor: pointer;
-}
-
-button.delete {
-    background-color: #DC4747;
-}
-
-.item {
-    width: 100%;
-
-    margin-bottom: 30px;
-
-    animation: swipeUp .6s ease-out;
-}
-
-.item div {
-    font-size: 16px;
-    font-weight: 700;
-}
-
-.item a.link__button {
-    font-size: 16px;
-    text-transform: none;
-
-    cursor: pointer;
-}
-
-input,
-textarea,
-select {
-    width: 100%;
-    
-    padding: 8px 16px;
-
-    font-family: 'Roboto', sans-serif;
-    font-size: 16px;
-    line-height: 19px;
-
-    color: #111111;
-
-    margin-top: 10px;
-
-    border: 1px solid #DDDDDD;
-    outline: none;
-}
-
-select {
-    color: #111111;
-}
-
-option {
-    color: #111111;
-}
-
-select:invalid {
-    color: #777777;
-}
-
-textarea {
-    min-height: 200px;
-    resize: vertical;
-}
-
-div.input-field {
-    display: grid;
-    grid-template-columns: 1fr 32px;
-    column-gap: 4px; 
-
-    align-items: center;
-}
-
-.input-field button {
-    margin-top: 10px;
-    padding: 0;
-
-    width: 32px;
-    height: 32px;
-}
-
-.input-field button span {
-    font-size: 16px;
-}
-
 /* DETAILS */
 
 .recipe,
@@ -476,7 +369,6 @@ a.button {
 /* AVATAR UPLOAD */
 
 .item #avatar-upload {
-    margin-top: 10px;
     position: relative;
 
     display: flex;
@@ -495,6 +387,10 @@ a.button {
 
     overflow: hidden;
     opacity: 0;
+}
+
+.item #avatar-upload a.button {
+    color: white;
 }
 
 #avatar-upload .avatar-preview {
