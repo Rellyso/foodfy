@@ -1,6 +1,7 @@
 {% extends 'session/layout.njk' %}
 
 {% block content %}
+
     <div class="login session__container">
         <div class="content__title">
             <h2>Iniciar Sessão</h2>
@@ -21,3 +22,7 @@
         </div>
     </div>
 {% endblock content %}
+
+{% block scripts %}
+    <script src="/scripts/fields.js"></script>
+{% endblock scripts %}
