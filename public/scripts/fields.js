@@ -234,13 +234,19 @@ const Validate = {
         div.innerHTML = error
 
         input.parentNode.appendChild(div)
-        // input.parentNode.querySelector('input').classList.add('error')
+        // adicionando classe error ao input
+        input.parentNode.querySelector('input').classList.add('error')
 
         input.focus()
     },
     clearErrors(input) {
-        const divError = input.parentNode.querySelector('.error')
+        // removendo classe error do input
         const inputError = input.parentNode.querySelector('input')
+        if (inputError)
+        inputError.classList.remove('error')
+        
+        // removendo mensagem de erro
+        const divError = input.parentNode.querySelector('.error')
         if (divError)
             divError.remove('error')
     },
