@@ -8,7 +8,7 @@ const SessionController = require('../app/controllers/SessionController')
 
 // login/logout
 routes.get('/login', SessionController.loginForm)
-// routes.post('/login', SessionController.login)
+routes.post('/login', SessionController.login)
 // routes.post('/logout', SessionController.logout)
 
 // // password reset/forgot password
