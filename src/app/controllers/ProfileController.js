@@ -1,12 +1,7 @@
-const Recipe = require('../models/Recipe')
-const File = require('../models/File')
 
 module.exports = {
     async index(req, res) {
- 
-
-        return res.render('admin/recipes/index', { recipes: filteredRecipes })
-
+        return res.render('admin/profile/index')
     },
 
     async create(req, res) {
