@@ -1,0 +1,29 @@
+{% extends 'admin/layout.njk' %}
+
+{% block head %}
+    <title>Gerenciar contas</title>
+{% endblock head %}
+   
+{% block content %}
+     <section class="content" id="profile">
+            <div class="content__title">
+                <h2>Gerenciar contas</h2>
+            </div>
+                <div class="cards">
+        
+                    <div class="card">
+                        <figure class="card__img">
+                            <img src="{{recipe.src}}" alt="imagem de {{recipe.title}}">
+                        </figure>
+
+                        <div class="card__content">
+                            <h3>{{recipe.title}}</h3>
+                            
+                            <p>Por {{recipe.chef_name}}</p>
+                            <a href="/admin/recipes/{{ recipe.id }}">visualizar</a>
+                        </div>
+                    </div>
+
+            </div>
+        </section>
+{% endblock content %}
