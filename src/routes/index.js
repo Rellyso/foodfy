@@ -1,14 +1,14 @@
 const express = require('express')
 const routes = express.Router()
+
 const MainController = require('../app/controllers/MainController')
+
 const admin = require('./admin')
-const users = require('./users')
+const session = require('./session')
 
-routes.get('/', (req, res) => {
-    return res.redirect('/home')
-})
+routes.get('/', MainController.index)
 
-routes.use('/users', users)
+routes.use(session)
 routes.use('/admin', admin)
 
 routes.get('/home', MainController.index)

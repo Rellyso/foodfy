@@ -1,21 +1,18 @@
 const express = require('express')
 const routes = express.Router()
-const multer = require('../app/middlewares/multer')
-const chefs = require('./chefs')
 
-const RecipesController = require('../app/controllers/RecipesController')
+const chefs = require('./admin/chefs')
+const recipes = require('./admin/recipes')
+const users = require('./admin/users')
 
 
+// ROTAS DE CHEFS
 routes.use('/chefs', chefs)
 
-routes.get('/recipes', RecipesController.index)
-routes.get('/recipes/create', RecipesController.create)
-routes.get('/recipes/:id', RecipesController.show)
-routes.get('/recipes/:id/edit', RecipesController.edit)
+// ROTAS DE RECEITAS
+routes.use('/recipes', recipes)
 
-routes.post('/recipes', multer.array("images", 5), RecipesController.post)
-routes.put('/recipes', multer.array("images", 5), RecipesController.put)
-routes.delete('/recipes', RecipesController.delete)
-
+// ROTAS DO USUÁRIO
+routes.use(users)
 
 module.exports = routes
