@@ -1,8 +1,8 @@
-.container {
+#admin.container {
     margin: 0 auto;
 }
 
-.header__content {
+#admin .header__content {
     height: 80px;
     
     background-color: black;
@@ -11,7 +11,7 @@
     margin-bottom: 20px;
 }
 
-.header__content header {
+#admin .header__content header {
     padding: 30px 0;
     
     height: 100%;
@@ -25,14 +25,14 @@
     overflow: hidden;
 }
 
-header .logo__link {
+#admin header .logo__link {
     margin-right: 50px;
 
     display: flex;
     align-items: center;
 }
 
-.header__content header .links a {
+#admin .header__content header .links a {
     text-decoration: none;
     
     font-size: 15px;
@@ -44,18 +44,18 @@ header .logo__link {
     margin-right: 30px;
 }
 
-header .links a.active {
+#admin header .links a.active {
     color: #ffffff;
 }
 
-.content {
+#admin .content {
     width: 100%;
     max-width: 1000px;
 
     margin: 20px auto;
 }
 
-.content a {
+#admin .content a {
     font-size: 14px;
     line-height: 16px;
 
@@ -67,18 +67,18 @@ header .links a.active {
 }
 
 /* PADDING */
-.content__title,
+#admin .content__title,
 .form__title {
     padding: 20px 0;
 }
 
 /* CARDS */
 
-.content .cards {
+#admin .content .cards {
     grid-template-columns: 1fr 1fr;
 }
 
-.cards .card {
+#admin .cards .card {
     flex-direction: row;
 
     margin: 0;
@@ -86,7 +86,7 @@ header .links a.active {
     cursor: auto;
 }
 
-.card .card__img {
+#admin .card .card__img {
     width: initial;
     height: 100%;
 
@@ -95,29 +95,29 @@ header .links a.active {
     padding-right: 20px;
 }
 
-.card .card__img img {
+#admin .card .card__img img {
     width: 172px;
     height: 80px;
 }
 
-.card__content {
+#admin .card__content {
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
 
-.card__content h3 {
+#admin .card__content h3 {
     font-size: 18px;
     line-height: 21px;
 }
 
-#recipes .card__content > p {
+#admin #recipes .card__content > p {
     font-size: 14px;
     line-height: 16px;
 
 }
 
-#recipes .card__content a {
+#admin #recipes .card__content a {
     text-decoration: none;
 
     font: 700 Roboto 16px;
@@ -129,30 +129,30 @@ header .links a.active {
 
 /* CHEFS' CARDS */
 
-.cards#chefs {
+#admin .cards#chefs {
     grid-template-columns: repeat(4, 1fr);
 }
 
-#chefs .card__img img {
+#admin #chefs .card__img img {
     width: 64px;
     height: 64px;
     border-radius: 50%;
 }
 
-#chefs .card__content {
+#admin #chefs .card__content {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
 }
 
-#chefs .card__content h3 {
+#admin #chefs .card__content h3 {
     margin-bottom: 0;
 }
 
 /* DETAILS */
 
-.recipe,
-.chef {
+#admin .recipe,
+#admin .chef {
     width: 100%;
     max-width: 1000px;
 
@@ -161,46 +161,46 @@ header .links a.active {
     animation: swipeUp .6s ease-out;
 }
 
-.recipe__actions,
-.chef__actions {
+#admin .recipe__actions,
+#admin .chef__actions {
     display: flex;
     justify-content: space-between;
 
     padding-top: 20px;
 }
 
-a.button {
+#admin a.button {
     display: inline-block;
     text-decoration: none;
 }
 
-.recipe__title,
-.chef__title {
+#admin .recipe__title,
+#admin .chef__title {
     margin: 30px 0;
     text-align: center;
 }
 
-.recipe__title h1,
-.chef__title h1 {
+#admin .recipe__title h1,
+#admin .chef__title h1 {
     font-size: 36px;
     line-height: 46px;
 }
 
-.recipe__title h3,
-.chef__title h3 {
+#admin .recipe__title h3,
+#admin .chef__title h3 {
     color: #777777;
 
     font-size: 20px;
     font-weight: 500;
 }
 
-.recipe__content,
-.chef__content {
+#admin .recipe__content,
+#admin .chef__content {
     padding-bottom: 20px;
 }
 
 
-.content__title h2 {
+#admin .content__title h2 {
     padding: 0;
     margin: 0;
 
@@ -208,15 +208,15 @@ a.button {
     line-height: 34px;
 }
 
-.content__content {
+#admin .content__content {
     display: none;
 }
 
-.content__content.active {
+#admin .content__content.active {
     display: inline;
 }
 
-.content__list {
+#admin .content__list {
     font-size: 18px;
     line-height: 28px;
     font-weight: normal;
@@ -224,46 +224,46 @@ a.button {
     list-style-position: inside;
 }
 
-.content__list ul {
+#admin .content__list ul {
     list-style-type: " - ";
 }
 
 /* RECIPES LIST */
 
-.chef__content .recipe__list {
+#admin .chef__content .recipe__list {
     display: grid;
     grid-template-columns: 1fr 1fr ;
 }
 
-.recipe__list .card {
+#admin .recipe__list .card {
     width: 100%;
     display: flex;
 }
 
-.recipe__list .card img {
+#admin .recipe__list .card img {
     border-radius: 9px;
 }
 
-.recipe__list .card__content a {
+#admin .recipe__list .card__content a {
     font-weight: 700;
 }
 
-#recipes .card__content p {
+#admin #recipes .card__content p {
     padding: 0;
     margin: 0;
 }
 
 /* PHOTOS UPLOAD */
 
-#photos-field {
+#admin #photos-field {
     display: flex;
     flex-direction: row;
     
     margin-top: 10px;
 }
 
-.item #photos-upload,
-#photos-preview .photo {
+#admin .item #photos-upload,
+#admin #photos-preview .photo {
     width: 150px;
     height: 150px;
 
@@ -276,7 +276,7 @@ a.button {
 
 }
 
-.item #photos-upload i {
+#admin .item #photos-upload i {
     position: absolute;
     
     width: 100%;
@@ -292,7 +292,7 @@ a.button {
     overflow: hidden;
 }
 
-.item #photos-upload input {
+#admin .item #photos-upload input {
     position: absolute;    
 
     width: 100%;
@@ -313,7 +313,7 @@ a.button {
     padding: 0;
 }
 
-.item #photos-preview {
+#admin .item #photos-preview {
     display: grid;
     grid-template-columns: repeat(5, 150px);
     gap: 10px;
@@ -322,7 +322,7 @@ a.button {
     margin-left: 10px;
 }
 
-.item #photos-preview .photo {
+#admin .item #photos-preview .photo {
     width: 100%;
     height: 100%;
 
@@ -331,7 +331,7 @@ a.button {
     border: none;
 }
 
-.item #photos-preview .photo img {
+#admin .item #photos-preview .photo img {
     width: 100%;
     height: 100%;
 
@@ -339,7 +339,7 @@ a.button {
     object-position: 50% 50%;
 }
 
-.item #photos-preview .photo i {
+#admin .item #photos-preview .photo i {
     position: absolute;
     
     background-color: rgba(255,255,255,0.7);
@@ -362,20 +362,20 @@ a.button {
     transition: opacity .4s ease;
 }
 
-.item #photos-preview .photo i:hover {
+#admin .item #photos-preview .photo i:hover {
     opacity: 1;
 }
 
 /* AVATAR UPLOAD */
 
-.item #avatar-upload {
+#admin .item #avatar-upload {
     position: relative;
 
     display: flex;
     align-items: center;
 }
 
-.item #avatar-upload input {
+#admin .item #avatar-upload input {
     position: absolute;
     display: block;
 
@@ -389,16 +389,16 @@ a.button {
     opacity: 0;
 }
 
-.item #avatar-upload a.button {
+#admin .item #avatar-upload a.button {
     color: white;
 }
 
-#avatar-upload .avatar-preview {
+#admin #avatar-upload .avatar-preview {
     padding-left: 10px;
     height: 35px;
 }
 
-#avatar-upload .avatar-preview img{
+#admin #avatar-upload .avatar-preview img{
     width: 35px;
     height: 35px;
 

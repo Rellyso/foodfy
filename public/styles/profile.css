@@ -1,0 +1,9 @@
+#profile .button {
+    padding: 8px 32px;
+}
+
+#profile .form__body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 40px;
+}
