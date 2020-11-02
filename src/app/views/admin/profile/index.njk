@@ -7,24 +7,17 @@
 {% block content %}
      <section class="content" id="profile">
             <div class="content__title">
-                <h2>Gerenciar contas</h2>
+                <h2>Bem vindo Diego</h2>
+
+                <button type="submit" class="button" form="f_profile">Salvar</button>
             </div>
-                <div class="cards">
-        
-                    <div class="card">
-                        <figure class="card__img">
-                            <img src="{{recipe.src}}" alt="imagem de {{recipe.title}}">
-                        </figure> 
-                        
-
-                        <div class="card__content">
-                            <h3>{{recipe.title}}</h3>
-                            
-                            <p>Por {{recipe.chef_name}}</p>
-                            <a href="/admin/recipes/{{ recipe.id }}">visualizar</a>
-                        </div>
-                    </div>
-
+                <form action="POST" action="/profile?_method=PUT" id="f_profile">
+                    {% include 'admin/profile/fields.njk'%}
+                </form>
             </div>
         </section>
 {% endblock content %}
+
+{% block scripts %}
+    <script src="/scripts/fields.js"></script>
+{% endblock scripts %}
