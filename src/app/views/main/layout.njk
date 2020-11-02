@@ -9,14 +9,11 @@
             <title>Foodfy</title>
         {% endblock head %}
 
-        <link rel="stylesheet" href="/styles/global.css">
-        <link rel="stylesheet" href="/styles/main.css">
-        <link rel="stylesheet" href="/styles/responsive.css">
-        <link rel="stylesheet" href="/styles/keyframes.css">
+        {% include 'parts/styles.njk'%}
     </head>
 
     <body>
-        <div class="container">
+        <div class="container" id="main">
             <header>
                 <a class="logo__link" href="/">
                     <img src="/assets/logo.png" alt="foodfy logo">
