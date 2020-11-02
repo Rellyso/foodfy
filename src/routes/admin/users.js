@@ -7,7 +7,7 @@ const ProfileController = require('../../app/controllers/ProfileController')
 
 // // rotas de usuário logado
 routes.get('/profile', ProfileController.index)
-// routes.put('/profile', ProfileController.put)
+routes.put('/profile', ProfileController.put)
 
 
 // // Rotas de gerenciamento dos administradores
