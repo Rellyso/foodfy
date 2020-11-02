@@ -5,7 +5,8 @@ module.exports = {
     },
 
     async login(req, res) {
-        req.session.userId = req.users
-        return res.render('session/login', {error: 'Ainda não tá pronto'})
+        req.session.userId = req.user.id
+
+        return res.redirect('/admin')
     },
 }
