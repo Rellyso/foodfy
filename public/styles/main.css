@@ -79,6 +79,21 @@
 
     cursor: pointer;
 }
+/* =========== DASHBOARD =========== */
+#main .dashboard {
+    margin: auto;
+    padding-left: 10px;
+}
+
+#main .dashboard .button{
+    background-color: rgb(218, 87, 87);
+}
+
+/* =========== CONTENT =========== */
+#main .form-filter {
+    min-width: fit-content;
+}
+
 
 /* =========== CONTENT =========== */
 
@@ -272,6 +287,10 @@
 }
 
 /* ======= RECIPE PAGE ======= */
+
+#main .recipe__head {
+    margin: 20px 0;
+}
 
 #main .recipe__title {
     margin: 30px 0;
