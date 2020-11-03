@@ -15,4 +15,9 @@ routes.use('/recipes', recipes)
 // ROTAS DO USUÁRIO
 routes.use(users)
 
+// Alias
+routes.get('/', (req, res) => {
+    res.redirect('/admin/chefs')
+})
+
 module.exports = routes
