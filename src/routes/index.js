@@ -21,7 +21,7 @@ routes.get('/chefs', MainController.chefs)
 
 // Alias
 routes.get('/accounts', (req, res) => {
-    return res.redirect('/users/login')
+    return res.redirect('/login')
 })
 
 
