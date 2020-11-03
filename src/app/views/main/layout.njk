@@ -26,6 +26,12 @@
                 </div>
 
                 {% block filter %}{% endblock filter %}
+
+                {% if session %}
+                <div class="dashboard">
+                    <a href="/admin" class="button">Dashboard</a>
+                </div>
+                {% endif %}
             </header>
 
             {% block content %}{% endblock content %}
