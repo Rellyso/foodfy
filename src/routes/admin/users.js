@@ -2,11 +2,12 @@ const express = require('express')
 const routes = express.Router()
 
 const ProfileController = require('../../app/controllers/ProfileController')
+const UserValidator = require('../../app/validators/user')
 
 // rotas de sessão
 
 // // rotas de usuário logado
-routes.get('/profile', ProfileController.index)
+routes.get('/profile', UserValidator.show, ProfileController.index)
 routes.put('/profile', ProfileController.put)
 
 
