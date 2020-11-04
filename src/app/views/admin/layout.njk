@@ -16,20 +16,7 @@
 
     <body>
         <div class="container" id="admin">
-            <div class="header__content">
-                <header>
-                    <a class="logo__link" href="/">
-                        <img src="/assets/white-logo.png" alt="foodfy logo">
-                    </a>
-
-                    <div class="links">
-                        <a href="/admin/recipes">RECEITAS</a>
-                        <a href="/admin/chefs">CHEFS</a>
-                        <a href="/admin/profile">USUÁRIOS</a>
-                    </div>
-
-                </header>
-            </div>
+            {% include 'parts/admin-header.njk'%}
 
             {% block content %}{% endblock content %}
         </div>
