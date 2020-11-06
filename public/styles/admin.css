@@ -57,6 +57,8 @@
     background: none;
 
     font-weight: bold;
+
+    outline: none;
 }
 
 #admin .content {
