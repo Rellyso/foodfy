@@ -12,4 +12,8 @@ module.exports = {
         
     },
 
+    async list(req, res) {
+        return res.render('admin/users/list')
+    }
+
 }

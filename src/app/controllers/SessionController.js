@@ -9,4 +9,10 @@ module.exports = {
 
         return res.redirect('/admin')
     },
+
+    async logout(req, res) {
+        req.session.destroy()
+
+        return res.redirect('/')
+    }
 }
