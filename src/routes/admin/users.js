@@ -8,11 +8,11 @@ const UserValidator = require('../../app/validators/user')
 
 // // rotas de usuário logado
 routes.get('/profile', UserValidator.show, ProfileController.index)
-routes.put('/profile', ProfileController.put)
+routes.put('/profile', UserValidator.update, ProfileController.put)
 
 
 // // Rotas de gerenciamento dos administradores
-// routes.get('/admin/users', ProfileController.list)
+routes.get('/admin/users', ProfileController.list)
 // routes.post('/admin/users', ProfileController.post)
 // routes.put('/admin/users', ProfileController.put)
 // routes.delete('/admin/users', ProfileController.delete)
