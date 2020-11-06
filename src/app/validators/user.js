@@ -18,7 +18,7 @@ async function show(req, res, next) {
 
     const user = await User.findOne({ where: { id } })
 
-    if (!user) return res.render('users/register', {
+    if (!user) return res.render('profile/register', {
         error: "Usuário não encontrado."
     })
 
@@ -27,6 +27,25 @@ async function show(req, res, next) {
     next()
 }
 
+async function update(req, res, next) {
+    const { id } = req.body
+    const fillAllFields = checkAllFields(req.body)
+
+    if (!fillAllFields) return res.render('profile/index', {
+        user: req.body,
+        error: "Por favor preencha todos os campos para atualizar."
+    })
+
+    const user = await User.findOne({ where: { id } })
+
+    if (!user) return res.render('profile/register', {
+        error: "Usuário não encontrado."
+    })
+
+    next()
+}
+
 module.exports = {
     show,
+    update,
 }
