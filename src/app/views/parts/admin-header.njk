@@ -8,13 +8,17 @@
             <div class="links">
                 <a href="/admin/recipes">RECEITAS</a>
                 <a href="/admin/chefs">CHEFS</a>
+                {% if user.is_admin %}
+                <a href="/admin/users">USUÁRIOS</a>
+                {% else %}
                 <a href="/admin/profile">USUÁRIOS</a>
+                {% endif %}
             </div>
         </div>
 
         {% if session %}
         <div class="logout-button">
-            <form action="/users/logout" method="post">
+            <form action="/logout" method="post">
                 <button type="submit">SAIR</button>
             </form>
         </div>
