@@ -1,0 +1,30 @@
+#users .button {
+    padding: 8px 32px;
+}
+
+#users.content .content__title {
+    margin-bottom: 64px;
+}
+    
+#admin #users.content .cards {
+    display: grid;
+    grid-template-columns: repeat(3, 200px);
+
+    justify-content: space-between;
+}
+
+
+#users .card .links{
+    display: flex;
+    padding: 16px 0 0 0;
+}
+
+#users .card .links a.remove {
+    color: #F55A5A;
+    display: flex;
+    padding: 0;
+}
+
+#users .card .links a:first-child{
+    padding-right: 16px;
+}

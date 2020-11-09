@@ -185,6 +185,10 @@
 #admin a.button {
     display: inline-block;
     text-decoration: none;
+
+    color: white;
+    font-size: 16px;
+    line-height: 19px;
 }
 
 #admin .recipe__title,

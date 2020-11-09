@@ -28,6 +28,10 @@ a {
     text-decoration: none;
 }
 
+a.remove {
+    color: #F55A5A;
+}
+
 /* FOOTER */
 
 footer {
