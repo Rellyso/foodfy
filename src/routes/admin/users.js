@@ -12,10 +12,10 @@ routes.put('/profile', UserValidator.update, ProfileController.put)
 
 
 // // Rotas de gerenciamento dos administradores
-routes.get('/admin/users', ProfileController.list)
-// routes.post('/admin/users', ProfileController.post)
-// routes.put('/admin/users', ProfileController.put)
-// routes.delete('/admin/users', ProfileController.delete)
+routes.get('/users', ProfileController.list)
+// routes.post('/users', ProfileController.post)
+// routes.put('/users', ProfileController.put)
+// routes.delete('/users', ProfileController.delete)
 
 
 module.exports = routes
