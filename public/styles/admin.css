@@ -191,6 +191,10 @@
     line-height: 19px;
 }
 
+#admin a.button.cancel {
+    background-color: #8A8A8A !important;
+}
+
 #admin .recipe__title,
 #admin .chef__title {
     margin: 30px 0;
@@ -422,4 +426,63 @@
     object-fit: cover;
 
     border-radius: 50%;
+}
+
+/* CHECKBOX FORM */
+
+#admin .item .checkbox {
+    position: relative;
+    padding-left: 20px;
+
+    
+}
+#admin .item .checkbox input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+#admin .item .checkbox .checkmark {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    height: 15px;
+    width: 15px;
+    background-color: white;
+    border: 1px solid #dddddd;
+    border-radius: 4px;
+
+    transform: translateY(-50%);
+}
+
+#admin .item .checkbox:hover input ~ .checkmark {
+    background-color: #eee;
+}
+
+#admin .item .checkbox input:checked ~ .checkmark {
+    background-color: #6558C3;
+}
+
+#admin .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+#admin .checkbox-container input:checked ~ .checkmark:after {
+    display: block;
+}
+
+#admin .checkbox-container .checkmark:after {
+    left: 3px;
+    top: 1px;
+    width: 3px;
+    height: 8px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
 }

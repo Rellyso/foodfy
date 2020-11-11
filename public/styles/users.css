@@ -13,13 +13,10 @@
     justify-content: space-between;
 }
 
-
 #users .card .links{
     display: flex;
     padding: 16px 0 0 0;
 }
-
-
 
 #users .card .links a.remove {
     color: #F55A5A;
@@ -27,6 +24,15 @@
     padding: 0;
 }
 
+
 #users .card .links a:first-child{
     padding-right: 16px;
+}
+
+/* USERS CREATE FORM */
+
+#users .form__body {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 60px;
 }
