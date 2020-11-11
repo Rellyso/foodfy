@@ -1,0 +1,29 @@
+{% extends 'admin/layout.njk' %}
+
+{% block head %}
+    <title>Criar usuário</title>
+{% endblock head %}
+
+    {% block content %}
+    <section class="content" id="users">
+
+        <div class="content__title">
+            <h2>Criar usuário</h2>
+        
+            <div class="buttons">
+                <button type="submit" class="button__save" form="f_create">Salvar</button>
+                <a href="/admin/users" class="button cancel">Cancelar</a>
+            </div>
+        </div>
+
+        <form id="f_create" method="POST" action="/admin/chefs" enctype="multipart/form-data">
+            {% include 'admin/users/fields.njk' %}
+        </form>
+    </section>
+
+    {% endblock content %}
+
+    {% block scripts %}
+    <script src="/scripts/fields.js"></script>
+    {% endblock scripts %}
+    
