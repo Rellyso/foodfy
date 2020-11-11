@@ -1,3 +1,5 @@
+const User = require('../models/User')
+
 module.exports = {
     async index(req, res) {
         const user = req.user
@@ -13,7 +15,8 @@ module.exports = {
     },
 
     async list(req, res) {
-        return res.render('admin/users/list')
+        const users = await User.listAll()
+        return res.render('admin/users/list', { users })
     }
 
 }
