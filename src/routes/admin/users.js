@@ -15,7 +15,7 @@ routes.put('/profile', UserValidator.update, ProfileController.put)
 routes.get('/users', ProfileController.list)
 routes.get('/users/create', ProfileController.create)
 
-// routes.post('/users', ProfileController.post) 
+routes.post('/users', ProfileController.post) 
 // routes.put('/users', ProfileController.put)
 // routes.delete('/users', ProfileController.delete)
 
