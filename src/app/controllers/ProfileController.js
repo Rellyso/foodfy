@@ -10,6 +10,10 @@ module.exports = {
         return res.render('admin/users/create')
     },
 
+    async post(req, res) {
+        return res.redirect('/admin/users')
+    },
+
     async put(req, res) {
         
     },
