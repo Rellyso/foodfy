@@ -16,7 +16,9 @@ div.message {
 
     position: fixed;
     top: 20px;
-    right: 20px;
+    right: -350px;
+
+    opacity: 0;
 
     display: flex;
     align-items: center;
@@ -29,7 +31,29 @@ div.message {
 
     border-radius: 4px;
 
-    animation: slide-out .5s 5s ease-in forwards;
+    animation: slide-in-out 5s .2s ease-in-out forwards;
+}
+
+@keyframes slide-in-out {
+    0% {
+        right: -350px;
+        opacity: 0;
+    }
+
+    10% {
+        right: 20px;
+        opacity: 1;
+    }
+
+    85% {
+        right: 20px;
+        opacity: 1;
+    }
+    
+    100% {
+        right: -350px;
+        opacity: 0;
+    }
 }
 
 @keyframes slide-out {
