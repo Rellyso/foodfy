@@ -3,14 +3,27 @@ const User = require('../models/User')
 function checkAllFields(body) {
     const keys = Object.keys(body)
 
-    keys.map(key => {
+    for (let key of keys) {
         if (body[key] == "") {
             return {
                 user: body,
-                error: "Por favor preencha todos os campos."
+                error: 'Por favor preencha todos os campos.'
             }
         }
-    })
+    }
+
+}
+
+async function post(req, res, next) {
+    const fillAllFields = checkAllFields(req.body)
+
+    if (fillAllFields) {
+        return res.render('admin/users/create', fillAllFields)
+    }
+
+    const user = await User.create()
+
+    next()
 }
 
 async function show(req, res, next) {
@@ -46,6 +59,7 @@ async function update(req, res, next) {
 }
 
 module.exports = {
+    post,
     show,
     update,
 }
