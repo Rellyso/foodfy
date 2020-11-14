@@ -25,17 +25,25 @@
 
     <div class="item">
 
-        <div class="checkbox">
+        <div class="checkbox" >
             <label class="checkbox-container">Administrador
                 <input 
                     type="checkbox" 
                     name="isAdmin" 
-                    id="isAdmin" 
-                    value="{{ user.isAdmin }}" 
-                    checked
+                    id="isAdmin"
+                    value="1"
+                    onclick="isChecked.toggleInput()"
                 >
+                
                 <span class="checkmark"></span>
             </label>
         </div>
     </div>
+
+    <input
+        type="hidden" 
+        name="isAdmin" 
+        id="hiddenAdmin"
+        value="0"
+    >
 </div>
