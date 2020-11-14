@@ -264,3 +264,16 @@ const Validate = {
         }
     }
 }
+
+const isChecked = {
+    checkbox: document.querySelector('input#isAdmin'),
+    inputHidden: document.querySelector('input#hiddenAdmin'),
+    toggleInput() {
+        if (this.checkbox.checked) {
+            this.inputHidden.disabled = true
+        } else {
+            this.inputHidden.disabled = false
+        }
+        console.log(this.inputHidden)
+    }
+}
