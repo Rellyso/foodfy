@@ -1,0 +1,28 @@
+{% extends 'admin/layout.njk' %}
+
+{% block head %}
+    <title>Atualizar usuário</title>
+{% endblock head %}
+
+{% block content %}
+    <section class="content" id="profile">
+        <div class="content__title">
+            <h2>Atualizar usuário</h2>
+
+            <div class="buttons">
+                <button type="submit" class="button delete" form="f_delete">Deletar</button>
+                <button type="submit" class="button" form="f_update">Salvar</button>
+            </div>
+        </div>
+        <form method="POST" action="/admin/users?_method=PUT" id="f_update">
+            {% include 'admin/users/edit-fields.njk'%}
+
+            <input type="hidden" name="id" value="{{ user.id }}">
+        </form>
+    </div>
+</section>
+{% endblock content %}
+
+{% block scripts %}
+    <script src="/scripts/fields.js"></script>
+{% endblock scripts %}

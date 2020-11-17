@@ -1,0 +1,19 @@
+<div class="form__body">
+
+    <div class="item">
+        <div>Nome</div>
+
+        <input type="text" name="name" value="{{ user.name }}">
+    </div>
+
+    <div class="item">
+        <div>Email</div>
+
+        <input 
+        type="email" 
+        name="email" 
+        value="{{ user.email }}" 
+        onblur="Validate.apply(this, 'isEmail')"
+        >
+    </div>
+</div>
