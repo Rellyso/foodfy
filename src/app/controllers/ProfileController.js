@@ -6,21 +6,20 @@ module.exports = {
         return res.render('admin/profile/index', { user })
     },
 
-    async create(req, res) {
-        return res.render('admin/users/create')
-    },
-
-    async post(req, res) {
-        return res.redirect('/admin/users')
-    },
-
     async put(req, res) {
-        
+        const { user } = req
+        const { name, email, password } = req.body
+
+        await User.update(user.id, {
+            name,
+            email,
+            password
+        })
+
+        // return res.redirect('/admin/users')
+        return res.render(`admin/profile/index`, {
+            user: req.body,
+            success: 'Usuário atualizado com sucesso'
+        })
     },
-
-    async list(req, res) {
-        const users = await User.listAll()
-        return res.render('admin/users/list', { users })
-    }
-
 }
