@@ -1,4 +1,5 @@
 const db = require('../../config/db')
+const { hash } = require('bcryptjs')
 
 module.exports = {
     async findOne(filters) {
@@ -28,9 +29,75 @@ module.exports = {
         }
     },
 
+    async create(data) {
+        try {
+            const password = data.password || 'admin1234'
+
+            const query = `
+            INSERT INTO users (
+                name,
+                email,
+                password,
+                is_admin
+            ) VALUES ($1, $2, $3, $4)
+            RETURNING id
+        `
+            const hashPassword = await hash(password, 8)
+
+            const values = [
+                data.name,
+                data.email,
+                hashPassword,
+                data.isAdmin,
+            ]
+
+            const results = await db.query(query, values)
+            const user = results.rows[0]
+
+            return user.id
+        } catch (err) {
+            console.error(err)
+        }
+    },
+
     async listAll() {
-        const results = await db.query(`SELECT * FROM users`)
-        
-        return results.rows
-    }
+        try {
+            const results = await db.query(`SELECT * FROM users`)
+
+            return results.rows
+        } catch (err) {
+            console.error(err)
+        }
+    },
+
+    async update(id, fields) {
+        try {
+            let query = `UPDATE users SET`
+
+            Object.keys(fields).map( (key, index, array) => {
+
+                // if not key
+                if ((index + 1) < array.length) {
+                   
+                    query = ` ${query} 
+                        ${key} = '${fields[key]}',` 
+                } else {
+                    // if last key
+
+                    query = ` ${query}
+                        ${key} = '${fields[key]}'
+                        WHERE id = ${id}`
+                }
+
+
+            })
+
+            await db.query(query)
+
+            return 
+
+        } catch (err) {
+            console.error(err)
+        }
+    },
 }
