@@ -14,7 +14,8 @@ async function login(req, res, next) {
         })
     }
 
-    const passed = password == user.password
+    // verify if password match with user password
+    const passed = await compare(password, user.password)
     // const passed = await compare(password, user.password)
 
     if (!passed) {
@@ -28,7 +29,6 @@ async function login(req, res, next) {
 
     next()
 }
-
 
 module.exports = {
     login,
