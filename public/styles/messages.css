@@ -3,32 +3,34 @@
     color: white;
 }
 
-.item input.error {
+/* .item input.error {
     border-color: #dc4747 !important;
     border-radius: 4px;
     transition: all .2s ease;
-}
+} */
 
 /* POPUP MESSAGE */
 div.message {
     font-weight: 500;
     font-size: 16px;
-
+    
     position: fixed;
     top: 20px;
     right: -350px;
-
+    
     opacity: 0;
-
+    
     display: flex;
     align-items: center;
     justify-content: center;
     
     color: white;
-
+    
     width: 350px;
     height: 135px;
-
+    
+    padding: 0 16px;
+    
     border-radius: 4px;
 
     animation: slide-in-out 5s .2s ease-in-out forwards;
