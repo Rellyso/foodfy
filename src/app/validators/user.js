@@ -11,19 +11,34 @@ function checkAllFields(body) {
             }
         }
     }
-
 }
 
 async function post(req, res, next) {
-    const fillAllFields = checkAllFields(req.body)
+    try {
+        const fillAllFields = checkAllFields(req.body)
+    
+        if (fillAllFields) {
+            return res.render('admin/users/create', fillAllFields)
+        }
+    
+        let { email, name, isAdmin } = req.body
 
-    if (fillAllFields) {
-        return res.render('admin/users/create', fillAllFields)
+        const user = await User.findOne({
+            where: {email},
+        })
+
+        if (user) return res.render('admin/users/create', {
+            user: req.body,
+            error: 'Email já cadastrado.'
+        })
+
+        next()
+
+    } catch (err) {
+        return res.render('admin/users/create', {
+            error: err,
+        })
     }
-
-    const user = await User.create()
-
-    next()
 }
 
 async function show(req, res, next) {
@@ -40,20 +55,37 @@ async function show(req, res, next) {
     next()
 }
 
+async function edit(req, res, next) {
+    const { id } = req.params
+
+    if (id == req.session.userId) return res.redirect('/admin/profile')
+
+    const user = await User.findOne({
+        where: {id}
+    })
+
+    if (!user) return res.render('admin/users', {
+        error: 'Usuário não encontrado.'
+    })
+
+    req.user = user
+
+    next()
+}
+
 async function update(req, res, next) {
     const { id } = req.body
     const fillAllFields = checkAllFields(req.body)
 
-    if (!fillAllFields) return res.render('profile/index', {
-        user: req.body,
-        error: "Por favor preencha todos os campos para atualizar."
-    })
+    if (fillAllFields) return res.render('admin/users/edit', fillAllFields)
 
     const user = await User.findOne({ where: { id } })
 
-    if (!user) return res.render('profile/register', {
+    if (!user) return res.render('/register', {
         error: "Usuário não encontrado."
     })
+
+    req.user = user
 
     next()
 }
@@ -61,5 +93,6 @@ async function update(req, res, next) {
 module.exports = {
     post,
     show,
+    edit,
     update,
 }
