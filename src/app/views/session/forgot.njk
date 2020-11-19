@@ -1,0 +1,30 @@
+{% extends 'session/layout.njk' %}
+
+{% block head %}
+<title>Fazer login</title>
+{% endblock head %}
+
+{% block content %}
+
+    <div class="forgot session__container">
+        <div class="content__title">
+            <h2>Esqueceu a senha?</h2>
+        </div>
+
+        <form id="f_forgot" 
+            method="POST" 
+            action="/forgot-password"
+            >
+                {% include 'session/forgot-fields.njk' %}
+
+        </form>
+
+        <div class="footer forgot">
+            <button type="submit" form="f_forgot" class="button">Recuperar</button>
+        </div>
+    </div>
+{% endblock content %}
+
+{% block scripts %}
+    <script src="/scripts/fields.js"></script>
+{% endblock scripts %}

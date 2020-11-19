@@ -1,0 +1,17 @@
+<div class="form__body">
+
+    <div class="item">
+        <div>Email</div>
+
+        <input 
+            type="email" 
+            name="email" 
+            value="{{ session.email }}" 
+            required
+            placeholder="Digite seu email"
+            onblur="Validate.apply(this, 'isEmail')"
+        >
+
+    </div>
+    
+</div>
