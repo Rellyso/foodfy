@@ -20,7 +20,7 @@ routes.get('/users/edit/:id', UserValidator.edit, UserController.edit)
 
 routes.post('/users/create', UserValidator.post, UserController.post)
 routes.put('/users', UserValidator.update, UserController.put)
-// routes.delete('/users', UserController.delete)
+routes.delete('/users', UserController.delete)
 
 
 module.exports = routes
