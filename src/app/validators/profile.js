@@ -1,4 +1,5 @@
 const User = require('../models/User')
+const { compare } = require('bcryptjs')
 
 function checkAllFields(body) {
     const keys = Object.keys(body)
@@ -14,13 +15,13 @@ function checkAllFields(body) {
 
 }
 
-
 async function show(req, res, next) {
     const { userId: id } = req.session
 
     const user = await User.findOne({ where: { id } })
 
     if (!user) return res.render('profile/register', {
+        user: req.body,
         error: "Usuário não encontrado."
     })
 
@@ -30,23 +31,33 @@ async function show(req, res, next) {
 }
 
 async function update(req, res, next) {
-    const { id } = req.body
-    const fillAllFields = checkAllFields(req.body)
+    const { id, password } = req.body
 
-    if (fillAllFields) return res.render('admin/profile/index', {
-        user: req.body,
-        error: "Por favor preencha todos os campos para atualizar."
-    })
+    try {
+        const fillAllFields = checkAllFields(req.body)
+        if (fillAllFields) return res.render('admin/profile/index', fillAllFields)
 
-    const user = await User.findOne({ where: { id } })
+        const user = await User.findOne({ where: { id } })
 
-    if (!user) return res.render('admin/profile/register', {
-        error: "Usuário não encontrado."
-    })
+        //verify if password match
+        const passed = await compare(password, user.password)
 
-    req.user = user
+        if (!passed) return res.render('admin/profile/index', {
+            user: req.body,
+            error: "Senha incorreta."
+        })
 
-    next()
+        req.user = user
+        next()
+
+    } catch (err) {
+        console.error(err)
+
+        return res.render('admin/profile/index', {
+            user: req.body,
+            error: "Ocorreu um erro."
+        })
+    }
 }
 
 module.exports = {
