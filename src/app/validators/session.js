@@ -30,6 +30,26 @@ async function login(req, res, next) {
     next()
 }
 
+async function forgot(req, res, next) {
+    // verify if user exists
+    const { email } = req.body
+
+    try {
+        let user = await User.findOne({ where: { email } })
+
+        if (!user) return res.render('session/forgot', {
+            user: req.body,
+            error: 'Usuário inexistente! <br> Verifique se seu email está correto.'
+        })
+        req.user = user
+    
+        next()
+    } catch (err) {
+        
+    }
+}
+
 module.exports = {
     login,
+    forgot,
 }
