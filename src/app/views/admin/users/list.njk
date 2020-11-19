@@ -20,7 +20,14 @@
                     <p>{{ user.email }}</p>
                     <div class="links">
                         <a href="/admin/users/edit/{{ user.id }}">editar</a>
-                        <a class="remove" href="/admin/users/remove">remover</a>
+                        <form 
+                            action="/admin/users?_method=DELETE" 
+                            method="POST" 
+                            id="f_delete"
+                        >
+                            <button type="submit" class="no-button delete-link">remover</button>
+                            <input type="hidden" name="id" value="{{ user.id }}">
+                        </form>
                     </div>
                 </div>
             </div>
@@ -32,6 +39,6 @@
 {% endblock content %}
 
 {% block scripts %}
-<script src="/scripts/fields.js"></script>
-<script src="/scripts/main/main.js"></script>
+    {% include 'parts/delete-confirmation.njk' %}
+    <script src="/scripts/fields.js"></script>
 {% endblock scripts %}

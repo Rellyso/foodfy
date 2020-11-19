@@ -19,6 +19,14 @@
 
             <input type="hidden" name="id" value="{{ user.id }}">
         </form>
+
+        <form 
+            method="POST" 
+            action="/admin/users?_method=DELETE" 
+            id="f_delete">
+            <input type="hidden" name="id" value="{{ user.id }}">
+        </form>
+
     </div>
 </section>
 {% endblock content %}
