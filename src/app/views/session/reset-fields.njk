@@ -1,0 +1,43 @@
+<div class="form__body">
+
+    <div class="item">
+        <div>Email</div>
+
+        <input 
+            type="email" 
+            name="email" 
+            value="{{ user.email }}" 
+            required
+            placeholder="Digite seu email"
+            onblur="Validate.apply(this, 'isEmail')"
+        >
+
+    </div>
+
+    <div class="item">
+        <div>Nova senha</div>
+
+        <input 
+            type="password" 
+            name="password" 
+            value="{{ user.password }}" 
+            required
+            placeholder="Digite sua nova senha"
+        >
+
+    </div>
+
+    <div class="item">
+        <div>Repetir senha</div>
+
+        <input 
+            type="password-repeat" 
+            name="password-repeat" 
+            value="{{ user.password-repeat }}" 
+            required
+            placeholder="Repita a nova senha"
+        >
+
+    </div>
+    
+</div>

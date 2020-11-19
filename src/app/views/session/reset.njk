@@ -1,0 +1,30 @@
+{% extends 'session/layout.njk' %}
+
+{% block head %}
+<title>Fazer login</title>
+{% endblock head %}
+
+{% block content %}
+
+    <div class="reset session__container">
+        <div class="content__title">
+            <h2>Nova senha</h2>
+        </div>
+
+        <form id="f_reset" 
+            method="POST" 
+            action="/reset"
+            >
+                {% include 'session/reset-fields.njk' %}
+
+        </form>
+
+        <div class="footer reset">
+            <button type="submit" form="f_reset" class="button">Nova senha</button>
+        </div>
+    </div>
+{% endblock content %}
+
+{% block scripts %}
+    <script src="/scripts/fields.js"></script>
+{% endblock scripts %}
