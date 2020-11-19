@@ -71,6 +71,11 @@ module.exports = {
     },
 
     async update(id, fields) {
+
+        if (fields.password) {
+            fields.password = await hash(fields.password, 8)
+        }
+
         try {
             let query = `UPDATE users SET`
 
@@ -100,4 +105,10 @@ module.exports = {
             console.error(err)
         }
     },
+
+    async delete(id) {
+        await db.query(`DELETE FROM users WHERE id = $1`, [id])
+
+        return
+    }
 }
