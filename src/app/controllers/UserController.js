@@ -28,12 +28,11 @@ module.exports = {
 
     async put(req, res) {
         const { user } = req
-        const { name, email, password } = req.body
+        const { id } = req.body
 
         await User.update(user.id, {
-            name,
-            email,
-            password
+            id,
+            ...req.body
         })
 
         // return res.redirect('/admin/users')
@@ -46,6 +45,19 @@ module.exports = {
     async list(req, res) {
         const users = await User.listAll()
         return res.render('admin/users/list', { users })
+    },
+
+    async delete(req, res) {
+        // const { id } = req.body
+
+        // await User.delete(id)
+
+        const users = await User.listAll()
+
+        return res.render('admin/users/list', {
+            users,
+            success: 'Deletado'
+        })
     }
 
 }
