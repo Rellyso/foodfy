@@ -16,15 +16,15 @@ function checkAllFields(body) {
 async function post(req, res, next) {
     try {
         const fillAllFields = checkAllFields(req.body)
-    
+
         if (fillAllFields) {
             return res.render('admin/users/create', fillAllFields)
         }
-    
+
         let { email, name, isAdmin } = req.body
 
         const user = await User.findOne({
-            where: {email},
+            where: { email },
         })
 
         if (user) return res.render('admin/users/create', {
@@ -61,7 +61,7 @@ async function edit(req, res, next) {
     if (id == req.session.userId) return res.redirect('/admin/profile')
 
     const user = await User.findOne({
-        where: {id}
+        where: { id }
     })
 
     if (!user) return res.render('admin/users', {
@@ -75,19 +75,31 @@ async function edit(req, res, next) {
 
 async function update(req, res, next) {
     const { id } = req.body
-    const fillAllFields = checkAllFields(req.body)
 
-    if (fillAllFields) return res.render('admin/users/edit', fillAllFields)
+    try {
+        const fillAllFields = checkAllFields(req.body)
 
-    const user = await User.findOne({ where: { id } })
+        if (fillAllFields) return res.render('admin/users/edit', fillAllFields)
 
-    if (!user) return res.render('/register', {
-        error: "Usuário não encontrado."
-    })
+        const user = await User.findOne({ where: { id } })
 
-    req.user = user
+        if (!user) return res.render('admin/profile/index', {
+            user: req.body,
+            error: "Usuário não foi encontrado."
+        })
 
-    next()
+        req.user = user
+
+        next()
+    } catch (err) {
+        console.error(err)
+
+        return res.render('admin/users', {
+            user: req.body,
+            error: "Ocorreu um erro."
+        })
+    }
+
 }
 
 module.exports = {
