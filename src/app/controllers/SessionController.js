@@ -16,7 +16,7 @@ module.exports = {
     async logout(req, res) {
         req.session.destroy()
 
-        return res.redirect('/')
+        return res.redirect('/login')
     },
 
     forgotForm(req, res) {
