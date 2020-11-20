@@ -33,6 +33,10 @@ a.remove {
     color: #F55A5A;
 }
 
+.gray__color {
+    color: #999999 !important;
+}
+
 /* FOOTER */
 
 footer {
