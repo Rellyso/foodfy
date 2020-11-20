@@ -23,8 +23,9 @@ module.exports = {
                 ingredients,
                 preparation,
                 information,
+                user_id,
                 created_at
-            ) VALUES ($1, $2, $3, $4, $5, $6)
+            ) VALUES ($1, $2, $3, $4, $5, $6, $7)
             RETURNING id`
 
         const values = [
@@ -33,6 +34,7 @@ module.exports = {
             params.ingredients,
             params.preparation,
             params.information,
+            params.user_id || 1,
             `now()`,
         ]
 
