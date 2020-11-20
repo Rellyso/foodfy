@@ -39,12 +39,18 @@ module.exports = {
 
         for (let key of keys) {
             if (req.body[key] == "" && key != "removed_files") {
-                return res.send('Please fill in all the fields.')
+                return res.render('admin/recipes/create', {
+                    recipe: req.body,
+                    error: "Please fill in all the fields."
+                })
             }
         }
 
         if (req.files.length == 0) {
-            return res.send("Please send at least one image.")
+            return res.render('admin/recipes/create', {
+                recipe: req.body,
+                error: "Please send at least one image."
+            })
         }
 
         let newIngredients = [],
@@ -73,10 +79,14 @@ module.exports = {
             const filesPromise = req.files.map(file => File.create({ ...file, recipe_id: recipeId }))
             await Promise.all(filesPromise)
 
-
             return res.redirect(`/admin/recipes/${recipeId}`)
         } catch (err) {
-            res.send(`It wasn't possible create a new recipe, has an error at ${err}`)
+            console.error(err)
+
+            return res.render('admin/recipes/create', {
+                recipe: req.body,
+                error: "It wasn't possible create a new recipe"
+            })
         }
 
     },
