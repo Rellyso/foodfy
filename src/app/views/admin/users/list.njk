@@ -13,24 +13,27 @@
         </div>
         <div class="cards">
             {% for user in users %}
-            <div class="card">
-                <div class="card__content">
-                    <h3>{{ user.name }}</h3>
+                <div class="card">
+                    <div class="card__content">
+                        <h3>{{ user.name }} {% if user.id == session.userId %}(Você){% endif %}</h3>
 
-                    <p>{{ user.email }}</p>
-                    <div class="links">
-                        <a href="/admin/users/edit/{{ user.id }}">editar</a>
-                        <form 
-                            action="/admin/users?_method=DELETE" 
-                            method="POST" 
-                            id="f_delete"
-                        >
-                            <button type="submit" class="no-button delete-link">remover</button>
-                            <input type="hidden" name="id" value="{{ user.id }}">
-                        </form>
+                        <p>{{ user.email }}</p>
+                        
+                        <div class="links">
+                            <a href="/admin/users/edit/{{ user.id }}">editar</a>
+
+                            {% if user.id == session.userId %}
+                                <a class="gray__color">remover</a>
+                            {% else %}
+                                <form action="/admin/users?_method=DELETE" method="POST" id="f_delete">
+
+                                    <button type="submit" class="no-button delete-link">remover</button>
+                                    <input type="hidden" name="id" value="{{ user.id }}">
+                                </form>
+                            {% endif %}
+                        </div>
                     </div>
                 </div>
-            </div>
             {% endfor %}
         </div>
 
@@ -39,6 +42,6 @@
 {% endblock content %}
 
 {% block scripts %}
-    {% include 'parts/delete-confirmation.njk' %}
-    <script src="/scripts/fields.js"></script>
+{% include 'parts/delete-confirmation.njk' %}
+<script src="/scripts/fields.js"></script>
 {% endblock scripts %}
