@@ -1,5 +1,6 @@
 const express = require('express')
 const routes = express.Router()
+const { onlyAdmins } = require('../../app/middlewares/session')
 
 const ProfileController = require('../../app/controllers/ProfileController')
 const UserController = require('../../app/controllers/UserController')

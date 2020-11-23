@@ -20,7 +20,6 @@
         <input 
             type="password" 
             name="password" 
-            value="{{ user.password }}" 
             required
             placeholder="Digite sua nova senha"
         >
@@ -31,13 +30,14 @@
         <div>Repetir senha</div>
 
         <input 
-            type="password-repeat" 
-            name="password-repeat" 
-            value="{{ user.password-repeat }}" 
+            type="password" 
+            name="passwordRepeat" 
             required
             placeholder="Repita a nova senha"
         >
 
     </div>
+
+    <input type="hidden" name="token" value="{{ token }}">
     
 </div>

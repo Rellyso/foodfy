@@ -8,14 +8,20 @@ module.exports = {
     },
 
     async login(req, res) {
+        const { user } = req
         req.session.userId = req.user.id
+        res.locals.isAdmin = user.is_admin
 
+        console.log(res.locals.isAdmin)
+        
         return res.redirect('/admin')
     },
-
+    
     async logout(req, res) {
         req.session.destroy()
-
+        res.locals.isAdmin = false
+        console.log(res.locals.isAdmin)
+        
         return res.redirect('/login')
     },
 
@@ -49,7 +55,7 @@ module.exports = {
                     <h1>Precisa de uma nova senha?</h1>
                     <p>Deixa conosco, Chefe! clique no link abaixo para recuperar sua senha: </p>
                     <p>
-                        <a href="http://localhost:3000/users/password-reset?token=${token}" target="_blank">
+                        <a href="http://localhost:3000/password-reset?token=${token}" target="_blank">
                             RECUPERAR SENHA
                         </a>
                     </p>
@@ -69,11 +75,35 @@ module.exports = {
     },
 
     resetForm(req, res) {
-        return res.render('session/reset')
+        return res.render('session/password-reset', { token: req.query.token })
     },
 
-    reset(req, res) {
-        
+    async reset(req, res) {
+        const { user } = req
+        const { password, token } = req.body
+
+        try {
+            // atualizar usuário
+            await User.update(user.id, {
+                password,
+                reset_token: '',
+                reset_token_expires: '',
+            })
+
+            // avisar usuário que tem uma nova senha
+            return res.render('session/login', {
+                user: req.body,
+                success: "Senha atualizada com sucesso! Faça seu login"
+            })
+
+        } catch (err) {
+            console.error(err)
+            return res.render('session/reset', {
+                user: req.body,
+                token,
+                error: 'Ocorreu um erro. Entre em contato conosco em reply@foodfy.com.br'
+            })
+        }
     }
 
 }
