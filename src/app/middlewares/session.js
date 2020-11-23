@@ -17,7 +17,7 @@ async function onlyAdmins(req, res, next) {
             return res.render('admin/profile/index', {
                 user: user,
                 error: 'Somente admins podem acessar.'
-            })
+        })
         }
 
         next()
@@ -27,6 +27,7 @@ async function onlyAdmins(req, res, next) {
         })
     }
 }
+
 
 module.exports = {
     onlyUsers,
