@@ -12,7 +12,6 @@ module.exports = {
             ${key}
             `
             // SELECT * FROM users WHERE
-
             Object.keys(filters[key]).map(field => {
                 // field -> name: email, value: example@mail.com
                 query = `${query} ${field} = '${filters[key][field]}'`
