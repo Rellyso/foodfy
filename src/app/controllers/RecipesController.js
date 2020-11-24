@@ -35,24 +35,6 @@ module.exports = {
     async post(req, res) {
         const { ingredients, preparation } = req.body
 
-        const keys = Object.keys(req.body)
-
-        for (let key of keys) {
-            if (req.body[key] == "" && key != "removed_files") {
-                return res.render('admin/recipes/create', {
-                    recipe: req.body,
-                    error: "Please fill in all the fields."
-                })
-            }
-        }
-
-        if (req.files.length == 0) {
-            return res.render('admin/recipes/create', {
-                recipe: req.body,
-                error: "Please send at least one image."
-            })
-        }
-
         let newIngredients = [],
             newPreparation = []
 
