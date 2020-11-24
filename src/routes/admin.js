@@ -1,4 +1,5 @@
 const express = require('express')
+const { isAdmin } = require('../app/middlewares/session')
 const routes = express.Router()
 
 const chefs = require('./admin/chefs')
@@ -16,7 +17,7 @@ routes.use('/recipes', recipes)
 routes.use(users)
 
 // Alias
-routes.get('/', (req, res) => {
+routes.get('/', isAdmin, (req, res) => {
     res.redirect('/admin/chefs')
 })
 
