@@ -8,7 +8,9 @@
             <div class="links">
                 <a href="/admin/recipes">RECEITAS</a>
                 <a href="/admin/chefs">CHEFS</a>
+                {% if session.isAdmin %}
                 <a href="/admin/users">USUÁRIOS</a>
+                {% endif %}
                 <a href="/admin/profile">MINHA CONTA</a>
             </div>
         </div>

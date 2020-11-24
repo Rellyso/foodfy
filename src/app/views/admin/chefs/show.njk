@@ -9,8 +9,9 @@
         <div class="chef__actions">
             <h2>Chef:
                 {{chef.name}}</h2>
-
-            <a class="button" href="/admin/chefs/{{ chef.id }}/edit">Editar Chef</a>
+            {% if session.isAdmin %}
+            <a class="button" href="/admin/chefs/{{ chef.id }}/edit">Editar Chef {{session.isAdmin}}</a>
+            {% endif %}
         </div>
         <div class="chef__head">
 

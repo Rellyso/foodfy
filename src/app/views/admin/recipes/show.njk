@@ -9,8 +9,10 @@
         <div class="recipe__actions">
             <h2>Receita:
                 {{recipe.title}}</h2>
-
+                
+            {% if session.isAdmin %}
             <a class="button" href="/admin/recipes/{{ recipe.id }}/edit">Editar receita</a>
+            {% endif %}
         </div>
         <div class="recipe__head">
 
