@@ -274,6 +274,30 @@
     margin: 0;
 }
 
+#admin .no_recipe {
+    margin-top: 30px;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    animation: swipeUp .6s ease-out;
+}
+
+#admin .no_recipe p {
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 26px;
+
+    color: #777777;
+}
+
+#admin .no_recipe a {
+    font-size: 16px;
+    line-height: 26px;
+    text-transform: none;
+}
+
 /* PHOTOS UPLOAD */
 
 #admin #photos-field {

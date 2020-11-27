@@ -9,6 +9,7 @@
             <div class="content__title">
                 <h2>Gerenciar receitas</h2>
             </div>
+            {% if recipes > 0 %}
             <div class="cards">
                 {% for recipe in recipes %}
         
@@ -27,6 +28,13 @@
 
                 {% endfor %}
             </div>
+            {% else %}
+                <div class="no_recipe">
+                    <p>Você ainda não tem receitas cadastradas.</p>
+
+                    <a href="/admin/recipes/create">Crie sua primeira receita</a>
+                </div>
+            {% endif %}
         </section>
     {% endblock content %}
     
