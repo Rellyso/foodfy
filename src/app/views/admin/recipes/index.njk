@@ -9,17 +9,15 @@
             <div class="content__title">
                 <h2>Gerenciar receitas</h2>
             </div>
-            {% if recipes > 0 %}
             <div class="cards">
                 {% for recipe in recipes %}
-        
                     <div class="card">
                         <figure class="card__img">
                             <img src="{{recipe.src}}" alt="imagem de {{recipe.title}}">
                         </figure>
 
                         <div class="card__content">
-                            <h3>{{recipe.title}}</h3>
+                            <h3>{{recipe.title}} {% if session.userId == recipe.user_id %}(Sua){% endif %}</h3>
                             
                             <p>Por {{recipe.chef_name}}</p>
                             <a href="/admin/recipes/{{ recipe.id }}">visualizar</a>
@@ -28,7 +26,7 @@
 
                 {% endfor %}
             </div>
-            {% else %}
+            {% if recipes == 0 %}
                 <div class="no_recipe">
                     <p>Você ainda não tem receitas cadastradas.</p>
 

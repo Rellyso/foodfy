@@ -10,7 +10,7 @@
             <h2>Receita:
                 {{recipe.title}}</h2>
                 
-            {% if session.isAdmin %}
+            {% if session.isAdmin or session.isOwner %}
             <a class="button" href="/admin/recipes/{{ recipe.id }}/edit">Editar receita</a>
             {% endif %}
         </div>
