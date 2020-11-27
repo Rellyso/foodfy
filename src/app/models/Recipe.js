@@ -41,11 +41,13 @@ module.exports = {
         return db.query(query, values)
     },
 
-    find(id) {
-        return db.query(`SELECT recipes.*, chefs.name AS chef_name
+    async find(id) {
+        let results = await db.query(`SELECT recipes.*, chefs.name AS chef_name
         FROM recipes
         LEFT JOIN chefs ON (chefs.id = recipes.chef_id)
         WHERE recipes.id = $1`, [id])
+
+        return results.rows[0]
     },
 
     findBy(filter) {
@@ -103,8 +105,10 @@ module.exports = {
         return db.query(query, values)
     },
 
-    selectChefOptions() {
-        return db.query(`SELECT name, id FROM chefs`)
+    async selectChefOptions() {
+        let results = await db.query(`SELECT name, id FROM chefs`)
+        
+        return results.rows
     },
 
     async delete(id) {
