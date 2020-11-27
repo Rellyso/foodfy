@@ -3,11 +3,11 @@ const File = require('../models/File')
 
 module.exports = {
     async index(req, res) {
-        const { isAdmin, userId: id } = req.session
+        const { is_admin:isAdmin, id } = req.user
 
         let results
 
-        if (isAdmin) {
+        if (isAdmin == true) {
             results = await Recipe.selectAllWithChefNamesAndFiles()
         } else {
             results = await Recipe.selectByUserIdWhitChefNamesAndFiles(id)
@@ -35,8 +35,7 @@ module.exports = {
     },
 
     async create(req, res) {
-        let results = await Recipe.selectChefOptions()
-        const options = results.rows
+        let options = await Recipe.selectChefOptions()
 
         return res.render('admin/recipes/create', { options })
     },
@@ -76,6 +75,7 @@ module.exports = {
 
             return res.render('admin/recipes/create', {
                 recipe: req.body,
+                options: await Recipe.selectChefOptions(),
                 error: "It wasn't possible create a new recipe"
             })
         }
@@ -85,8 +85,7 @@ module.exports = {
     async show(req, res) {
         const { id } = req.params
         try {
-            let results = await Recipe.find(id)
-            const recipe = results.rows[0]
+            let recipe = await Recipe.find(id)
 
             results = await File.getFilesByRecipeId(id)
             let files = results.rows
@@ -104,8 +103,7 @@ module.exports = {
     async edit(req, res) {
         const { id } = req.params
 
-        let results = await Recipe.find(id)
-        const recipe = results.rows[0]
+        let recipe = await Recipe.find(id)
 
         results = await Recipe.selectChefOptions()
         const options = results.rows

@@ -1,3 +1,4 @@
+const Recipe = require('../models/Recipe')
 const User = require('../models/User')
 
 function checkAllFields(body) {
@@ -20,7 +21,6 @@ async function index(req, res, next) {
     const user = await User.findOne({ where: { id } })
     
     req.user = user
-    console.log(user)
 
     next()
 }
@@ -29,14 +29,20 @@ async function index(req, res, next) {
 async function post(req, res, next) {
     const fillAllFields = checkAllFields(req.body)
 
-    if (fillAllFields) return res.render('admin/recipes/create', fillAllFields)
+    if (fillAllFields) return res.render('admin/recipes/create', {
+        ...fillAllFields,
+        options: await Recipe.selectChefOptions(),
+    })
 
+    
     if (req.files.length == 0) {
         return res.render('admin/recipes/create', {
             recipe: req.body,
             error: "Envie pelo menos uma imagem."
         })
     }
+
+    next()
 }
 
 module.exports = {
