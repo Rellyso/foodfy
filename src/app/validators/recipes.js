@@ -1,4 +1,4 @@
-const Recipe = require('../models/Recipe')
+const User = require('../models/User')
 
 function checkAllFields(body) {
     const keys = Object.keys(body)
@@ -12,17 +12,19 @@ function checkAllFields(body) {
         }
     }
 
-    for (let key of keys) {
-        if (req.body[key] == "" && key != "removed_files") {
-            return res.render('admin/recipes/create', {
-                recipe: req.body,
-                error: "Por favor preencha todos os campos."
-            })
-        }
-    }
-
-    
 }
+
+async function index(req, res, next) {
+    const {userId:id} = req.session
+
+    const user = await User.findOne({ where: { id } })
+    
+    req.user = user
+    console.log(user)
+
+    next()
+}
+
 
 async function post(req, res, next) {
     const fillAllFields = checkAllFields(req.body)
@@ -39,4 +41,5 @@ async function post(req, res, next) {
 
 module.exports = {
     post,
+    index,
 }

@@ -9,8 +9,8 @@ const RecipesValidator = require('../../app/validators/recipes')
 
 
 // ROTAS DAS RECEITAS
-routes.get('/', onlyUsers, RecipesController.index)
-routes.get('/create', onlyAdmins, RecipesController.create)
+routes.get('/', onlyUsers, RecipesValidator.index, RecipesController.index)
+routes.get('/create', onlyUsers, RecipesController.create)
 routes.get('/:id', onlyUsers, RecipesController.show)
 routes.get('/:id/edit', onlyAdmins, RecipesController.edit)
 
