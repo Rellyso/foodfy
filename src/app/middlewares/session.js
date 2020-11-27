@@ -14,6 +14,7 @@ async function onlyAdmins(req, res, next) {
 
         const user = await User.findOne({ where: { id } })
 
+        
         if (!user.is_admin) {
             return res.redirect('/admin/profile')
 
@@ -23,6 +24,7 @@ async function onlyAdmins(req, res, next) {
 
         next()
     } catch (err) {
+        console.error(err)
         return res.render('session/login', {
             error: 'Você precisa se conectar para acessar.'
         })
