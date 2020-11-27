@@ -70,6 +70,16 @@ module.exports = {
         ORDER BY recipes.updated_at DESC`)
     },
 
+    async selectByUserIdWhitChefNamesAndFiles(id) {
+        return db.query(`SELECT recipes.*, chefs.name AS chef_name, files.name AS filename, files.path
+        FROM recipes
+        LEFT JOIN chefs ON (chefs.id = recipes.chef_id)
+        LEFT JOIN recipe_files ON (recipes.id = recipe_files.recipe_id)
+        LEFT JOIN files ON (recipe_files.file_id = files.id)
+        WHERE recipes.user_id = $1
+        ORDER BY recipes.updated_at DESC`, [id])
+    },
+
     async update(params) {
         const query = `
             UPDATE recipes SET

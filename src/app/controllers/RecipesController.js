@@ -3,7 +3,16 @@ const File = require('../models/File')
 
 module.exports = {
     async index(req, res) {
-        let results = await Recipe.selectAllWithChefNamesAndFiles()
+        const { isAdmin, userId: id } = req.session
+
+        let results
+
+        if (isAdmin) {
+            results = await Recipe.selectAllWithChefNamesAndFiles()
+        } else {
+            results = await Recipe.selectByUserIdWhitChefNamesAndFiles(id)
+        }
+
         const recipes = results.rows
 
         let lastId = 0
@@ -156,7 +165,7 @@ module.exports = {
                 removedFiles.splice(lastIndex, 1) // [1, 2, 3]
 
                 const removedFilesPromise = removedFiles.map(id => File.deleteFileFromRecipe(id))
-                
+
                 await Promise.all(removedFilesPromise)
             }
 
