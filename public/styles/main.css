@@ -412,3 +412,74 @@
 #main #chefs .card__content p {
     margin: 0;
 }
+
+/* login button link */
+
+div.login {
+    position: fixed;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 45px;
+    height: 45px;
+    right: 20px;
+    bottom: 20px;
+
+    background-color: #6558C3;
+    border-radius: 50%;
+}
+
+
+div.login a {
+    position: relative;
+    color: white;
+
+    height: 100%;
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+div.login a::before {
+    content: '';
+    position: absolute;
+
+    width: 45px;
+    height: 45px;
+    transform: scale(1);
+
+    background-color: #6558C3;
+    border-radius: 50%;
+    
+    opacity: .5;
+    z-index: -1;
+
+    transition: all .5s ease-in-out;
+    animation: fadeCircleWithDelay infinite 4s;
+}
+
+div.login:hover a::before {
+    transform: scale(1.6);
+    opacity: 0;
+}
+
+@keyframes fadeCircleWithDelay {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    } 50% {
+        transform: scale(1.5);
+        opacity: 0;
+    } 60% {
+        transform: scale(1);
+    }
+}
+
+div.login a i {
+    font-size: 14px;
+}
