@@ -9,6 +9,9 @@
             <title>Foodfy</title>
         {% endblock head %}
 
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+         rel="stylesheet">
+
         {% include 'parts/styles.njk'%}
     </head>
 
@@ -28,20 +31,19 @@
                 {% block filter %}{% endblock filter %}
 
                 {% if session.userId %}
-                <div class="dashboard">
-                    <a href="/admin" class="button">Dashboard</a>
-                </div>
+                    <div class="dashboard">
+                        <a href="/admin" class="button">Dashboard</a>
+                    </div>
                 {% endif %}
             </header>
 
             {% block content %}{% endblock content %}
         </div>
-        
+
         {% include 'parts/footer.njk' %}
 
-
-        {% block scripts %}
-        {% endblock scripts %}
+        {% include 'parts/login-button.njk' %}
+        {% block scripts %}{% endblock scripts %}
         <script src="/scripts/main/main.js"></script>
         <script src="/scripts/fields.js"></script>
     </body>
