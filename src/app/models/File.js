@@ -56,13 +56,14 @@ module.exports = {
         `, [id])
     },
 
-    getFilesByRecipeId(recipe_id) {
-        return db.query(`
+    async getFilesByRecipeId(recipe_id) {
+        const results = await db.query(`
             SELECT files.* FROM recipes, recipe_files, files
             WHERE recipes.id = recipe_files.recipe_id 
             AND recipe_files.file_id = files.id
             AND recipes.id = $1`, [recipe_id])
-
+            
+        return results.rows
     },
 
     async deleteFileFromRecipe(id) {

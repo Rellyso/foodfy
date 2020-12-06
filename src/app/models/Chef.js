@@ -42,14 +42,16 @@ module.exports = {
         `)
     },
 
-    selectChefsWithTotalRecipes() {
-        return db.query(`
+    async selectChefsWithTotalRecipes() {
+        let results = await db.query(`
             SELECT chefs.*, files.path, count(recipes) AS total_recipes
             FROM chefs
             LEFT JOIN recipes ON (chefs.id = recipes.chef_id)
             LEFT JOIN files ON (chefs.file_id = files.id)
             GROUP BY chefs.id, files.path
         `)
+
+        return results.rows
     },
 
     selectRecipesOptions(id) {

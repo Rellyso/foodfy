@@ -15,7 +15,7 @@ module.exports = {
         })
     },
 
-    create(params) {
+    async create(params) {
         const query = `
             INSERT INTO recipes (
                 chef_id,
@@ -38,7 +38,9 @@ module.exports = {
             `now()`,
         ]
 
-        return db.query(query, values)
+         const results = await db.query(query, values)
+
+         return results.rows[0].id
     },
 
     async find(id) {
@@ -50,8 +52,8 @@ module.exports = {
         return results.rows[0]
     },
 
-    findBy(filter) {
-        return db.query(`
+    async findBy(filter) {
+        const results = await db.query(`
         SELECT recipes.*, chefs.name AS chef_name, files.name AS filename, files.path
         FROM recipes
         LEFT JOIN chefs ON (chefs.id = recipes.chef_id)
@@ -61,15 +63,19 @@ module.exports = {
         OR chefs.name ILIKE '%${filter}%'
         ORDER BY recipes.updated_at ASC
         `)
+
+        return results.rows
     },
 
-    selectAllWithChefNamesAndFiles() {
-        return db.query(`SELECT recipes.*, chefs.name AS chef_name, files.name AS filename, files.path
+    async selectAllWithChefNamesAndFiles() {
+        let results = await db.query(`SELECT recipes.*, chefs.name AS chef_name, files.name AS filename, files.path
         FROM recipes
         LEFT JOIN chefs ON (chefs.id = recipes.chef_id)
         LEFT JOIN recipe_files ON (recipes.id = recipe_files.recipe_id)
         LEFT JOIN files ON (recipe_files.file_id = files.id)
         ORDER BY recipes.updated_at DESC`)
+
+        return results.rows
     },
 
     async selectByUserIdWhitChefNamesAndFiles(id) {
