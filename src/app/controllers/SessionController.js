@@ -12,17 +12,14 @@ module.exports = {
         req.session.userId = req.user.id
         res.locals.isAdmin = user.is_admin
 
-        console.log(res.locals.isAdmin)
-        
         return res.redirect('/admin')
     },
     
     async logout(req, res) {
         req.session.destroy()
         res.locals.isAdmin = false
-        console.log(res.locals.isAdmin)
         
-        return res.redirect('/login')
+        return res.redirect('/')
     },
 
     forgotForm(req, res) {

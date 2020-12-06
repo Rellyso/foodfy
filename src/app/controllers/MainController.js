@@ -4,8 +4,7 @@ const File = require("../models/File")
 
 module.exports = {
     async index(req, res) {
-        let results = await Recipe.selectAllWithChefNamesAndFiles()
-        const recipes = results.rows
+        let recipes = await Recipe.selectAllWithChefNamesAndFiles()
 
         let lastId = 0
         let filteredRecipes = []
@@ -28,8 +27,7 @@ module.exports = {
     },
 
     async recipes(req, res) {
-        let results = await Recipe.selectAllWithChefNamesAndFiles()
-        const recipes = results.rows
+        let recipes = await Recipe.selectAllWithChefNamesAndFiles()
 
         let lastId = 0
         let filteredRecipes = []
@@ -52,11 +50,9 @@ module.exports = {
     async recipe(req, res) {
         const { id } = req.params
 
-        let results = await Recipe.find(id)
-        const recipe = results.rows[0]
+        let recipe = await Recipe.find(id)
 
-        results = await File.getFilesByRecipeId(id)
-        let files = results.rows
+        let files = await File.getFilesByRecipeId(id)
 
         files.map(file => {
             file.src = `${req.protocol}://${req.headers.host}${file.path.replace("public", "")}`
@@ -68,11 +64,11 @@ module.exports = {
     async search(req, res) {
         const { filter } = req.query
 
-        let results = await Recipe.findBy(filter)
+        let files = await Recipe.findBy(filter)
 
         let lastId = 0
         let filteredRecipes = []
-        results.rows.forEach(recipe => {
+        files.forEach(recipe => {
 
 
             if (recipe.id !== lastId) {
@@ -89,14 +85,11 @@ module.exports = {
     },
 
     async chefs(req, res) {
-        let results = await Chef.selectChefsWithTotalRecipes()
-        const chefsQuery = results.rows,
-            chefs = []
+        let chefs = await Chef.selectChefsWithTotalRecipes()
+        
 
-        chefsQuery.forEach(chef => {
+        chefs.forEach(chef => {
             chef.avatar_url = `${req.protocol}://${req.headers.host}${chef.path.replace('public', '')}`
-
-            chefs.push(chef)
         })
 
         res.render('main/chefs', { chefs })

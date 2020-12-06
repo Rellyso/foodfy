@@ -3,17 +3,15 @@ const File = require('../models/File')
 
 module.exports = {
     async index(req, res) {
-        const { is_admin:isAdmin, id } = req.user
+        const { is_admin: isAdmin, id } = req.user
 
-        let results
+        let recipes
 
         if (isAdmin == true) {
-            results = await Recipe.selectAllWithChefNamesAndFiles()
+            recipes = await Recipe.selectAllWithChefNamesAndFiles()
         } else {
-            results = await Recipe.selectByUserIdWhitChefNamesAndFiles(id)
+            recipes = await Recipe.selectByUserIdWhitChefNamesAndFiles(id)
         }
-
-        const recipes = results.rows
 
         let lastId = 0
         let filteredRecipes = []
@@ -63,8 +61,7 @@ module.exports = {
         }
 
         try {
-            let results = await Recipe.create(data)
-            const recipeId = results.rows[0].id
+            const recipeId = await Recipe.create(data)
 
             const filesPromise = req.files.map(file => File.create({ ...file, recipe_id: recipeId }))
             await Promise.all(filesPromise)
@@ -87,8 +84,7 @@ module.exports = {
         try {
             let recipe = await Recipe.find(id)
 
-            results = await File.getFilesByRecipeId(id)
-            let files = results.rows
+            files = await File.getFilesByRecipeId(id)
 
             files.map(file => {
                 file.src = `${req.protocol}://${req.headers.host}${file.path.replace("public", "")}`
@@ -105,11 +101,9 @@ module.exports = {
 
         let recipe = await Recipe.find(id)
 
-        results = await Recipe.selectChefOptions()
-        const options = results.rows
+        let options = await Recipe.selectChefOptions()
 
-        results = await File.getFilesByRecipeId(id)
-        let files = results.rows
+        let files = await File.getFilesByRecipeId(id)
 
         files.map(file => {
             file.src = `${req.protocol}://${req.headers.host}${file.path.replace("public", "")}`
