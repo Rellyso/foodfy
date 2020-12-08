@@ -415,7 +415,7 @@
 
 /* login button link */
 
-div.login {
+.login_button {
     position: fixed;
 
     display: flex;
@@ -432,7 +432,7 @@ div.login {
 }
 
 
-div.login a {
+.login_button div {
     position: relative;
     color: white;
 
@@ -445,7 +445,7 @@ div.login a {
 
 }
 
-div.login a::before {
+.login_button div::before {
     content: '';
     position: absolute;
 
@@ -463,7 +463,7 @@ div.login a::before {
     animation: fadeCircleWithDelay infinite 4s;
 }
 
-div.login:hover a::before {
+div.login_button:hover a::before {
     transform: scale(1.6);
     opacity: 0;
 }
@@ -480,6 +480,6 @@ div.login:hover a::before {
     }
 }
 
-div.login a i {
+div.login_button a i {
     font-size: 14px;
 }

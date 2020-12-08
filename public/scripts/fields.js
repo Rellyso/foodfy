@@ -277,3 +277,10 @@ const isChecked = {
         console.log(this.inputHidden)
     }
 }
+
+const redirectToLogin = {
+    loginButton: document.querySelector('a.login'),
+    redirect(toLocal) {
+        window.location.href = toLocal
+    }
+}
