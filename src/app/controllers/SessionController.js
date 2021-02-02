@@ -3,6 +3,10 @@ const mailer = require('../../libs/mailer')
 const User = require('../models/User')
 
 module.exports = {
+    async register(req, res) {
+        return res.render('session/register')
+    },
+
     async loginForm(req, res) {
         return res.render('session/login')
     },
