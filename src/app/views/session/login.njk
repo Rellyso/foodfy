@@ -14,13 +14,15 @@
         <form id="f_login" 
             method="POST" 
             action="/login"
-            >
-                {% include 'session/fields.njk' %}
-
+        >
+            {% include 'session/fields.njk' %}
         </form>
 
         <div class="footer">
-            <a href="/forgot-password" class="">Perdeu a senha?</a>
+            {# <div class="footer__links"> #}
+                <a href="/forgot-password" class="">Perdeu a senha?</a>
+                {# <a href="/register" class=" new-account">Criar nova conta</a> #}
+            {# </div> #}
 
             <button type="submit" form="f_login" class="button">Acessar</button>
         </div>

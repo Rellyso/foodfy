@@ -1,4 +1,4 @@
-{% if session %}
+{% if (not session.userId) %}
 <a href="/login" class="login_button">
     <div>
         <span class="material-icons">
