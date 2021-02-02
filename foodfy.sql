@@ -1,7 +1,23 @@
+-- para excluir e recriar esquema em cascata 
+DROP SCHEMA public CASCADE;
+CREATE SCHEMA public;
+
+-- excluir e recriar caso exista a base de dados launchstoredb
+DROP DATABASE IF EXISTS foodfy;
+CREATE DATABASE foodfy;
+
 CREATE TABLE "files" (
   "id" serial PRIMARY KEY,
   "name" text,
   "path" text NOT NULL
+);
+
+-- adicionando tabela chefs
+CREATE TABLE "chefs" (
+  "id" serial PRIMARY KEY,
+  "name" text NOT NULL,
+  "file_id" int NOT NULL,
+  "created_at" timestamp DEFAULT (now())
 );
 
 CREATE TABLE "recipe_files" (
@@ -26,11 +42,12 @@ ALTER TABLE "recipes" ADD COLUMN "updated_at" timestamp DEFAULT (now());
 ALTER TABLE "recipes" ALTER "created_at" SET DEFAULT (now());
 
 
-
 -- adicionando relacionamentos de recipe_files
 ALTER TABLE "recipe_files" ADD FOREIGN KEY ("recipe_id") REFERENCES "recipes" ("id");
 ALTER TABLE "recipe_files" ADD FOREIGN KEY ("file_id") REFERENCES "files" ("id");
 
+-- adicionando relacionamentos de chefs
+ALTER TABLE "chefs" ADD FOREIGN KEY ("file_id") REFERENCES "files" ("id");
 
 
 CREATE TABLE "users" (
