@@ -1,0 +1,54 @@
+<div class="form__body">
+
+    <div class="item">
+        <div>Nome</div>
+
+        <input 
+            type="text" 
+            name="name" 
+            value="{{ session.name }}" 
+            required
+            placeholder="Digite seu nome"
+        >
+
+    </div>
+
+    <div class="item">
+        <div>Email</div>
+
+        <input 
+            type="email" 
+            name="email" 
+            value="{{ session.email }}" 
+            required
+            placeholder="Digite seu email"
+            onblur="Validate.apply(this, 'isEmail')"
+        >
+
+    </div>
+
+    <div class="item">
+        <div>Senha</div>
+
+        <input 
+            type="password" 
+            name="password" 
+            required
+            placeholder="Digite sua senha"
+        >
+
+    </div>
+
+    <div class="item">
+        <div>Senha</div>
+
+        <input 
+            type="password" 
+            name="password" 
+            required
+            placeholder="Confirme sua senha"
+        >
+
+    </div>
+    
+</div>

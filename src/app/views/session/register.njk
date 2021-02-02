@@ -1,0 +1,31 @@
+{% extends 'session/layout.njk' %}
+
+{% block head %}
+<title>Criar nova conta</title>
+{% endblock head %}
+
+{% block content %}
+
+    <div class="register session__container">
+        <div class="content__title">
+            <h2>Criar nova conta</h2>
+        </div>
+
+        <form id="f_login" 
+            method="POST"
+            action="/login"
+        >
+            {% include 'session/register-fields.njk' %}
+        </form>
+
+        <div class="footer">
+            <a href="/login" class="">Fazer login</a>
+
+            <button type="submit" form="f_login" class="button">Criar</button>
+        </div>
+    </div>
+{% endblock content %}
+
+{% block scripts %}
+    <script src="/scripts/fields.js"></script>
+{% endblock scripts %}
