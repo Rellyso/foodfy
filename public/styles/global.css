@@ -37,6 +37,10 @@ a.remove {
     color: #999999 !important;
 }
 
+.primary__color {
+    color: #6558C3 !important;
+}
+
 /* FOOTER */
 
 footer {
@@ -164,8 +168,6 @@ select {
     font-family: 'Roboto', sans-serif;
     font-size: 16px;
     line-height: 19px;
-
-    
 
     color: #111111;
 
