@@ -8,21 +8,27 @@
     {% block content %}
 
         <section id="page-recipes" class="content">
-            <div class="cards">
-                {% for recipe in recipes %}
-                    <a href="/recipes/{{recipe.id}}" class="card">
-                        <figure class="card__img">
-                            <img src="{{recipe.src}}" alt="imagem de {{recipe.title}}">
-                        </figure>
+            {% if (recipes and recipes.length > 0) %}
+                <div class="cards">
+                    {% for recipe in recipes %}
+                        <a href="/recipes/{{recipe.id}}" class="card">
+                            <figure class="card__img">
+                                <img src="{{recipe.src}}" alt="imagem de {{recipe.title}}">
+                            </figure>
 
-                        <div class="card__content">
-                            <h3>{{recipe.title}}</h3>
-                            
-                            <p>{{recipe.chef_name}}</p>
-                        </div>
-                    </a>
-                {% endfor %}
-            </div>
+                            <div class="card__content">
+                                <h3>{{recipe.title}}</h3>
+                                
+                                <p>{{recipe.chef_name}}</p>
+                            </div>
+                        </a>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="no_content">
+                    <p>Nenhuma receita encontrada.</p>
+                </div>
+            {% endif %}
         </section>
 
         {# <div class="modal-overlay">

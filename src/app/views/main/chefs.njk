@@ -6,26 +6,32 @@
 
 {% block content %}
     <section class="content" id="chefs">
-        <div class="cards" >
-            {% for chef in chefs %}
-                <div class="card">
-                    <figure class="card__img">
-                        <img src="{{ chef.avatar_url }}" alt="imagem de {{ chef.name }}">
-                    </figure>
+        {% if (chefs and chefs.length > 0) %}
+            <div class="cards" >
+                {% for chef in chefs %}
+                    <div class="card">
+                        <figure class="card__img">
+                            <img src="{{ chef.avatar_url }}" alt="imagem de {{ chef.name }}">
+                        </figure>
 
-                    <div class="card__content">
-                        <h3>{{ chef.name }}</h3>
+                        <div class="card__content">
+                            <h3>{{ chef.name }}</h3>
 
-                        <p> 
-                            {% if chef.total_recipes > 0 %}
-                                {{chef.total_recipes}} receita{% if chef.total_recipes > 1 %}s{% endif %} 
-                            {% else %}
-                                Nenhuma receita
-                            {% endif %}
-                        </p>
+                            <p> 
+                                {% if chef.total_recipes > 0 %}
+                                    {{chef.total_recipes}} receita{% if chef.total_recipes > 1 %}s{% endif %} 
+                                {% else %}
+                                    Nenhuma receita
+                                {% endif %}
+                            </p>
+                        </div>
                     </div>
-                </div>
-            {% endfor %}
-        </div>
+                {% endfor %}
+            </div>
+        {% else%}
+            <div class="no_content">
+                <p>Nenhum chefe encontrado.</p>
+            </div>
+        {% endif %}
     </section>
 {% endblock content %}
