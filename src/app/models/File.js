@@ -1,8 +1,12 @@
 const db = require('../../config/db')
 const fs = require('fs')
+const Base = require('./Base')
+
+Base.init({ table: 'files' })
 
 module.exports = {
-    async create({ filename, path, recipe_id }) {
+    ...Base,
+    async createRecipeFile({ filename, path, recipe_id }) {
         try {
             let query = `
             INSERT INTO files (
@@ -35,7 +39,7 @@ module.exports = {
             throw `Database Error => ${err}`
         }
     },
-
+    
     createChefFile({ filename, path }) {
         try {
             return db.query(`

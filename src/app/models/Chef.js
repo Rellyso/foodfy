@@ -1,45 +1,54 @@
 const db = require('../../config/db')
 const { date } = require('../../libs/utils')
+const Base = require('./Base')
+
+Base.init({ table: 'chefs' })
 
 module.exports = {
+    ...Base,
+
     all() {
         return db.query(`SELECT * FROM chefs ORDER BY name ASC`)
     },
 
-    create({ name, fileId }) {
-        const query = `
-        INSERT INTO chefs (
-            name,
-            file_id,
-            created_at
-            ) VALUES ($1, $2, $3)
-            RETURNING id`
+    // create({ name, fileId }) {
+    //     const query = `
+    //     INSERT INTO chefs (
+    //         name,
+    //         file_id,
+    //         created_at
+    //         ) VALUES ($1, $2, $3)
+    //         RETURNING id`
 
-        const values = [
-            name,
-            fileId,
-            date(Date.now()).iso,
-        ]
+    //     const values = [
+    //         name,
+    //         fileId,
+    //         date(Date.now()).iso,
+    //     ]
 
-        return db.query(query, values)
-    },
+    //     return db.query(query, values)
+    // },
 
-    find(id) {
-        return db.query(`SELECT chefs.*, files.path, files.id AS file_id, count(recipes) AS total_recipes
+    async findWithFiles(id) {
+        const results = await db.query(`SELECT chefs.*, files.path, files.id AS file_id, count(recipes) AS total_recipes
         FROM chefs
         LEFT JOIN recipes ON (chefs.id = recipes.chef_id)
         LEFT JOIN files ON (chefs.file_id = files.id)
         WHERE chefs.id = $1
         GROUP BY chefs.id, files.path, files.id`, [id])
+
+        return results.rows[0]
     },
 
-    selectAllWithAvatar() {
-        return db.query(`
+    async selectAllWithAvatar() {
+        let results = await db.query(`
             SELECT chefs.*, files.path
             FROM files, chefs 
             WHERE chefs.file_id = files.id
             ORDER BY chefs.name ASC
         `)
+
+        return results.rows
     },
 
     async selectChefsWithTotalRecipes() {
