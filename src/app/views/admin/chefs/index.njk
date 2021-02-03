@@ -9,6 +9,7 @@
         <div class="content__title">
             <h2>Gerenciar chefs</h2>
         </div>
+        
         <div class="cards" id="chefs">
             {% for chef in chefs %}
                 <div class="card">
@@ -24,5 +25,13 @@
                 </div>
             {% endfor %}
         </div>
+
+        {% if chefs == 0 %}
+            <div class="no_chef">
+                <p>Nenhum chefe por aqui.</p>
+
+                <a href="/admin/chefs/create"> Cadastre um chef</a>
+            </div>
+        {% endif %}
     </section>
 {% endblock content %}
