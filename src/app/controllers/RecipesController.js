@@ -63,7 +63,7 @@ module.exports = {
         try {
             const recipeId = await Recipe.create(data)
 
-            const filesPromise = req.files.map(file => File.create({ ...file, recipe_id: recipeId }))
+            const filesPromise = req.files.map(file => File.createRecipeFile({ ...file, recipe_id: recipeId }))
             await Promise.all(filesPromise)
 
             return res.redirect(`/admin/recipes/${recipeId}`)
@@ -145,7 +145,7 @@ module.exports = {
             }
 
             if (req.files.length != 0) {
-                const newFilesPromise = req.files.map(file => File.create({ ...file, recipe_id: req.body.id }))
+                const newFilesPromise = req.files.map(file => File.createRecipeFile({ ...file, recipe_id: req.body.id }))
 
                 await Promise.all(newFilesPromise)
             }

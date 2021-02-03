@@ -4,9 +4,10 @@ const { date } = require('../../libs/utils')
 
 module.exports = {
     async index(req, res) {
-        let results = await Chef.selectAllWithAvatar()
-        const chefs = results.rows,
-            chefsWithAvatar = []
+        const chefs = await Chef.selectAllWithAvatar()
+        
+        let chefsWithAvatar = []
+
 
         chefs.forEach(chef => {
             chef.avatar_url = `${req.protocol}://${req.headers.host}${chef.path.replace('public', '')}`
@@ -32,19 +33,24 @@ module.exports = {
         }
 
         if (!req.file) {
-            res.send('Please send an image')
+            return res.send('Please send an image')
         }
 
         try {
-            let results = await File.createChefFile({ ...req.file })
-            const fileId = results.rows[0].id
+            const fileId = await File.create({ 
+                name: req.file.filename,
+                path: req.file.path
+            })
 
-            results = await Chef.create({ ...req.body, fileId })
-            const chefId = results.rows[0].id
+            
+            const chefId = await Chef.create({ 
+                name: req.body.name,
+                file_id: fileId
+            })
 
             return res.redirect(`/admin/chefs/${chefId}`)
         } catch (err) {
-            return res.send(req.body)
+            return console.error(err)
         }
 
     },
@@ -52,8 +58,7 @@ module.exports = {
     async show(req, res) {
         const { id } = req.params
 
-        let results = await Chef.find(id)
-        const chef = results.rows[0]
+        const chef = await Chef.findWithFiles(id)
 
         if (chef.path) {
             chef.avatar_url = `${req.protocol}://${req.headers.host}${chef.path.replace('public', '')}`
@@ -65,9 +70,12 @@ module.exports = {
             return res.send('Chef not found')
         }
 
-        results = await Chef.selectRecipesOptions(id)
-        let lastId = 0
+        let results = await Chef.selectRecipesOptions(id),
+            lastId = 0
+
         const recipes = []
+
+
         results.rows.forEach(recipe => {
             if (recipe.recipe_id != lastId) {
                 recipe.src = `${req.protocol}://${req.headers.host}${recipe.path.replace('public', '')}`
@@ -82,8 +90,7 @@ module.exports = {
     async edit(req, res) {
         const { id } = req.params
 
-        let results = await Chef.find(id)
-        const chef = results.rows[0]
+        const chef = await Chef.findWithFiles(id)
 
         if (chef.path) {
             chef.avatar_url = `${req.protocol}://${req.headers.host}${chef.path.replace('public', '')}`
