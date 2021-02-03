@@ -274,7 +274,8 @@
     margin: 0;
 }
 
-#admin .no_recipe {
+#admin .no_recipe,
+#admin .no_chef {
     margin-top: 30px;
     
     display: flex;
@@ -284,7 +285,8 @@
     animation: swipeUp .6s ease-out;
 }
 
-#admin .no_recipe p {
+#admin .no_recipe p,
+#admin .no_chef  p{
     font-size: 16px;
     font-weight: bold;
     line-height: 26px;
@@ -292,7 +294,8 @@
     color: #777777;
 }
 
-#admin .no_recipe a {
+#admin .no_recipe a,
+#admin .no_chef a {
     font-size: 16px;
     line-height: 26px;
     text-transform: none;
@@ -447,7 +450,7 @@
     width: 35px;
     height: 35px;
 
-    object-fit: fill;
+    object-fit: cover;
 
     border-radius: 50%;
 }
