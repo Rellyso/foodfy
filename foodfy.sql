@@ -29,7 +29,6 @@ CREATE TABLE "recipe_files" (
 CREATE TABLE "recipes" (
   "id" serial PRIMARY KEY,
   "chef_id" int NOT NULL,
-  "image" text,
   "title" text,
   "ingredients" text[],
   "preparation" text[],
