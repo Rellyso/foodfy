@@ -1,0 +1,11 @@
+{% if redirect %}
+<script>
+    function redirectToPath() {
+        setTimeout(() => {
+        window.location.href = '{{ redirect.path }}'
+        }, 5000)
+    }
+
+    redirectToPath()
+</script>
+{% endif %}
