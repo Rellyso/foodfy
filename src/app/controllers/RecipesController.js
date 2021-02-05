@@ -41,7 +41,7 @@ module.exports = {
     async post(req, res) {
         const { ingredients, preparation } = req.body
 
-        let newIngredients = [],
+        const newIngredients = [],
             newPreparation = []
 
         ingredients.map(ingredient => {
@@ -55,13 +55,18 @@ module.exports = {
         })
 
         const data = {
-            ...req.body,
+            chef_id: req.body.chef_id,
+            title: req.body.title,
+            information: req.body.information,
+            user_id: req.body.user_id,
             ingredients: newIngredients,
-            preparation: newPreparation
+            preparation: newPreparation,
         }
+        console.log(data)
 
         try {
             const recipeId = await Recipe.create(data)
+            console.log(recipeId)
 
             const filesPromise = req.files.map(file => File.createRecipeFile({ ...file, recipe_id: recipeId }))
             await Promise.all(filesPromise)

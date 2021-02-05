@@ -13,12 +13,16 @@ module.exports = {
     async post(req, res) {
         const userId = await User.create(req.body)
 
-        if (!userId) return res.render('/admin/users/create', {
+        if (!userId) return res.render('admin/users/create', {
             user: req.body,
             error: 'Erro'
         })
 
-        return res.redirect('/admin/users')
+        return res.render('admin/users/create', {
+            user: req.body,
+            success: `Conta criada com sucesso <br> Seu email e senha são: ${req.body.email}`,
+            redirect: { path: '/admin/users' }
+        })
     },
 
     edit(req, res) {
@@ -48,9 +52,9 @@ module.exports = {
     },
 
     async delete(req, res) {
-        // const { id } = req.body
+        const { id } = req.body
 
-        // await User.delete(id)
+        await User.delete(id)
 
         const users = await User.listAll()
 
