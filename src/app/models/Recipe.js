@@ -1,6 +1,11 @@
 const db = require('../../config/db')
 
+const Base = require('./Base')
+
+Base.init({ table: 'recipes' })
+
 module.exports = {
+    ...Base,
     all(callback) {
         db.query(`
             SELECT recipes.*, count(chefs) AS total_chefs
@@ -86,29 +91,6 @@ module.exports = {
         LEFT JOIN files ON (recipe_files.file_id = files.id)
         WHERE recipes.user_id = $1
         ORDER BY recipes.updated_at DESC`, [id])
-    },
-
-    async update(params) {
-        const query = `
-            UPDATE recipes SET
-                chef_id = ($1),
-                title = ($2),
-                ingredients = ($3),
-                preparation = ($4),
-                information = ($5)
-            WHERE id = $6
-            RETURNING id`
-
-        const values = [
-            params.chef_id,
-            params.title,
-            params.ingredients,
-            params.preparation,
-            params.information,
-            params.id
-        ]
-
-        return db.query(query, values)
     },
 
     async selectChefOptions() {

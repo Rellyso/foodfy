@@ -30,7 +30,7 @@ module.exports = {
 
     async create(data) {
         try {
-            const password = data.password || 'admin1234'
+            const password = data.email
 
             const query = `
             INSERT INTO users (

@@ -11,24 +11,6 @@ module.exports = {
         return db.query(`SELECT * FROM chefs ORDER BY name ASC`)
     },
 
-    // create({ name, fileId }) {
-    //     const query = `
-    //     INSERT INTO chefs (
-    //         name,
-    //         file_id,
-    //         created_at
-    //         ) VALUES ($1, $2, $3)
-    //         RETURNING id`
-
-    //     const values = [
-    //         name,
-    //         fileId,
-    //         date(Date.now()).iso,
-    //     ]
-
-    //     return db.query(query, values)
-    // },
-
     async findWithFiles(id) {
         const results = await db.query(`SELECT chefs.*, files.path, files.id AS file_id, count(recipes) AS total_recipes
         FROM chefs
@@ -72,28 +54,4 @@ module.exports = {
             AND recipes.chef_id = $1   
         `, [id])
     },
-
-    async update({ name, fileId = null, id }) {
-        const query = `
-            UPDATE chefs SET
-                name = $1,
-                file_id = $2
-            WHERE id = $3`
-
-        const values = [
-            name,
-            fileId,
-            id
-        ]
-
-        return db.query(query, values)
-    },
-
-    delete(id, callback) {
-        db.query(`DELETE FROM chefs WHERE id = $1`, [id], (err, results) => {
-            if (err) throw `Database error! ${err}`
-
-            callback()
-        })
-    }
 }
