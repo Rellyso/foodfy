@@ -1,9 +1,7 @@
 <script>
         const formDelete = document.querySelector('#f_delete')
 
-        console.log(formDelete)
-
-        formDelete.addEventListener("submit", function (event) {
+        formDelete.addEventListener("submit", event => {
             const confirmation = confirm("Deseja realmente deletar?")
 
             if (!confirmation) {
@@ -11,5 +9,4 @@
             }
         })
 
-        // descobrir o porquê de não está ouvindo o Event
 </script>
