@@ -61,10 +61,10 @@
     margin-right: 8px;
 }
 
-#main button[type="submit"],
-#main button[type="button"],
+#main button[type="submit"].button,
+#main button[type="button"].button,
 #main a.button {
-    background-color: #6558C3;
+    background-color: var(--primary-color);
     color: white;
 
     border: none;
@@ -427,7 +427,7 @@
     right: 20px;
     bottom: 20px;
 
-    background-color: #6558C3;
+    background-color: var(--primary-color);
     border-radius: 50%;
 }
 
@@ -453,7 +453,7 @@
     height: 45px;
     transform: scale(1);
 
-    background-color: #6558C3;
+    background-color: var(--primary-color);
     border-radius: 50%;
     
     opacity: .5;

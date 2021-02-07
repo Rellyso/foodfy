@@ -11,8 +11,7 @@
 
         <link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
 
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-         rel="stylesheet">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
         {% include 'parts/styles.njk'%}
     </head>
@@ -33,16 +32,30 @@
                 {% block filter %}{% endblock filter %}
 
                 {% if session.userId %}
-                    <div class="dashboard">
-                        <a href="/admin" class="button">Dashboard</a>
+                    <div class="dropdown-container">
+                        <i class="material-icons account">
+                            account_circle
+                        </i>
+
+                        <ul class="dropdown">
+                            <li>
+                                <a href="/admin/profile">Dashboard</a>
+                            </li>
+                            <li>
+                                <form action="/logout" method="post">
+                                    <button type="submit" class="logout">Sair</button>
+                                </form>
+                            </li>
+                        </ul>
                     </div>
+
                 {% endif %}
             </header>
 
             {% block content %}{% endblock content %}
 
-        {% include 'parts/login-button.njk' %} 
-        
+            {% include 'parts/login-button.njk' %}
+
         </div>
 
         {% include 'parts/footer.njk' %}
