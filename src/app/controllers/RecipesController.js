@@ -7,11 +7,15 @@ module.exports = {
 
         let recipes
 
+        
         if (isAdmin == true) {
             recipes = await Recipe.selectAllWithChefNamesAndFiles()
         } else {
             recipes = await Recipe.selectByUserIdWhitChefNamesAndFiles(id)
         }
+        
+        // se não houver receitas
+        if (recipes.rowCount < 1) return res.render('admin/recipes/index')
 
         let lastId = 0
         let filteredRecipes = []
