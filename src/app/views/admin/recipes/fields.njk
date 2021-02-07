@@ -67,7 +67,8 @@
 
                     <button 
                         type="button" 
-                        class="delete ingredient-delete-button" 
+                        class="delete btn_ingredient delete-button" 
+                        onclick="addNewField.removeIngredient(this)"
                     >
                         <span class="material-icons">
                             close
@@ -78,7 +79,7 @@
             <div class="ingredient input-field">
                 <input type="text" name="ingredients[]" value="" class="ingredient-field">
 
-                <button type="button" class="delete ingredient-delete-button">
+                <button type="button" class="delete btn_ingredient delete-button" onclick="addNewField.removeIngredient(this)">
                     <span class="material-icons">
                         close
                     </span>
@@ -100,7 +101,8 @@
 
                     <button 
                         type="button" 
-                        class="delete preparation-delete-button"
+                        class="delete btn_preparation delete-button"
+                        onclick="addNewField.removeIngredient(this)"
                     >
                         <span class="material-icons">
                             close
@@ -112,7 +114,7 @@
             <div class="preparation input-field">
                 <input type="text" name="preparation[]" value="" class="preparation-field">
 
-                <button type="button" class="delete preparation-delete-button">
+                <button type="button" class="delete btn_preparation delete-button" onclick="addNewField.removeIngredient(this)">
                     <span class="material-icons">
                         close
                     </span>

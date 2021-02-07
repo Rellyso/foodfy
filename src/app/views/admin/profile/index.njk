@@ -12,13 +12,13 @@
 
             <button type="submit" class="button" form="f_profile">Salvar</button>
         </div>
-        <form method="POST" action="/admin/profile?_method=PUT" id="f_profile">
-            {% include 'admin/profile/fields.njk'%}
+            <form method="POST" action="/admin/profile?_method=PUT" id="f_profile">
+                {% include 'admin/profile/fields.njk'%}
 
-            <input type="hidden" name="id" value="{{ user.id }}">
-        </form>
-    </div>
-</section>
+                <input type="hidden" name="id" value="{{ user.id }}">
+            </form>
+        </div>
+    </section>
 {% endblock content %}
 
 {% block scripts %}
