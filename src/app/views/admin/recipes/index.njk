@@ -26,7 +26,7 @@
 
                 {% endfor %}
             </div>
-            {% if recipes == 0 %}
+            {% if (recipes == 0) or (not recipes) %}
                 <div class="no_recipe">
                     <p>Você ainda não tem receitas cadastradas.</p>
 
