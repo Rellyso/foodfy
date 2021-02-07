@@ -23,11 +23,12 @@
     justify-content: space-between;
 
     margin: 0 auto;
-    overflow: hidden;
 }
 
 #admin header .header__head {
     display: flex;
+
+    align-items: center;
 }
 
 #admin header .logo__link {
@@ -51,6 +52,15 @@
 
 #admin header .links a.active {
     color: #ffffff;
+}
+
+#admin header .actions {
+    
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    flex: 1;
 }
 
 #admin header .logout-button form button {
@@ -521,6 +531,7 @@
     margin: 10px 0;
 }
 
-#admin .input-field .ingredient-delete-button {
+#admin .input-field .delete-button {
     margin: 0 !important;
+    height: 100%;
 }

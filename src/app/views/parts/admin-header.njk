@@ -1,6 +1,6 @@
 <div class="header__content">
     <header>
-        <div class="header__head">
+        <nav class="header__head">
             <a class="logo__link" href="/">
                 <img src="/assets/white-logo.png" alt="foodfy logo">
             </a>
@@ -9,18 +9,40 @@
                 <a href="/admin/recipes">RECEITAS</a>
                 <a href="/admin/chefs">CHEFS</a>
                 {% if session.isAdmin %}
-                <a href="/admin/users">USUÁRIOS</a>
+                    <a href="/admin/users">USUÁRIOS</a>
                 {% endif %}
                 <a href="/admin/profile">MINHA CONTA</a>
             </div>
+        </nav>
+
+        <div class="actions">
+            <div class="dropdown-container">
+            <i class="material-icons">add</i>
+
+            <ul class="dropdown">
+                {% if session.isAdmin %}
+                    <li>
+                        <a href="/admin/users/create">Usuário</a>
+                    </li>
+
+                    <li>
+                        <a href="/admin/chefs/create">Chef</a>
+                    </li>
+                {% endif %}
+
+                <li>
+                    <a href="/admin/recipes/create">Receita</a>
+                </li>
+            </ul>
+        </div>
         </div>
 
         {% if session %}
-        <div class="logout-button">
-            <form action="/logout" method="post">
-                <button type="submit">SAIR</button>
-            </form>
-        </div>
+            <div class="logout-button">
+                <form action="/logout" method="post">
+                    <button type="submit">SAIR</button>
+                </form>
+            </div>
         {% endif %}
     </header>
 </div>
