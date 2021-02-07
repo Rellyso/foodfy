@@ -1,41 +1,14 @@
 const addNewField = {
-    deleteIngredient(length) {
-        const deleteIngredientBtns = document.querySelectorAll('.ingredient-delete-button')
-        const fieldContainer = document.querySelectorAll('.ingredient')
-        console.log(fieldContainer)
-        let count = fieldContainer.length
+    removeIngredient(field) {
+        const input = field.parentNode
+        const fatherDiv = input.parentNode
 
-        for (let i = 0; i <= length; i++) {
-            deleteIngredientBtns[i].addEventListener('click', function () {
-                if (count > 1) {
-                    const confirmation = window.confirm('Deseja excluir o campo?')
-                    if (confirmation) {
-                        fieldContainer[i].remove()
-                        count--
-                    }
-                } else if (count <= 1) {
-                    alert('Você não pode excluir todos os campos!')
-                }
-            })
+        if (fatherDiv.childElementCount > 1) {
+            const confirmation = confirm('Tem certeza? Essa ação não poderá ser desfeita')
+            if (confirmation) input.remove()
         }
-    },
-    
-    deletePreparation(length) {
-        const deletePreparationBtns = document.querySelectorAll('.preparation-delete-button')
-        const fieldContainer = document.querySelectorAll('.preparation')
-        let count = fieldContainer.length
-
-        for (let i = 0; i <= length; i++) {
-
-            deletePreparationBtns[i].addEventListener('click', function () {
-                if (count > 1) {
-                    fieldContainer[i].remove()
-                    count = count - 1
-                } else {
-                    alert('Você não pode excluir todos os campos!')
-                }
-            })
-        }
+        else alert('Você não pode remover todos os campos')
+        
     },
 
     newIngredient() {
@@ -47,7 +20,6 @@ const addNewField = {
 
         newField.children[0].value = ""
         fatherDiv.appendChild(newField)
-        addNewField.deleteIngredient(fatherDiv.children.length - 1)
     },
 
     newPreparation() {
@@ -59,7 +31,6 @@ const addNewField = {
 
         newField.children[0].value = ""
         fatherDiv.appendChild(newField)
-        addNewField.deletePreparation(fatherDiv.children.length - 1)
     }
 
 }
