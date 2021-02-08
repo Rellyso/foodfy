@@ -63,7 +63,7 @@
         <div class="ingredients">
             {% for ingredient in recipe.ingredients %}
                 <div class="ingredient input-field">
-                    <input type="text" name="ingredients[]" value="{{ ingredient }}" class="ingredient-field">
+                    <input type="text" name="ingredients[]" value="{{ ingredient }}" class="ingredient-field" onkeydown="addNewField.watchShift('newIngredient')">
 
                     <button 
                         type="button" 
@@ -77,7 +77,7 @@
                 </div>
             {% endfor %}
             <div class="ingredient input-field">
-                <input type="text" name="ingredients[]" value="" class="ingredient-field">
+                <input type="text" name="ingredients[]" value="" class="ingredient-field" onkeydown="addNewField.watchShift('newIngredient')">
 
                 <button type="button" class="delete btn_ingredient delete-button" onclick="addNewField.removeIngredient(this)">
                     <span class="material-icons">
@@ -97,7 +97,7 @@
             {% for step in recipe.preparation %}
                 <div class="preparation input-field">
 
-                    <input type="text" name="preparation[]" value="{{ step }}">
+                    <input type="text" name="preparation[]" value="{{ step }}" onkeydown="addNewField.watchShift('newPreparation')">
 
                     <button 
                         type="button" 
@@ -112,7 +112,7 @@
             {% endfor %}
 
             <div class="preparation input-field">
-                <input type="text" name="preparation[]" value="" class="preparation-field">
+                <input type="text" name="preparation[]" value="" class="preparation-field" onkeydown="addNewField.watchShift('newPreparation')">
 
                 <button type="button" class="delete btn_preparation delete-button" onclick="addNewField.removeIngredient(this)">
                     <span class="material-icons">

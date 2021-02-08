@@ -1,4 +1,9 @@
 const addNewField = {
+    watchShift(func) {
+        if (event.key == "Tab") {
+            this[func]()
+        }
+    },
     removeIngredient(field) {
         const input = field.parentNode
         const fatherDiv = input.parentNode
