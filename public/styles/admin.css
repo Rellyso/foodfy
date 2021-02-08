@@ -534,4 +534,11 @@
 #admin .input-field .delete-button {
     margin: 0 !important;
     height: 100%;
+    filter: brightness(1);
+
+    transition: filter .2s;
+}
+
+#admin .input-field .delete-button:hover {
+    filter: brightness(0.8);
 }
