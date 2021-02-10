@@ -66,11 +66,9 @@ module.exports = {
             ingredients: newIngredients,
             preparation: newPreparation,
         }
-        console.log(data)
 
         try {
             const recipeId = await Recipe.create(data)
-            console.log(recipeId)
 
             const filesPromise = req.files.map(file => File.createRecipeFile({ ...file, recipe_id: recipeId }))
             await Promise.all(filesPromise)
@@ -122,6 +120,7 @@ module.exports = {
     },
 
     async put(req, res) {
+        const { id } = req.body
         // teste de campos preenchidos
         try {
             const keys = Object.keys(req.body)
@@ -146,9 +145,10 @@ module.exports = {
             })
 
             const data = {
-                ...req.body,
-                id: parseInt(req.body.id, 10),
-                chef_id: parseInt(req.body.chef_id, 10),
+                chef_id: parseInt(req.body.chef_id),
+                title: req.body.title,
+                information: req.body.information,
+                user_id: parseInt(req.body.user_id),
                 ingredients: newIngredients,
                 preparation: newPreparation,
             }
@@ -170,13 +170,28 @@ module.exports = {
                 await Promise.all(removedFilesPromise)
             }
 
-            let results = await Recipe.update(data)
-            const recipeId = results.rows[0].id
+            await Recipe.update(id, data)
+
+            let recipe = await Recipe.find(id)
+
+            let options = await Recipe.selectChefOptions()
+
+            let files = await File.getFilesByRecipeId(id)
+
+            files.map(file => {
+                file.src = `${req.protocol}://${req.headers.host}${file.path.replace("public", "")}`
+            })
 
 
-            return res.redirect(`/admin/recipes/${recipeId}`)
+            return res.render(`admin/recipes/show`, {
+                recipe,
+                options,
+                files,
+                success: 'Receita atualizada com sucesso'
+            })
         } catch (err) {
-            res.send(`It wasn't possible updating recipe because: Has an ${err}`)
+            console.error(err)
+            // return res.redirect(`/admin/recipes/${req.body.id}`)
         }
     },
 
