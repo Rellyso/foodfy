@@ -69,6 +69,14 @@
     font-weight: bold;
 
     outline: none;
+
+    transition: all .2s;
+}
+
+#admin header .logout-button form button:hover {
+    background: #eee;
+
+    color: black;
 }
 
 #admin .content {
@@ -363,7 +371,7 @@
 
     opacity: 0;
 
-    z-index: 2;
+    z-index: 10;
 
     cursor: pointer;
 
@@ -433,6 +441,11 @@
     align-items: center;
 }
 
+#admin .item #avatar-upload:hover a {
+    filter: brightness(1.2);
+}
+
+
 #admin .item #avatar-upload input {
     position: absolute;
     display: block;
@@ -443,8 +456,12 @@
     margin: 0;
     padding: 0;
 
+    z-index: 2;
+
     overflow: hidden;
     opacity: 0;
+
+    cursor: pointer;
 }
 
 #admin .item #avatar-upload a.button {
