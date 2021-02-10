@@ -67,7 +67,6 @@ const imagesUpload = {
             reader.readAsDataURL(file)
         })
         imagesUpload.input.files = imagesUpload.getAllFiles()
-        console.log(imagesUpload.input.files)
     },
     hasLimit(event) {
         const { uploadLimit, input, preview } = imagesUpload
@@ -180,7 +179,6 @@ const avatarUpload = {
             reader.readAsDataURL(file)
         })
         avatarUpload.input.files = avatarUpload.getFile()
-        console.log(avatarUpload.input.files)
         avatarUpload.files = []
     },
 
@@ -250,7 +248,6 @@ const isChecked = {
         } else {
             this.inputHidden.disabled = false
         }
-        console.log(this.inputHidden)
     }
 }
 
