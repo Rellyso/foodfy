@@ -1,8 +1,22 @@
 const addNewField = {
+    dontShowAgain: false,
     watchShift(func) {
         if (event.key == "Tab") {
             this[func]()
         }
+    },
+    showTip(element) {
+        const field = element.parentNode
+        const coordinates = field.getBoundingClientRect()
+        const tipContainer = document.querySelector('.tip')
+
+        let coordsX = coordinates.x + coordinates.width + 16
+        let coordsY = coordinates.y + (coordinates.height)
+
+        tipContainer.style.left = `${coordsX}px`
+        tipContainer.style.top = `${coordsY}px`
+
+        tipContainer.style.opacity = 1
     },
     removeIngredient(field) {
         const input = field.parentNode
@@ -256,4 +270,8 @@ const redirectToLogin = {
     redirect(toLocal) {
         window.location.href = toLocal
     }
+}
+
+const getCoords = {
+    
 }

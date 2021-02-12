@@ -44,6 +44,7 @@
 
         <input type="text" name="title" value="{{ recipe.title }}" required="required">
 
+
     </div>
 
     <div class="item">
@@ -63,7 +64,7 @@
         <div class="ingredients">
             {% for ingredient in recipe.ingredients %}
                 <div class="ingredient input-field">
-                    <input type="text" name="ingredients[]" value="{{ ingredient }}" class="ingredient-field" onkeydown="addNewField.watchShift('newIngredient')">
+                    <input type="text" name="ingredients[]" value="{{ ingredient }}" class="ingredient-field" onfocus="addNewField.showTip(this)" onkeydown="addNewField.watchShift('newIngredient')">
 
                     <button 
                         type="button" 
@@ -77,13 +78,18 @@
                 </div>
             {% endfor %}
             <div class="ingredient input-field">
-                <input type="text" name="ingredients[]" value="" class="ingredient-field" onkeydown="addNewField.watchShift('newIngredient')">
+                <input type="text" name="ingredients[]" value="" class="ingredient-field" onfocus="addNewField.showTip(this)" onkeydown="addNewField.watchShift('newIngredient')">
 
                 <button type="button" class="delete btn_ingredient delete-button" onclick="addNewField.removeIngredient(this)">
                     <span class="material-icons">
                         close
                     </span>
                 </button>
+
+                
+                <div class="tip">
+                    <p>pressione shift para adicionar um ingrediente mais rápido</p>
+                </div>
             </div>
         </div>
 
