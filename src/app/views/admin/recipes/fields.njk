@@ -1,3 +1,10 @@
+<div class="tip">
+    <p>pressione shift para adicionar um ingrediente mais rápido</p>
+    <i class="material-icons" onclick="addNewField.removeTipOnExitClick()">
+        close
+    </i>
+</div>
+
 <div class="form__body">
 
     <div class="item">
@@ -77,20 +84,19 @@
                     </button>
                 </div>
             {% endfor %}
-            <div class="ingredient input-field">
-                <input type="text" name="ingredients[]" value="" class="ingredient-field" onfocus="addNewField.showTip(this)" onkeydown="addNewField.watchShift('newIngredient')">
 
-                <button type="button" class="delete btn_ingredient delete-button" onclick="addNewField.removeIngredient(this)">
-                    <span class="material-icons">
-                        close
-                    </span>
-                </button>
+                <div class="ingredient input-field">
+                    <input type="text" name="ingredients[]" value="" class="ingredient-field" onfocus="addNewField.showTip(this)" onkeydown="addNewField.watchShift('newIngredient')">
 
-                
-                <div class="tip">
-                    <p>pressione shift para adicionar um ingrediente mais rápido</p>
+                    <button type="button" class="delete btn_ingredient delete-button" onclick="addNewField.removeIngredient(this)">
+                        <span class="material-icons">
+                            close
+                        </span>
+                    </button>
+
                 </div>
-            </div>
+
+            
         </div>
 
         <a class="link__button add-ingredient" onclick="addNewField.newIngredient()">Adicionar novo ingrediente</a>

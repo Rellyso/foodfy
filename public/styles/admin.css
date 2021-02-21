@@ -562,20 +562,51 @@
 
 /* TIPS CONTAINER */
 .tip {
-    position: absolute;
-    max-width: 200px;
+    position: fixed;
 
+    display: grid;
+    grid-template-columns: 1fr 50px;
+    justify-items: center;
+    align-items: center;
+
+    width: 50vw;
+
+    transform: translate(-50%, -50%);
+    left: 50%;
+    bottom: -60px;
+    
     background-color: var(--primary-color);
 
     opacity: 0;
 
-    transition: all .2s;
+    transition: all .4s;
 }
 
 .tip p {
     color: white;
 
-    padding: 4px 16px;
+    width: 100%;
+    padding: 8px 16px;
 
-    font-size: 12px;
+    font-size: 16px;
+    font-weight: bold;
+
+    text-align: start;
 }
+
+.tip i {
+    height: 100%;
+    width: 100%;
+
+    color: white;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+    transition: background .2s ;
+}
+    .tip i:hover {
+        background-color: rgba(255,255,255,0.2);
+    }

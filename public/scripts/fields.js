@@ -6,17 +6,36 @@ const addNewField = {
         }
     },
     showTip(element) {
-        const field = element.parentNode
-        const coordinates = field.getBoundingClientRect()
+        // const field = element.parentNode
+        // const coordinates = field.getBoundingClientRect()
         const tipContainer = document.querySelector('.tip')
 
-        let coordsX = coordinates.x + coordinates.width + 16
-        let coordsY = coordinates.y + (coordinates.height)
+        // let coordsX = coordinates.x + coordinates.width + 16
+        // let coordsY = coordinates.height + coordinates.y - 10
 
-        tipContainer.style.left = `${coordsX}px`
-        tipContainer.style.top = `${coordsY}px`
+        // tipContainer.style.left = `${coordsX}px`
+        // tipContainer.style.top = `${coordsY}px`
 
-        tipContainer.style.opacity = 1
+        if (this.dontShowAgain == false) {
+            tipContainer.style.opacity = 1
+            tipContainer.style.bottom = 0
+
+            setTimeout(() => {
+                this.closeTip(tipContainer)
+            }, 10000)
+        }
+
+
+        this.dontShowAgain = true
+    },
+    closeTip(tipContainer) {
+        tipContainer.style.opacity = 0
+        tipContainer.style.bottom = '-60px'
+    },
+    removeTipOnExitClick() {
+        const tipContainer = document.querySelector('.tip')
+        
+        this.closeTip(tipContainer)
     },
     removeIngredient(field) {
         const input = field.parentNode
@@ -27,7 +46,7 @@ const addNewField = {
             if (confirmation) input.remove()
         }
         else alert('Você não pode remover todos os campos')
-        
+
     },
 
     newIngredient() {
@@ -95,9 +114,9 @@ const imagesUpload = {
         const imagesDiv = []
         preview.childNodes.forEach(item => {
             if (item.classList && item.classList.value == "photo")
-            imagesDiv.push(item)
+                imagesDiv.push(item)
         })
-        
+
         const totalImages = imagesDiv.length + fileList.length
 
         if (totalImages > uploadLimit) {
@@ -149,7 +168,7 @@ const imagesUpload = {
 
         if (photoDiv.id) {
             const removedFiles = document.querySelector('input[name=removed_files]')
-            
+
             if (removedFiles) {
                 removedFiles.value += `${photoDiv.id},`
             }
@@ -179,7 +198,7 @@ const avatarUpload = {
     files: [],
     preview: document.querySelector('.avatar-preview img'),
     handleFileInput(event) {
-        const {files: fileList} = event.target
+        const { files: fileList } = event.target
         avatarUpload.input = event.target
 
         Array.from(fileList).forEach(file => {
@@ -231,8 +250,8 @@ const Validate = {
         // removendo classe error do input
         const inputError = input.parentNode.querySelector('input')
         if (inputError)
-        inputError.classList.remove('error')
-        
+            inputError.classList.remove('error')
+
         // removendo mensagem de erro
         const divError = input.parentNode.querySelector('.error')
         if (divError)
@@ -245,7 +264,7 @@ const Validate = {
 
         if (!value.match(mailFormat) && value.length > 0)
             error = "Email inválido"
-        
+
         return {
             error,
             value
@@ -273,5 +292,5 @@ const redirectToLogin = {
 }
 
 const getCoords = {
-    
+
 }
